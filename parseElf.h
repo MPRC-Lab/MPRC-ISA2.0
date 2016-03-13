@@ -1,0 +1,1 @@
+void parseELF(char* filename);
