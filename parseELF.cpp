@@ -67,6 +67,29 @@ void parseELF(char* filename){
         cout << dec << (unsigned int)elf_ehdr.e_shentsize << formatInfo << endl;
     cout << "  Number of section headers:              "   << dec << (unsigned int)elf_ehdr.e_shnum     << "; " << endl;
     cout << "  Section header string table index:      "   << dec << (unsigned int)elf_ehdr.e_shstrndx  << "; " << endl;
-    cout << "======================parse ELF end======================" << endl << endl;
+    cout << endl;
 
+    cout << "---------------------------------------------------------" << endl << endl;
+
+    cout << "ELF Program Headers:" << endl;
+    Elf32_Phdr elf_phdr;
+    for(int i = 0; i < elf_ehdr.e_phnum; i++){
+        fin.seekg(elf_ehdr.e_phoff + i * elf_ehdr.e_phentsize, ios::beg);
+        fin.read((char*)&elf_phdr, elf_ehdr.e_phentsize);
+
+        cout << "  Entry " << dec << i << endl;
+        cout << "      p_type:        0x" << hex << (unsigned int)elf_phdr.p_type   << endl;
+        cout << "      p_offset:      0x" << hex << (unsigned int)elf_phdr.p_offset << endl;
+        cout << "      p_vaddr:       0x" << hex << (unsigned int)elf_phdr.p_vaddr  << endl;
+        cout << "      p_paddr:       0x" << hex << (unsigned int)elf_phdr.p_paddr  << endl;
+        cout << "      p_filesz:      0x" << hex << (unsigned int)elf_phdr.p_filesz << "(";
+            cout << dec << (unsigned int)elf_phdr.p_filesz  << " bytes)" << endl;
+        cout << "      p_memsz:       0x" << hex << (unsigned int)elf_phdr.p_memsz  << "(";
+            cout << dec << (unsigned int)elf_phdr.p_memsz   << " bytes)" << endl;
+        cout << "      p_flags:       0x" << hex << (unsigned int)elf_phdr.p_flags  << endl;
+        cout << "      p_align:       0x" << hex << (unsigned int)elf_phdr.p_align  << endl;
+        cout << endl;  
+    }
+
+    cout << "======================parse ELF end======================" << endl << endl;
 }
