@@ -1,16 +1,16 @@
 #include "Memory.h"
 
-void clear(){
+void Memory::memoryClear(){
 	memory.clear();
 };
 	
-void memoryWrite(unsigned int addr, unsigned char* source, unsigned int bytes = 1){
+void Memory::memoryWrite(unsigned int addr, unsigned char* source, unsigned int bytes){
 	for (unsigned int i = 0; i < bytes; i++){
 		memory[addr+i] = source[i];
 	}
 };
 
-void memoryRead( unsigned int addr, unsigned char* target, unsigned int bytes = 1){
+void Memory::memoryRead( unsigned int addr, unsigned char* target, unsigned int bytes){
 	for (unsigned int i = 0; i < bytes; i++){
 		if(memory.find(addr+i) != memory.end()){
 			target[i] = memory[addr+i];
@@ -21,7 +21,7 @@ void memoryRead( unsigned int addr, unsigned char* target, unsigned int bytes = 
 	}
 };
 
-void instructionRead( unsigned int addr, unsigned int* target, unsigned int num = 1){
+void Memory::instructionRead( unsigned int addr, unsigned int* target, unsigned int num){
 	unsigned int instruction = 0;
 	unsigned int onebyte;
 	for(unsigned int i = 0; i < num * 4; i++){
@@ -31,11 +31,13 @@ void instructionRead( unsigned int addr, unsigned int* target, unsigned int num 
 			onebyte = 0;
 			break;
 		}
+
 		if(i % 4 != 3){
-			instruction = instruction << 8 | onebyte;
+			instruction = instruction | (onebyte << (i%4 * 8));
 		} else {
 			target[i/4] = instruction;
 			instruction = 0;
+			onebyte = 0;
 		}
 	}
 };
