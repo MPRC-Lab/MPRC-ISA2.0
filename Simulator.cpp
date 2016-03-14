@@ -17,13 +17,11 @@ int main(){
 	Memory memory;
 	unsigned int entryPoint; 					// the entry point of program 
 	entryPoint = loadELF(filename, memory);
-
-/*
-	cout << endl << endl;
+///*
 	cout << "entryPoint: 0x"   << hex << entryPoint << endl;
 	cout << ".bssBegin:  0x" << hex << bssBegin << endl;
 	cout << ".bssSize:   "   << dec << bssSize << " bytes" << endl;
-*/
+//*/
 
  	return 0;
 }
