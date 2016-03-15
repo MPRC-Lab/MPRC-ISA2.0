@@ -1,0 +1,585 @@
+Filename: =====================parse ELF begin=====================
+ELF Header:
+  Magic:    7f 45 4c 46 1 1 1 0 0 0 0 0 0 0 0 0
+  Class:                                  0x1; ELF32
+  Data:                                   0x1; Little End
+  Version:                                1; (current)
+  OS/ABI:                                 0x0; 
+  ABI Version:                            0; 
+  Type:                                   0x2; Executable file
+  Machine:                                0xf3; <unknown>
+  Version:                                1; 
+  Entry point Address:                    0x11078; 
+  Start of program headers:               0x34; (52 bytes into file)
+  Start of section headers:               0x1d4; (468 bytes into file)
+  Flags                                   0x0; 
+  Size of this header:                    0x34; (52 bytes)
+  Size of program headers:                0x20; (32 bytes)
+  Number of program headers:              2; 
+  Size of section headers:                0x28; (40 bytes)
+  Number of section headers:              7; 
+  Section header string table index:      4; 
+---------------------------------------------------------
+ELF Program Headers: (2 headers)
+    Entry 0
+        p_type:        0x1
+        p_offset:      0x0
+        p_vaddr:       0x10000
+        p_paddr:       0x10000
+        p_filesz:      0x74(116 bytes)
+        p_memsz:       0x78(120 bytes)
+        p_flags:       0x6
+        p_align:       0x1000
+
+    Entry 1
+        p_type:        0x1
+        p_offset:      0x78
+        p_vaddr:       0x11078
+        p_paddr:       0x11078
+        p_filesz:      0x3c(60 bytes)
+        p_memsz:       0x3c(60 bytes)
+        p_flags:       0x5
+        p_align:       0x1000
+
+---------------------------------------------------------
+ELF Section Headers: (7 headers)
+    Entry 0: 
+        Name:          
+        Type:          SHT_NULL
+        Addr:          0x00000000
+        Off:           0x00000000
+        Size:          0
+        Entry Size:    0
+        Flags:         Unknown
+        Link:          0
+        Info:          0
+        Align:         0
+    Entry 1: 
+        Name:          .bss
+        Type:          SHT_NOBITS
+        Addr:          0x00010074
+        Off:           0x00000074
+        Size:          4
+        Entry Size:    0
+        Flags:         SHF_WRITE & SHF_ALLOC
+        Link:          0
+        Info:          0
+        Align:         4
+    Entry 2: 
+        Name:          .text
+        Type:          SHT_PROGBITS
+        Addr:          0x00011078
+        Off:           0x00000078
+        Size:          60
+        Entry Size:    0
+        Flags:         SHF_ALLOC & SHF_EXECINSTR
+        Link:          0
+        Info:          0
+        Align:         4
+    Entry 3: 
+        Name:          .comment
+        Type:          SHT_PROGBITS
+        Addr:          0x00000000
+        Off:           0x000000b4
+        Size:          17
+        Entry Size:    1
+        Flags:         Unknown
+        Link:          0
+        Info:          0
+        Align:         1
+    Entry 4: 
+        Name:          .shstrtab
+        Type:          SHT_STRTAB
+        Addr:          0x00000000
+        Off:           0x000000c5
+        Size:          47
+        Entry Size:    0
+        Flags:         Unknown
+        Link:          0
+        Info:          0
+        Align:         1
+    Entry 5: 
+        Name:          .symtab
+        Type:          SHT_SYMTAB
+        Addr:          0x00000000
+        Off:           0x000000f4
+        Size:          176
+        Entry Size:    16
+        Flags:         Unknown
+        Link:          6
+        Info:          5
+        Align:         4
+    Entry 6: 
+        Name:          .strtab
+        Type:          SHT_STRTAB
+        Addr:          0x00000000
+        Off:           0x000001a4
+        Size:          45
+        Entry Size:    0
+        Flags:         Unknown
+        Link:          0
+        Info:          0
+        Align:         1
+======================parse ELF end======================
+
+********************* ELF loading *********************
+    Entry point:                  0x11078
+    Program Headers parsing...
+    Sections loading...
+    -----------------------------------------------
+    Sections 0
+        p_type:         PT_LOAD
+        p_offset:       0x0
+        p_vaddr:        0x10000
+        p_paddr:        0x10000
+        p_filesz:       0x74
+        p_memsz:        0x78
+        p_flags:        0x6
+        p_align:        0x1000
+        Addr: 0x00010000        hex: 464c457f        bin: 01000110010011000100010101111111
+        Addr: 0x00010004        hex: 00010101        bin: 00000000000000010000000100000001
+        Addr: 0x00010008        hex: 00000000        bin: 00000000000000000000000000000000
+        Addr: 0x0001000c        hex: 00000000        bin: 00000000000000000000000000000000
+        Addr: 0x00010010        hex: 00f30002        bin: 00000000111100110000000000000010
+        Addr: 0x00010014        hex: 00000001        bin: 00000000000000000000000000000001
+        Addr: 0x00010018        hex: 00011078        bin: 00000000000000010001000001111000
+        Addr: 0x0001001c        hex: 00000034        bin: 00000000000000000000000000110100
+        Addr: 0x00010020        hex: 000001d4        bin: 00000000000000000000000111010100
+        Addr: 0x00010024        hex: 00000000        bin: 00000000000000000000000000000000
+        Addr: 0x00010028        hex: 00200034        bin: 00000000001000000000000000110100
+        Addr: 0x0001002c        hex: 00280002        bin: 00000000001010000000000000000010
+        Addr: 0x00010030        hex: 00040007        bin: 00000000000001000000000000000111
+        Addr: 0x00010034        hex: 00000001        bin: 00000000000000000000000000000001
+        Addr: 0x00010038        hex: 00000000        bin: 00000000000000000000000000000000
+        Addr: 0x0001003c        hex: 00010000        bin: 00000000000000010000000000000000
+        Addr: 0x00010040        hex: 00010000        bin: 00000000000000010000000000000000
+        Addr: 0x00010044        hex: 00000074        bin: 00000000000000000000000001110100
+        Addr: 0x00010048        hex: 00000078        bin: 00000000000000000000000001111000
+        Addr: 0x0001004c        hex: 00000006        bin: 00000000000000000000000000000110
+        Addr: 0x00010050        hex: 00001000        bin: 00000000000000000001000000000000
+        Addr: 0x00010054        hex: 00000001        bin: 00000000000000000000000000000001
+        Addr: 0x00010058        hex: 00000078        bin: 00000000000000000000000001111000
+        Addr: 0x0001005c        hex: 00011078        bin: 00000000000000010001000001111000
+        Addr: 0x00010060        hex: 00011078        bin: 00000000000000010001000001111000
+        Addr: 0x00010064        hex: 0000003c        bin: 00000000000000000000000000111100
+        Addr: 0x00010068        hex: 0000003c        bin: 00000000000000000000000000111100
+        Addr: 0x0001006c        hex: 00000005        bin: 00000000000000000000000000000101
+        Addr: 0x00010070        hex: 00001000        bin: 00000000000000000001000000000000
+        Addr: 0x00010074        hex: 00000000        bin: 00000000000000000000000000000000
+    -----------------------------------------------
+    Sections 1
+        p_type:         PT_LOAD
+        p_offset:       0x78
+        p_vaddr:        0x11078
+        p_paddr:        0x11078
+        p_filesz:       0x3c
+        p_memsz:        0x3c
+        p_flags:        0x5
+        p_align:        0x1000
+        Addr: 0x00011078        hex: fe010113        bin: 11111110000000010000000100010011
+        Addr: 0x0001107c        hex: 00812e23        bin: 00000000100000010010111000100011
+        Addr: 0x00011080        hex: 02010413        bin: 00000010000000010000010000010011
+        Addr: 0x00011084        hex: 00a00793        bin: 00000000101000000000011110010011
+        Addr: 0x00011088        hex: fef42623        bin: 11111110111101000010011000100011
+        Addr: 0x0001108c        hex: fec42783        bin: 11111110110001000010011110000011
+        Addr: 0x00011090        hex: 01978793        bin: 00000001100101111000011110010011
+        Addr: 0x00011094        hex: fef42623        bin: 11111110111101000010011000100011
+        Addr: 0x00011098        hex: fec42703        bin: 11111110110001000010011100000011
+        Addr: 0x0001109c        hex: 80e1a023        bin: 10000000111000011010000000100011
+        Addr: 0x000110a0        hex: 00000793        bin: 00000000000000000000011110010011
+        Addr: 0x000110a4        hex: 00078513        bin: 00000000000001111000010100010011
+        Addr: 0x000110a8        hex: 01c12403        bin: 00000001110000010010010000000011
+        Addr: 0x000110ac        hex: 02010113        bin: 00000010000000010000000100010011
+        Addr: 0x000110b0        hex: 00008067        bin: 00000000000000001000000001100111
+****************** ELF load complete ******************
+
+entryPoint: 0x11078
+.bssBegin:  0x10074
+.bssSize:   4 bytes
+-----------simulate the instruction excution---------
+Fetch the instruction
+pc:	11078		instruction:	fe010113
+opcode:	0x13
+funct3:	0x0
+Decode the instruction
+decode output
+Instruction type:	0x12
+Instruction rs1:	0x2	reg[rs1]	10000
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0x2	reg[rd]	10000
+Instruction imm:	0xfe0
+Excute the instruction
+0x10074:	0
+0x10075:	0
+0x10076:	0
+0x10077:	0
+0x10078:	0
+0x10079:	0
+0x1007a:	0
+0x1007b:	0
+0xfffff800:	0
+Instruction type:	12
+Instruction rs1:	0x2	reg[rs1]:	ffe0
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0x2	reg[rd]:	ffe0
+Instruction imm:	0xfe0
+Fetch the instruction
+pc:	1107c		instruction:	812e23
+opcode:	0x23
+funct3:	0x2
+Decode the instruction
+decode output
+Instruction type:	0x11
+Instruction rs1:	0x2	reg[rs1]	ffe0
+Instruction rs2:	0x8	reg[rs2]	0
+Instruction rd:	0x1c	reg[rd]	0
+Instruction imm:	0x1c
+Excute the instruction
+1c
+11111111:	0
+addr:	fffc
+WVal:	0
+0 0 0 0
+Instruction type:	11
+Instruction rs1:	0x2	reg[rs1]:	ffe0
+Instruction rs2:	0x8	reg[rs2]:	0
+Instruction rd:	0x1c	reg[rd]:	0
+Instruction imm:	0x1c
+Fetch the instruction
+pc:	11080		instruction:	2010413
+opcode:	0x13
+funct3:	0x0
+Decode the instruction
+decode output
+Instruction type:	0x12
+Instruction rs1:	0x2	reg[rs1]	ffe0
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0x8	reg[rd]	0
+Instruction imm:	0x20
+Excute the instruction
+0x10074:	0
+0x10075:	0
+0x10076:	0
+0x10077:	0
+0x10078:	0
+0x10079:	0
+0x1007a:	0
+0x1007b:	0
+0xfffff800:	0
+Instruction type:	12
+Instruction rs1:	0x2	reg[rs1]:	ffe0
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0x8	reg[rd]:	10000
+Instruction imm:	0x20
+Fetch the instruction
+pc:	11084		instruction:	a00793
+opcode:	0x13
+funct3:	0x0
+Decode the instruction
+decode output
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]	0
+Instruction rs2:	0xa	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0xa
+Excute the instruction
+0x10074:	0
+0x10075:	0
+0x10076:	0
+0x10077:	0
+0x10078:	0
+0x10079:	0
+0x1007a:	0
+0x1007b:	0
+0xfffff800:	0
+Instruction type:	12
+Instruction rs1:	0x0	reg[rs1]:	0
+Instruction rs2:	0xa	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	a
+Instruction imm:	0xa
+Fetch the instruction
+pc:	11088		instruction:	fef42623
+opcode:	0x23
+funct3:	0x2
+Decode the instruction
+decode output
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xf	reg[rs2]	a
+Instruction rd:	0xc	reg[rd]	0
+Instruction imm:	0xfec
+Excute the instruction
+ffffffec
+11111111:	a
+addr:	ffec
+WVal:	a
+a 0 0 0
+Instruction type:	11
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xf	reg[rs2]:	a
+Instruction rd:	0xc	reg[rd]:	0
+Instruction imm:	0xfec
+Fetch the instruction
+pc:	1108c		instruction:	fec42783
+opcode:	0x3
+funct3:	0x2
+Decode the instruction
+decode output
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xc	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	a
+Instruction imm:	0xfec
+Excute the instruction
+22222222222:	ffec
+22222222222:	a
+0x10074:	0
+0x10075:	0
+0x10076:	0
+0x10077:	0
+0x10078:	0
+0x10079:	0
+0x1007a:	0
+0x1007b:	0
+0xfffff800:	0
+Instruction type:	c
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xc	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	a
+Instruction imm:	0xfec
+Fetch the instruction
+pc:	11090		instruction:	1978793
+opcode:	0x13
+funct3:	0x0
+Decode the instruction
+decode output
+Instruction type:	0x12
+Instruction rs1:	0xf	reg[rs1]	a
+Instruction rs2:	0x19	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	a
+Instruction imm:	0x19
+Excute the instruction
+0x10074:	0
+0x10075:	0
+0x10076:	0
+0x10077:	0
+0x10078:	0
+0x10079:	0
+0x1007a:	0
+0x1007b:	0
+0xfffff800:	0
+Instruction type:	12
+Instruction rs1:	0xf	reg[rs1]:	23
+Instruction rs2:	0x19	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	23
+Instruction imm:	0x19
+Fetch the instruction
+pc:	11094		instruction:	fef42623
+opcode:	0x23
+funct3:	0x2
+Decode the instruction
+decode output
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xf	reg[rs2]	23
+Instruction rd:	0xc	reg[rd]	0
+Instruction imm:	0xfec
+Excute the instruction
+ffffffec
+11111111:	23
+addr:	ffec
+WVal:	23
+23 0 0 0
+Instruction type:	11
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xf	reg[rs2]:	23
+Instruction rd:	0xc	reg[rd]:	0
+Instruction imm:	0xfec
+Fetch the instruction
+pc:	11098		instruction:	fec42703
+opcode:	0x3
+funct3:	0x2
+Decode the instruction
+decode output
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xc	reg[rs2]	0
+Instruction rd:	0xe	reg[rd]	0
+Instruction imm:	0xfec
+Excute the instruction
+22222222222:	ffec
+22222222222:	23
+0x10074:	0
+0x10075:	0
+0x10076:	0
+0x10077:	0
+0x10078:	0
+0x10079:	0
+0x1007a:	0
+0x1007b:	0
+0xfffff800:	0
+Instruction type:	c
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xc	reg[rs2]:	0
+Instruction rd:	0xe	reg[rd]:	23
+Instruction imm:	0xfec
+Fetch the instruction
+pc:	1109c		instruction:	80e1a023
+opcode:	0x23
+funct3:	0x2
+Decode the instruction
+decode output
+Instruction type:	0x11
+Instruction rs1:	0x3	reg[rs1]	10874
+Instruction rs2:	0xe	reg[rs2]	23
+Instruction rd:	0x0	reg[rd]	0
+Instruction imm:	0x800
+Excute the instruction
+fffff800
+11111111:	23
+addr:	10074
+WVal:	23
+23 0 0 0
+Instruction type:	11
+Instruction rs1:	0x3	reg[rs1]:	10874
+Instruction rs2:	0xe	reg[rs2]:	23
+Instruction rd:	0x0	reg[rd]:	0
+Instruction imm:	0x800
+Fetch the instruction
+pc:	110a0		instruction:	793
+opcode:	0x13
+funct3:	0x0
+Decode the instruction
+decode output
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]	0
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	23
+Instruction imm:	0x0
+Excute the instruction
+0x10074:	23
+0x10075:	0
+0x10076:	0
+0x10077:	0
+0x10078:	0
+0x10079:	0
+0x1007a:	0
+0x1007b:	0
+0xfffff800:	0
+Instruction type:	12
+Instruction rs1:	0x0	reg[rs1]:	0
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x0
+Fetch the instruction
+pc:	110a4		instruction:	78513
+opcode:	0x13
+funct3:	0x0
+Decode the instruction
+decode output
+Instruction type:	0x12
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0xa	reg[rd]	0
+Instruction imm:	0x0
+Excute the instruction
+0x10074:	23
+0x10075:	0
+0x10076:	0
+0x10077:	0
+0x10078:	0
+0x10079:	0
+0x1007a:	0
+0x1007b:	0
+0xfffff800:	0
+Instruction type:	12
+Instruction rs1:	0xf	reg[rs1]:	0
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0xa	reg[rd]:	0
+Instruction imm:	0x0
+Fetch the instruction
+pc:	110a8		instruction:	1c12403
+opcode:	0x3
+funct3:	0x2
+Decode the instruction
+decode output
+Instruction type:	0xc
+Instruction rs1:	0x2	reg[rs1]	ffe0
+Instruction rs2:	0x1c	reg[rs2]	0
+Instruction rd:	0x8	reg[rd]	10000
+Instruction imm:	0x1c
+Excute the instruction
+22222222222:	fffc
+22222222222:	0
+0x10074:	23
+0x10075:	0
+0x10076:	0
+0x10077:	0
+0x10078:	0
+0x10079:	0
+0x1007a:	0
+0x1007b:	0
+0xfffff800:	0
+Instruction type:	c
+Instruction rs1:	0x2	reg[rs1]:	ffe0
+Instruction rs2:	0x1c	reg[rs2]:	0
+Instruction rd:	0x8	reg[rd]:	0
+Instruction imm:	0x1c
+Fetch the instruction
+pc:	110ac		instruction:	2010113
+opcode:	0x13
+funct3:	0x0
+Decode the instruction
+decode output
+Instruction type:	0x12
+Instruction rs1:	0x2	reg[rs1]	ffe0
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0x2	reg[rd]	ffe0
+Instruction imm:	0x20
+Excute the instruction
+0x10074:	23
+0x10075:	0
+0x10076:	0
+0x10077:	0
+0x10078:	0
+0x10079:	0
+0x1007a:	0
+0x1007b:	0
+0xfffff800:	0
+Instruction type:	12
+Instruction rs1:	0x2	reg[rs1]:	10000
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0x2	reg[rd]:	10000
+Instruction imm:	0x20
+Fetch the instruction
+pc:	110b0		instruction:	8067
+opcode:	0x67
+funct3:	0x0
+Decode the instruction
+decode output
+Instruction type:	0x3
+Instruction rs1:	0x1	reg[rs1]	0
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0x0	reg[rd]	0
+Instruction imm:	0x0
+Excute the instruction
+Instruction type:	3
+Instruction rs1:	0x1	reg[rs1]:	0
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0x0	reg[rd]:	0
+Instruction imm:	0x0
+ZGW: bssBegin: 0x10074
+-----------Output the result------------
+0x10074:	23
+0x10075:	0
+0x10076:	0
+0x10077:	0
+0x10078:	0
+0x10079:	0
+0x1007a:	0
+0x1007b:	0
+0xfffff800:	0
+23
+0
+0
+0

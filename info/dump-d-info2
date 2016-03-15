@@ -1,0 +1,53 @@
+
+/root/test2:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00011080 <swap>:
+   11080:	fd010113          	addi	sp,sp,-48
+   11084:	02812623          	sw	s0,44(sp)
+   11088:	03010413          	addi	s0,sp,48
+   1108c:	fca42e23          	sw	a0,-36(s0)
+   11090:	fcb42c23          	sw	a1,-40(s0)
+   11094:	fdc42783          	lw	a5,-36(s0)
+   11098:	0007a783          	lw	a5,0(a5)
+   1109c:	fef42623          	sw	a5,-20(s0)
+   110a0:	fd842783          	lw	a5,-40(s0)
+   110a4:	0007a783          	lw	a5,0(a5)
+   110a8:	fef42423          	sw	a5,-24(s0)
+   110ac:	fdc42783          	lw	a5,-36(s0)
+   110b0:	fe842703          	lw	a4,-24(s0)
+   110b4:	00e7a023          	sw	a4,0(a5)
+   110b8:	fd842783          	lw	a5,-40(s0)
+   110bc:	fec42703          	lw	a4,-20(s0)
+   110c0:	00e7a023          	sw	a4,0(a5)
+   110c4:	fec42703          	lw	a4,-20(s0)
+   110c8:	fe842783          	lw	a5,-24(s0)
+   110cc:	00f707b3          	add	a5,a4,a5
+   110d0:	00078513          	mv	a0,a5
+   110d4:	02c12403          	lw	s0,44(sp)
+   110d8:	03010113          	addi	sp,sp,48
+   110dc:	00008067          	ret
+
+000110e0 <main>:
+   110e0:	fe010113          	addi	sp,sp,-32
+   110e4:	00112e23          	sw	ra,28(sp)
+   110e8:	00812c23          	sw	s0,24(sp)
+   110ec:	02010413          	addi	s0,sp,32
+   110f0:	01d00793          	li	a5,29
+   110f4:	fef42423          	sw	a5,-24(s0)
+   110f8:	04300793          	li	a5,67
+   110fc:	fef42223          	sw	a5,-28(s0)
+   11100:	fe440713          	addi	a4,s0,-28
+   11104:	fe840793          	addi	a5,s0,-24
+   11108:	00070593          	mv	a1,a4
+   1110c:	00078513          	mv	a0,a5
+   11110:	f71ff0ef          	jal	11080 <swap>
+   11114:	fea42623          	sw	a0,-20(s0)
+   11118:	00000793          	li	a5,0
+   1111c:	00078513          	mv	a0,a5
+   11120:	01c12083          	lw	ra,28(sp)
+   11124:	01812403          	lw	s0,24(sp)
+   11128:	02010113          	addi	sp,sp,32
+   1112c:	00008067          	ret

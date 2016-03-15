@@ -109,7 +109,7 @@ void Cpu::decode(unsigned int pc, unsigned int inst, DecodeRes& decodeRes){
 			break;
 
 		case 0x23:
-			imm_11_5 = (inst >> 25) & 0x3f;
+			imm_11_5 = (inst >> 25) & 0x7f;
 			imm_4_0 = (inst >> 7) & 0x1f;
 			decodeRes.i_imm = (imm_11_5 << 5) | imm_4_0;
 			switch (funct3){
@@ -210,7 +210,7 @@ void Cpu::decode(unsigned int pc, unsigned int inst, DecodeRes& decodeRes){
 
 unsigned int Cpu::excute(Memory& memory, const DecodeRes& decodeRes, int& sstack){
 	//pc等于当前指令地址
-	int pc = decodeRes.i_pc;
+	unsigned int pc = decodeRes.i_pc;
 	int type = decodeRes.i_type;
 	unsigned int uimm = 0;
 	int imm = 0;
@@ -221,11 +221,14 @@ unsigned int Cpu::excute(Memory& memory, const DecodeRes& decodeRes, int& sstack
 	unsigned char* source = new unsigned char();
 	unsigned char* source2 = new unsigned char[2];
 	unsigned char* source4 = new unsigned char[4];
+	int BVal = 0;
+	int HVal = 0;
+	int WVal = 0;
 	int val = 0;
-	int uVal = 0;
 	int left = 0;
 	int right = 0;
 	int amount = 0;
+	int offset = 0;
 #ifdef DEBUG
 	cout << "Excute the instruction" << endl;
 #endif
@@ -234,186 +237,144 @@ unsigned int Cpu::excute(Memory& memory, const DecodeRes& decodeRes, int& sstack
 		case LUI:
 			reg[decodeRes.i_rd] = (decodeRes.i_imm << 12); 
 			pc += 4;
-#ifdef DEBUG
-	cout << "instruction:	" << "LUI" << endl;
-#endif
 			break;
 		case AUIPC:
 			reg[decodeRes.i_rd] = (decodeRes.i_imm << 12) + pc;
 			pc += 4;
-#ifdef DEBUG
-	cout << "instruction:	" << "AUIPC" << endl;
-#endif
 			break;
 		//有疑问，这里我对这句指令的模拟可能不对
 		case JAL:
 			if (decodeRes.i_rd != 0){
 				reg[decodeRes.i_rd] = pc + 4;
 			}
-			pc = (decodeRes.i_imm << 11) >> 11 + pc;
+			pc = ((decodeRes.i_imm << 11) >> 11) + pc;
 			++sstack;
-#ifdef DEBUG
-	cout << "instruction:	" << "JAL" << endl;
-#endif
 			break;
 		case JALR:
 			if (decodeRes.i_rd != 0){
 				reg[decodeRes.i_rd] = pc + 4;
 			}
-			pc = (decodeRes.i_imm << 20) >> 20 + pc;
+			pc = ((decodeRes.i_imm << 20) >> 20) + pc;
 			--sstack;
-#ifdef DEBUG
-			cout << "instruction:	" << "JALR" << endl;
-#endif
 			break;
 		case BEQ:
-			pc = (reg[decodeRes.i_rs1] == reg[decodeRes.i_rs2]) ? ((decodeRes.i_imm << 19) >> 19 + pc) : (pc+4);
-#ifdef DEBUG
-	cout << "instruction:	" << "BEQ" << endl;
-#endif
+			offset = (decodeRes.i_imm << 19) >> 19;
+			pc = (reg[decodeRes.i_rs1] == reg[decodeRes.i_rs2]) ? (offset + pc) : (pc+4);
 			break;
 		case BNE:
-			pc = (reg[decodeRes.i_rs1] != reg[decodeRes.i_rs2]) ? ((decodeRes.i_imm << 19) >> 19 + pc) : (pc+4);
-#ifdef DEBUG
-	cout << "instruction:	" << "BNE" << endl;
-#endif			
+			offset = (decodeRes.i_imm << 19) >> 19;
+			pc = (reg[decodeRes.i_rs1] != reg[decodeRes.i_rs2]) ? (offset + pc) : (pc+4);			
 			break;
 		case BLT:
-			pc = (reg[decodeRes.i_rs1] < reg[decodeRes.i_rs2]) ? ((decodeRes.i_imm << 19) >> 19 + pc) : (pc+4);
-#ifdef DEBUG
-	cout << "instruction:	" << "BLT" << endl;
-#endif
+			offset = (decodeRes.i_imm << 19) >> 19;
+			pc = ((int)reg[decodeRes.i_rs1] < (int)reg[decodeRes.i_rs2]) ? (offset + pc) : (pc+4);			
 			break;
 		case BLTU:
-			pc = ((unsigned int)reg[decodeRes.i_rs1] < (unsigned int)reg[decodeRes.i_rs2]) ? ((decodeRes.i_imm << 19) >> 19 + pc) : (pc+4);
-#ifdef DEBUG
-	cout << "instruction:	" << "BLTU" << endl;
-#endif
+			offset = (decodeRes.i_imm << 19) >> 19;
+			pc = (reg[decodeRes.i_rs1] < reg[decodeRes.i_rs2]) ? (offset + pc) : (pc+4);			
 			break;
 		case BGE:
-			pc = (reg[decodeRes.i_rs1] > reg[decodeRes.i_rs2]) ? (decodeRes.i_imm+pc) : (pc+4);
-#ifdef DEBUG
-	cout << "instruction:	" << "BGE" << endl;
-#endif
+			offset = (decodeRes.i_imm << 19) >> 19;
+			pc = ((int)reg[decodeRes.i_rs1] >= (int)reg[decodeRes.i_rs2]) ? (offset + pc) : (pc+4);			
 			break;
 		case BGEU:
-			pc = ((unsigned int)reg[decodeRes.i_rs1] > (unsigned int)reg[decodeRes.i_rs2]) ? (decodeRes.i_imm+pc) : (pc+4);
-#ifdef DEBUG
-	cout << "instruction:	" << "BGEU" << endl;
-#endif
+			offset = (decodeRes.i_imm << 19) >> 19;
+			pc = (reg[decodeRes.i_rs1] >= reg[decodeRes.i_rs2]) ? (offset + pc) : (pc+4);			
 			break;
 		case LB:
-			addr = decodeRes.i_imm + reg[decodeRes.i_rs1];
-			memory.memoryRead(addr, target, 1);
-			val = 0xff;
-			val &= target[0];
-			reg[decodeRes.i_rd] = val;
+			offset = (decodeRes.i_imm << 20) >> 20;
+			addr = offset + reg[decodeRes.i_rs1];
+			memory.memoryRead(addr, (unsigned char*)(&BVal), 1);
+			reg[decodeRes.i_rd] = BVal;
 			pc += 4;
-#ifdef DEBUG
-	cout << "instruction:	" << "LB" << endl;
-#endif
 			break;
 		//从char到int和unsigned int 转换时如何处理符号位的，我的电脑是进行符号扩展的
 		case LBU:
-			addr = decodeRes.i_imm + reg[decodeRes.i_rs1];
-			memory.memoryRead(addr, target, 1);
-			uVal = 0xff;
-			uVal &= target[0];
-			reg[decodeRes.i_rd] = uVal;
+			offset = (decodeRes.i_imm << 20) >> 20;
+			addr = offset + reg[decodeRes.i_rs1];
+			memory.memoryRead(addr, (unsigned char*)(&BVal), 1);
+			reg[decodeRes.i_rd] = BVal;
 			pc += 4;
-#ifdef DEBUG
-	cout << "instruction:	" << "LBU" << endl;
-#endif
 			break;
 		case LH:
-			addr = decodeRes.i_imm + reg[decodeRes.i_rs1];
-			memory.memoryRead(addr, target2, 2);
-			val = 0xffff;
-			val &= target[0];
-			val &= target[1] << 8;
-			reg[decodeRes.i_rd] = val;
+			offset = (decodeRes.i_imm << 20) >> 20;
+			addr = offset + reg[decodeRes.i_rs1];
+			memory.memoryRead(addr, (unsigned char*)(&HVal), 2);
+			reg[decodeRes.i_rd] = HVal;
 			pc += 4;
-#ifdef DEBUG
-	cout << "instruction:	" << "LH" << endl;
-#endif
 			break;
 		case LHU:
-			addr = decodeRes.i_imm + reg[decodeRes.i_rs1];
-			memory.memoryRead(addr, target2, 2);
-			val = 0xffff;
-			val &= target[0];
-			val &= target[1] << 8;
-			reg[decodeRes.i_rd] = val;
+			offset = (decodeRes.i_imm << 20) >> 20;
+			addr = offset + reg[decodeRes.i_rs1];
+			memory.memoryRead(addr, (unsigned char*)(&HVal), 2);
+			reg[decodeRes.i_rd] = HVal;
 			pc += 4;
-#ifdef DEBUG
-	cout << "instruction:	" << "LHU" << endl;
-#endif
 			break;
 		case LW:
-			addr = decodeRes.i_imm + reg[decodeRes.i_rs1];
-			memory.memoryRead(addr, target4, 4);
-			val = 0xffffffff;
-			val &= target[0];
-			val &= target[1] << 8;
-			val &= target[2] << 16;
-			val &= target[3] << 24;
-			reg[decodeRes.i_rd] = val;
+			offset = (decodeRes.i_imm << 20) >> 20;
+			addr = offset + reg[decodeRes.i_rs1];
+			memory.memoryRead(addr, (unsigned char *)&WVal, 4);
+			cout << "22222222222:	" << addr << endl;
+			cout << "22222222222:	" << WVal << endl;
+			cout << "0x10074:	" << (unsigned int)memory.memory[0x10074] << endl;
+	cout << "0x10075:	" << (unsigned int)memory.memory[0x10075] << endl;
+	cout << "0x10076:	" << (unsigned int)memory.memory[0x10076] << endl;
+	cout << "0x10077:	" << (unsigned int)memory.memory[0x10077] << endl;
+	cout << "0x10078:	" << (unsigned int)memory.memory[0x10078] << endl;
+	cout << "0x10079:	" << (unsigned int)memory.memory[0x10079] << endl;
+	cout << "0x1007a:	" << (unsigned int)memory.memory[0x1007a] << endl;
+	cout << "0x1007b:	" << (unsigned int)memory.memory[0x1007b] << endl;
+	cout << "0xfffff800:	" << (unsigned int)memory.memory[0xfffff800] << endl;
+			reg[decodeRes.i_rd] = WVal;
 			pc += 4;
-#ifdef DEBUG
-	cout << "instruction:	" << "LW" << endl;
-#endif
 			break;
 		case SB:
-			addr = (unsigned int)reg[decodeRes.i_imm] + (unsigned int)reg[decodeRes.i_rs1];
-			val = 0xff;
-			val &= reg[decodeRes.i_rs2];
-			source[0] = val;
-			memory.memoryWrite(addr, source, 1);
+			offset = (decodeRes.i_imm << 20) >> 20;
+			addr = offset + (unsigned int)reg[decodeRes.i_rs1];
+			WVal = reg[decodeRes.i_rs2];
+			memory.memoryWrite(addr, (unsigned char *)&WVal, 1);
 			pc += 4;
-#ifdef DEBUG
-	cout << "instruction:	" << "SB" << endl;
-#endif
 			break;
 		case SH:
-			addr = (unsigned int)reg[decodeRes.i_imm] + (unsigned int)reg[decodeRes.i_rs1];
-			val = 0xffff;
-			val &= reg[decodeRes.i_rs2];
-			source[0] = val & 0xff;
-			source[1] = (val >> 8) & 0xff;
-			memory.memoryWrite(addr, source2, 2);
+			offset = (decodeRes.i_imm << 20) >> 20; 
+			addr = offset + (unsigned int)reg[decodeRes.i_rs1];
+			WVal = reg[decodeRes.i_rs2];
+			memory.memoryWrite(addr, (unsigned char *)&WVal, 2);
 			pc += 4;
-#ifdef DEBUG
-	cout << "instruction:	" << "SH" << endl;
-#endif
 			break;
 		case SW:
-			addr = (unsigned int)reg[decodeRes.i_imm] + (unsigned int)reg[decodeRes.i_rs1];
-			val = 0xffffffff;
-			val &= reg[decodeRes.i_rs2];
-			source[0] = val & 0xff;
-			source[1] = (val >> 8) & 0xff;
-			source[2] = (val >> 16) & 0xff;
-			source[3] = (val >> 24) & 0xff;
-			memory.memoryWrite(addr, source4, 4);
+			offset = (decodeRes.i_imm << 20) >> 20;
+			cout << offset << endl;
+			addr = offset + (unsigned int)reg[decodeRes.i_rs1];			
+			WVal = reg[decodeRes.i_rs2];
+			cout << "11111111:	" << reg[decodeRes.i_rs2] << endl;
+			cout << "addr:	" << addr << endl;
+			cout << "WVal:	" << WVal << endl;
+			memory.memoryWrite(addr, (unsigned char *)&WVal, 4);
+			cout << (unsigned int)memory.memory[addr] << " ";
+			cout << (unsigned int)memory.memory[addr + 1] << " ";
+			cout << (unsigned int)memory.memory[addr + 2] << " ";
+			cout << (unsigned int)memory.memory[addr + 3] << endl;
 			pc += 4;
-#ifdef DEBUG
-	cout << "instruction:	" << "SW" << endl;
-#endif
 			break;
 		case ADDI:
-			reg[decodeRes.i_rd] = reg[decodeRes.i_rs1] + decodeRes.i_imm;
+			offset = (decodeRes.i_imm << 20) >> 20;
+			reg[decodeRes.i_rd] = reg[decodeRes.i_rs1] + offset;
 			pc += 4;
-#ifdef DEBUG
-	cout << "instruction:	" << "ADDI" << endl;
-#endif
+			cout << "0x10074:	" << (unsigned int)memory.memory[0x10074] << endl;
+	cout << "0x10075:	" << (unsigned int)memory.memory[0x10075] << endl;
+	cout << "0x10076:	" << (unsigned int)memory.memory[0x10076] << endl;
+	cout << "0x10077:	" << (unsigned int)memory.memory[0x10077] << endl;
+	cout << "0x10078:	" << (unsigned int)memory.memory[0x10078] << endl;
+	cout << "0x10079:	" << (unsigned int)memory.memory[0x10079] << endl;
+	cout << "0x1007a:	" << (unsigned int)memory.memory[0x1007a] << endl;
+	cout << "0x1007b:	" << (unsigned int)memory.memory[0x1007b] << endl;
+	cout << "0xfffff800:	" << (unsigned int)memory.memory[0xfffff800] << endl;
 			break;
 		case SLTI:
 			reg[decodeRes.i_rd] = (reg[decodeRes.i_rs1] < decodeRes.i_imm)? 1 : 0;
 			pc += 4;
 			break;
-#ifdef DEBUG
-	cout << "instruction:	" << "SLTI" << endl;
-#endif
 		case SLTIU:
 			if (decodeRes.i_imm == 1){
 				reg[decodeRes.i_rd] = (reg[decodeRes.i_rs1] == 0)? 1 : 0;
@@ -422,39 +383,24 @@ unsigned int Cpu::excute(Memory& memory, const DecodeRes& decodeRes, int& sstack
 				reg[decodeRes.i_rd] = ((unsigned int)reg[decodeRes.i_rs1] < (unsigned int)decodeRes.i_imm)? 1 : 0;
 			}
 			pc += 4;
-#ifdef DEBUG
-	cout << "instruction:	" << "SLTIU" << endl;
-#endif
 			break;
 		case XORI:
 			reg[decodeRes.i_rd] = reg[decodeRes.i_rs1] ^ decodeRes.i_imm;
 			pc += 4;
-#ifdef DEBUG
-	cout << "instruction:	" << "XORI" << endl;
-#endif
 			break;
 		case ORI:
 			reg[decodeRes.i_rd] = reg[decodeRes.i_rs1] | decodeRes.i_imm;
 			pc += 4;
-#ifdef DEBUG
-	cout << "instruction:	" << "ORI" << endl;
-#endif
 			break;
 		case ANDI:
 			reg[decodeRes.i_rd] = reg[decodeRes.i_rs1] & decodeRes.i_imm;
 			pc += 4;
-#ifdef DEBUG
-	cout << "instruction:	" << "ANDI" << endl;
-#endif
 			break;
 		case SLLI:
 			left = 0x1f;
 			left |= decodeRes.i_imm;
 			reg[decodeRes.i_rd] = reg[decodeRes.i_rs1] << left;
 			pc += 4;
-#ifdef DEBUG
-	cout << "instruction:	" << "SLLI" << endl;
-#endif
 			break;
 		case SRLI:
 		//逻辑右移，要补0，怎么确认高位补0,直接除以2咋样！
@@ -463,98 +409,62 @@ unsigned int Cpu::excute(Memory& memory, const DecodeRes& decodeRes, int& sstack
 			right |= decodeRes.i_imm;
 			reg[decodeRes.i_rd] = reg[decodeRes.i_rs1] / pow(2, right);
 			pc += 4;
-#ifdef DEBUG
-	cout << "instruction:	" << "SRLI" << endl;
-#endif
 			break;
 		case SRAI:
 			right = 0x1f;
 			right |= decodeRes.i_imm;
 			reg[decodeRes.i_rd] = reg[decodeRes.i_rs1] >> right;
 			pc += 4;
-#ifdef DEBUG
-	cout << "instruction:	" << "SRAI" << endl;
-#endif
 			break;
 		case ADD:
 			reg[decodeRes.i_rd] = reg[decodeRes.i_rs1] + reg[decodeRes.i_rs2];
 			pc += 4;
-#ifdef DEBUG
-	cout << "instruction:	" << "ADD" << endl;
-#endif
 			break;
 			//哪个减哪个？还是要注意的
 		case SUB:
 			reg[decodeRes.i_rd] = reg[decodeRes.i_rs1] - reg[decodeRes.i_rs2];
 			pc += 4;
-#ifdef DEBUG
-	cout << "instruction:	" << "SUB" << endl;
-#endif
 			break;
 		case SLL:
 			amount = 0x1f;
 			amount |= reg[decodeRes.i_rs2];
 			reg[decodeRes.i_rd] = reg[decodeRes.i_rs1] << amount;
 			pc += 4;
-#ifdef DEBUG
-	cout << "instruction:	" << "SLL" << endl;
-#endif
 			break;
 		case SLT:
 			reg[decodeRes.i_rd] = (reg[decodeRes.i_rs1] < reg[decodeRes.i_rs2])? 1 : 0;
 			pc += 4;
-#ifdef DEBUG
-	cout << "instruction:	" << "SLT" << endl;
-#endif
 			break;
 		case SLTU:
 			reg[decodeRes.i_rd] = ((unsigned int)reg[decodeRes.i_rs1] < (unsigned int)reg[decodeRes.i_rs2])? 1 : 0;
 			pc += 4;
-#ifdef DEBUG
-	cout << "instruction:	" << "SLTU" << endl;
-#endif
 			break;
 		case XOR:
 			reg[decodeRes.i_rd] = reg[decodeRes.i_rs1] ^ reg[decodeRes.i_rs2];
 			pc += 4;
-#ifdef DEBUG
-	cout << "instruction:	" << "XOR" << endl;
-#endif
 			break;
 		case OR:
 			reg[decodeRes.i_rd] = reg[decodeRes.i_rs1] | reg[decodeRes.i_rs2];
 			pc += 4;
-#ifdef DEBUG
-	cout << "instruction:	" << "OR" << endl;
-#endif
 			break;
 		case AND:
 			reg[decodeRes.i_rd] = reg[decodeRes.i_rs1] & reg[decodeRes.i_rs2];
 			pc += 4;
-#ifdef DEBUG
-	cout << "instruction:	" << "AND" << endl;
-#endif
 			break;
 		case SRL:
 			amount = 0x1f;
 			amount |= reg[decodeRes.i_rs2];
 			reg[decodeRes.i_rd] = reg[decodeRes.i_rs1] / pow(2, amount);
 			pc += 4;
-#ifdef DEBUG
-	cout << "instruction:	" << "SRL" << endl;
-#endif
 			break;
 		case SRA:
 			amount = 0x1f;
 			amount |= reg[decodeRes.i_rs2];
 			reg[decodeRes.i_rd] = reg[decodeRes.i_rs1] >> amount;
 			pc += 4;
-#ifdef DEBUG
-	cout << "instruction:	" << "SRA" << endl;
-#endif
 			break;
 	}
-//	cout << "Instruction type:	" << decodeRes.i_type << endl;
+	cout << "Instruction type:	" << decodeRes.i_type << endl;
 	cout << "Instruction rs1:	0x" << decodeRes.i_rs1 << "	reg[rs1]:	" << reg[decodeRes.i_rs1] << endl;
 	cout << "Instruction rs2:	0x" << decodeRes.i_rs2 << "	reg[rs2]:	" << reg[decodeRes.i_rs2] << endl;
 	cout << "Instruction rd:	0x" << decodeRes.i_rd << "	reg[rd]:	" << reg[decodeRes.i_rd] << endl;

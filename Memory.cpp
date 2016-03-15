@@ -22,6 +22,7 @@ void Memory::memoryWrite(unsigned int addr, unsigned char* source, unsigned int 
  * @param target : The recevier buf to gain data.
  * @param bytes  : How many bytes will be read.
  */
+ //little end
 void Memory::memoryRead( unsigned int addr, unsigned char* target, unsigned int bytes){
 	for (unsigned int i = 0; i < bytes; i++){
 		if(memory.find(addr+i) != memory.end()){

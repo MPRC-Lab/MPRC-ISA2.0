@@ -1,4 +1,5 @@
-
+#ifndef __ELF_H__
+#define __ELF_H__
 //	Name           Size Alignment   Purpose
 //	====           ==== =========   =======
 //	Elf32_Addr      4       4       Unsigned program address
@@ -298,3 +299,4 @@ typedef struct {
 
 char syb_type[][128] = {"NOTYPE", "OBJECT", "FUNC", "SECTION", "FILE", "LOPROC", "HIPORC"};
 char syb_bind[][128] = {"LOCAL", "GLOBAL", "WEAK", "LOPROC", "HIPORC"};
+#endif

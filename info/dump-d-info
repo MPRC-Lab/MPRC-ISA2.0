@@ -1,0 +1,22 @@
+
+/root/test:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00011078 <main>:
+   11078:	fe010113          	addi	sp,sp,-32
+   1107c:	00812e23          	sw	s0,28(sp)
+   11080:	02010413          	addi	s0,sp,32
+   11084:	00a00793          	li	a5,10
+   11088:	fef42623          	sw	a5,-20(s0)
+   1108c:	fec42783          	lw	a5,-20(s0)
+   11090:	01978793          	addi	a5,a5,25
+   11094:	fef42623          	sw	a5,-20(s0)
+   11098:	fec42703          	lw	a4,-20(s0)
+   1109c:	80e1a023          	sw	a4,-2048(gp) # 10074 <ANS>
+   110a0:	00000793          	li	a5,0
+   110a4:	00078513          	mv	a0,a5
+   110a8:	01c12403          	lw	s0,28(sp)
+   110ac:	02010113          	addi	sp,sp,32
+   110b0:	00008067          	ret

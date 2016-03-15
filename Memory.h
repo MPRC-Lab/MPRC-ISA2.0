@@ -4,7 +4,7 @@
 using namespace std;
 
 class Memory{
-private:
+public:
 	unordered_map<unsigned int, unsigned char> memory;
 public:
 	void memoryClear();
