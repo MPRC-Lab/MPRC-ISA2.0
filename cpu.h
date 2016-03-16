@@ -1,7 +1,9 @@
 #ifndef __CPU_H__
 #define __CPU_H__
 #include "Memory.h"
-#include "../zlib/head.h"
+#include <vector>
+
+
 
 class DecodeRes {
 public:

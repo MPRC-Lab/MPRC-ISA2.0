@@ -9,9 +9,9 @@ ELF Header:
   Type:                                   0x2; Executable file
   Machine:                                0xf3; <unknown>
   Version:                                1; 
-  Entry point Address:                    0x11078; 
+  Entry point Address:                    0x1108c; 
   Start of program headers:               0x34; (52 bytes into file)
-  Start of section headers:               0x1d4; (468 bytes into file)
+  Start of section headers:               0x2e8; (744 bytes into file)
   Flags                                   0x0; 
   Size of this header:                    0x34; (52 bytes)
   Size of program headers:                0x20; (32 bytes)
@@ -27,17 +27,17 @@ ELF Program Headers: (2 headers)
         p_vaddr:       0x10000
         p_paddr:       0x10000
         p_filesz:      0x74(116 bytes)
-        p_memsz:       0x78(120 bytes)
+        p_memsz:       0x8c(140 bytes)
         p_flags:       0x6
         p_align:       0x1000
 
     Entry 1
         p_type:        0x1
-        p_offset:      0x78
-        p_vaddr:       0x11078
-        p_paddr:       0x11078
-        p_filesz:      0x3c(60 bytes)
-        p_memsz:       0x3c(60 bytes)
+        p_offset:      0x8c
+        p_vaddr:       0x1108c
+        p_paddr:       0x1108c
+        p_filesz:      0x13c(316 bytes)
+        p_memsz:       0x13c(316 bytes)
         p_flags:       0x5
         p_align:       0x1000
 
@@ -59,7 +59,7 @@ ELF Section Headers: (7 headers)
         Type:          SHT_NOBITS
         Addr:          0x00010074
         Off:           0x00000074
-        Size:          4
+        Size:          24
         Entry Size:    0
         Flags:         SHF_WRITE & SHF_ALLOC
         Link:          0
@@ -68,9 +68,9 @@ ELF Section Headers: (7 headers)
     Entry 2: 
         Name:          .text
         Type:          SHT_PROGBITS
-        Addr:          0x00011078
-        Off:           0x00000078
-        Size:          60
+        Addr:          0x0001108c
+        Off:           0x0000008c
+        Size:          316
         Entry Size:    0
         Flags:         SHF_ALLOC & SHF_EXECINSTR
         Link:          0
@@ -80,7 +80,7 @@ ELF Section Headers: (7 headers)
         Name:          .comment
         Type:          SHT_PROGBITS
         Addr:          0x00000000
-        Off:           0x000000b4
+        Off:           0x000001c8
         Size:          17
         Entry Size:    1
         Flags:         Unknown
@@ -91,7 +91,7 @@ ELF Section Headers: (7 headers)
         Name:          .shstrtab
         Type:          SHT_STRTAB
         Addr:          0x00000000
-        Off:           0x000000c5
+        Off:           0x000001d9
         Size:          47
         Entry Size:    0
         Flags:         Unknown
@@ -102,7 +102,7 @@ ELF Section Headers: (7 headers)
         Name:          .symtab
         Type:          SHT_SYMTAB
         Addr:          0x00000000
-        Off:           0x000000f4
+        Off:           0x00000208
         Size:          176
         Entry Size:    16
         Flags:         Unknown
@@ -113,17 +113,85 @@ ELF Section Headers: (7 headers)
         Name:          .strtab
         Type:          SHT_STRTAB
         Addr:          0x00000000
-        Off:           0x000001a4
-        Size:          45
+        Off:           0x000002b8
+        Size:          46
         Entry Size:    0
         Flags:         Unknown
         Link:          0
         Info:          0
         Align:         1
+---------------------------------------------------------
+ELF Symbol Table:
+    Entry 0: 
+        Name:          
+        value:         0x00000000
+        Size:          0
+        Info(Type):    NOTYPE
+        Info(bind):    LOCAL
+    Entry 1: 
+        Name:          
+        value:         0x00010074
+        Size:          0
+        Info(Type):    SECTION
+        Info(bind):    LOCAL
+    Entry 2: 
+        Name:          
+        value:         0x0001108c
+        Size:          0
+        Info(Type):    SECTION
+        Info(bind):    LOCAL
+    Entry 3: 
+        Name:          
+        value:         0x00000000
+        Size:          0
+        Info(Type):    SECTION
+        Info(bind):    LOCAL
+    Entry 4: 
+        Name:          test4.c
+        value:         0x00000000
+        Size:          0
+        Info(Type):    FILE
+        Info(bind):    LOCAL
+    Entry 5: 
+        Name:          _gp
+        value:         0x00010874
+        Size:          0
+        Info(Type):    NOTYPE
+        Info(bind):    
+    Entry 6: 
+        Name:          __bss_start
+        value:         0x000121c8
+        Size:          0
+        Info(Type):    NOTYPE
+        Info(bind):    
+    Entry 7: 
+        Name:          main
+        value:         0x0001108c
+        Size:          316
+        Info(Type):    FUNC
+        Info(bind):    
+    Entry 8: 
+        Name:          _edata
+        value:         0x000121c8
+        Size:          0
+        Info(Type):    NOTYPE
+        Info(bind):    
+    Entry 9: 
+        Name:          _end
+        value:         0x000121c8
+        Size:          0
+        Info(Type):    NOTYPE
+        Info(bind):    
+    Entry 10: 
+        Name:          SUM
+        value:         0x00010074
+        Size:          24
+        Info(Type):    OBJECT
+        Info(bind):    
 ======================parse ELF end======================
 
 ********************* ELF loading *********************
-    Entry point:                  0x11078
+    Entry point:                  0x1108c
     Program Headers parsing...
     Sections loading...
     -----------------------------------------------
@@ -133,7 +201,7 @@ ELF Section Headers: (7 headers)
         p_vaddr:        0x10000
         p_paddr:        0x10000
         p_filesz:       0x74
-        p_memsz:        0x78
+        p_memsz:        0x8c
         p_flags:        0x6
         p_align:        0x1000
         Addr: 0x00010000        hex: 464c457f        bin: 01000110010011000100010101111111
@@ -142,9 +210,9 @@ ELF Section Headers: (7 headers)
         Addr: 0x0001000c        hex: 00000000        bin: 00000000000000000000000000000000
         Addr: 0x00010010        hex: 00f30002        bin: 00000000111100110000000000000010
         Addr: 0x00010014        hex: 00000001        bin: 00000000000000000000000000000001
-        Addr: 0x00010018        hex: 00011078        bin: 00000000000000010001000001111000
+        Addr: 0x00010018        hex: 0001108c        bin: 00000000000000010001000010001100
         Addr: 0x0001001c        hex: 00000034        bin: 00000000000000000000000000110100
-        Addr: 0x00010020        hex: 000001d4        bin: 00000000000000000000000111010100
+        Addr: 0x00010020        hex: 000002e8        bin: 00000000000000000000001011101000
         Addr: 0x00010024        hex: 00000000        bin: 00000000000000000000000000000000
         Addr: 0x00010028        hex: 00200034        bin: 00000000001000000000000000110100
         Addr: 0x0001002c        hex: 00280002        bin: 00000000001010000000000000000010
@@ -154,432 +222,4424 @@ ELF Section Headers: (7 headers)
         Addr: 0x0001003c        hex: 00010000        bin: 00000000000000010000000000000000
         Addr: 0x00010040        hex: 00010000        bin: 00000000000000010000000000000000
         Addr: 0x00010044        hex: 00000074        bin: 00000000000000000000000001110100
-        Addr: 0x00010048        hex: 00000078        bin: 00000000000000000000000001111000
+        Addr: 0x00010048        hex: 0000008c        bin: 00000000000000000000000010001100
         Addr: 0x0001004c        hex: 00000006        bin: 00000000000000000000000000000110
         Addr: 0x00010050        hex: 00001000        bin: 00000000000000000001000000000000
         Addr: 0x00010054        hex: 00000001        bin: 00000000000000000000000000000001
-        Addr: 0x00010058        hex: 00000078        bin: 00000000000000000000000001111000
-        Addr: 0x0001005c        hex: 00011078        bin: 00000000000000010001000001111000
-        Addr: 0x00010060        hex: 00011078        bin: 00000000000000010001000001111000
-        Addr: 0x00010064        hex: 0000003c        bin: 00000000000000000000000000111100
-        Addr: 0x00010068        hex: 0000003c        bin: 00000000000000000000000000111100
+        Addr: 0x00010058        hex: 0000008c        bin: 00000000000000000000000010001100
+        Addr: 0x0001005c        hex: 0001108c        bin: 00000000000000010001000010001100
+        Addr: 0x00010060        hex: 0001108c        bin: 00000000000000010001000010001100
+        Addr: 0x00010064        hex: 0000013c        bin: 00000000000000000000000100111100
+        Addr: 0x00010068        hex: 0000013c        bin: 00000000000000000000000100111100
         Addr: 0x0001006c        hex: 00000005        bin: 00000000000000000000000000000101
         Addr: 0x00010070        hex: 00001000        bin: 00000000000000000001000000000000
         Addr: 0x00010074        hex: 00000000        bin: 00000000000000000000000000000000
+        Addr: 0x00010078        hex: 00000000        bin: 00000000000000000000000000000000
+        Addr: 0x0001007c        hex: 00000000        bin: 00000000000000000000000000000000
+        Addr: 0x00010080        hex: 00000000        bin: 00000000000000000000000000000000
+        Addr: 0x00010084        hex: 00000000        bin: 00000000000000000000000000000000
+        Addr: 0x00010088        hex: 00000000        bin: 00000000000000000000000000000000
     -----------------------------------------------
     Sections 1
         p_type:         PT_LOAD
-        p_offset:       0x78
-        p_vaddr:        0x11078
-        p_paddr:        0x11078
-        p_filesz:       0x3c
-        p_memsz:        0x3c
+        p_offset:       0x8c
+        p_vaddr:        0x1108c
+        p_paddr:        0x1108c
+        p_filesz:       0x13c
+        p_memsz:        0x13c
         p_flags:        0x5
         p_align:        0x1000
-        Addr: 0x00011078        hex: fe010113        bin: 11111110000000010000000100010011
-        Addr: 0x0001107c        hex: 00812e23        bin: 00000000100000010010111000100011
-        Addr: 0x00011080        hex: 02010413        bin: 00000010000000010000010000010011
-        Addr: 0x00011084        hex: 00a00793        bin: 00000000101000000000011110010011
-        Addr: 0x00011088        hex: fef42623        bin: 11111110111101000010011000100011
-        Addr: 0x0001108c        hex: fec42783        bin: 11111110110001000010011110000011
-        Addr: 0x00011090        hex: 01978793        bin: 00000001100101111000011110010011
-        Addr: 0x00011094        hex: fef42623        bin: 11111110111101000010011000100011
-        Addr: 0x00011098        hex: fec42703        bin: 11111110110001000010011100000011
-        Addr: 0x0001109c        hex: 80e1a023        bin: 10000000111000011010000000100011
-        Addr: 0x000110a0        hex: 00000793        bin: 00000000000000000000011110010011
-        Addr: 0x000110a4        hex: 00078513        bin: 00000000000001111000010100010011
-        Addr: 0x000110a8        hex: 01c12403        bin: 00000001110000010010010000000011
-        Addr: 0x000110ac        hex: 02010113        bin: 00000010000000010000000100010011
-        Addr: 0x000110b0        hex: 00008067        bin: 00000000000000001000000001100111
+        Addr: 0x0001108c        hex: fb010113        bin: 11111011000000010000000100010011
+        Addr: 0x00011090        hex: 04812623        bin: 00000100100000010010011000100011
+        Addr: 0x00011094        hex: 05010413        bin: 00000101000000010000010000010011
+        Addr: 0x00011098        hex: 00100793        bin: 00000000000100000000011110010011
+        Addr: 0x0001109c        hex: fcf42823        bin: 11111100111101000010100000100011
+        Addr: 0x000110a0        hex: 00200793        bin: 00000000001000000000011110010011
+        Addr: 0x000110a4        hex: fcf42a23        bin: 11111100111101000010101000100011
+        Addr: 0x000110a8        hex: 00300793        bin: 00000000001100000000011110010011
+        Addr: 0x000110ac        hex: fcf42c23        bin: 11111100111101000010110000100011
+        Addr: 0x000110b0        hex: 00400793        bin: 00000000010000000000011110010011
+        Addr: 0x000110b4        hex: fcf42e23        bin: 11111100111101000010111000100011
+        Addr: 0x000110b8        hex: 00500793        bin: 00000000010100000000011110010011
+        Addr: 0x000110bc        hex: fef42023        bin: 11111110111101000010000000100011
+        Addr: 0x000110c0        hex: 00600793        bin: 00000000011000000000011110010011
+        Addr: 0x000110c4        hex: fef42223        bin: 11111110111101000010001000100011
+        Addr: 0x000110c8        hex: 00700793        bin: 00000000011100000000011110010011
+        Addr: 0x000110cc        hex: faf42c23        bin: 11111010111101000010110000100011
+        Addr: 0x000110d0        hex: 00800793        bin: 00000000100000000000011110010011
+        Addr: 0x000110d4        hex: faf42e23        bin: 11111010111101000010111000100011
+        Addr: 0x000110d8        hex: 00900793        bin: 00000000100100000000011110010011
+        Addr: 0x000110dc        hex: fcf42023        bin: 11111100111101000010000000100011
+        Addr: 0x000110e0        hex: 00a00793        bin: 00000000101000000000011110010011
+        Addr: 0x000110e4        hex: fcf42223        bin: 11111100111101000010001000100011
+        Addr: 0x000110e8        hex: 00b00793        bin: 00000000101100000000011110010011
+        Addr: 0x000110ec        hex: fcf42423        bin: 11111100111101000010010000100011
+        Addr: 0x000110f0        hex: 00c00793        bin: 00000000110000000000011110010011
+        Addr: 0x000110f4        hex: fcf42623        bin: 11111100111101000010011000100011
+        Addr: 0x000110f8        hex: fe042623        bin: 11111110000001000010011000100011
+        Addr: 0x000110fc        hex: 0ac0006f        bin: 00001010110000000000000001101111
+        Addr: 0x00011100        hex: fe042423        bin: 11111110000001000010010000100011
+        Addr: 0x00011104        hex: 08c0006f        bin: 00001000110000000000000001101111
+        Addr: 0x00011108        hex: fec42703        bin: 11111110110001000010011100000011
+        Addr: 0x0001110c        hex: 00070793        bin: 00000000000001110000011110010011
+        Addr: 0x00011110        hex: 00179793        bin: 00000000000101111001011110010011
+        Addr: 0x00011114        hex: 00e787b3        bin: 00000000111001111000011110110011
+        Addr: 0x00011118        hex: fe842703        bin: 11111110100001000010011100000011
+        Addr: 0x0001111c        hex: 00e787b3        bin: 00000000111001111000011110110011
+        Addr: 0x00011120        hex: 00279793        bin: 00000000001001111001011110010011
+        Addr: 0x00011124        hex: ff040713        bin: 11111111000001000000011100010011
+        Addr: 0x00011128        hex: 00f707b3        bin: 00000000111101110000011110110011
+        Addr: 0x0001112c        hex: fe07a683        bin: 11111110000001111010011010000011
+        Addr: 0x00011130        hex: fec42703        bin: 11111110110001000010011100000011
+        Addr: 0x00011134        hex: 00070793        bin: 00000000000001110000011110010011
+        Addr: 0x00011138        hex: 00179793        bin: 00000000000101111001011110010011
+        Addr: 0x0001113c        hex: 00e787b3        bin: 00000000111001111000011110110011
+        Addr: 0x00011140        hex: fe842703        bin: 11111110100001000010011100000011
+        Addr: 0x00011144        hex: 00e787b3        bin: 00000000111001111000011110110011
+        Addr: 0x00011148        hex: 00279793        bin: 00000000001001111001011110010011
+        Addr: 0x0001114c        hex: ff040713        bin: 11111111000001000000011100010011
+        Addr: 0x00011150        hex: 00f707b3        bin: 00000000111101110000011110110011
+        Addr: 0x00011154        hex: fc87a783        bin: 11111100100001111010011110000011
+        Addr: 0x00011158        hex: 00f686b3        bin: 00000000111101101000011010110011
+        Addr: 0x0001115c        hex: fec42703        bin: 11111110110001000010011100000011
+        Addr: 0x00011160        hex: 00070793        bin: 00000000000001110000011110010011
+        Addr: 0x00011164        hex: 00179793        bin: 00000000000101111001011110010011
+        Addr: 0x00011168        hex: 00e787b3        bin: 00000000111001111000011110110011
+        Addr: 0x0001116c        hex: fe842703        bin: 11111110100001000010011100000011
+        Addr: 0x00011170        hex: 00e787b3        bin: 00000000111001111000011110110011
+        Addr: 0x00011174        hex: 00279713        bin: 00000000001001111001011100010011
+        Addr: 0x00011178        hex: 80018793        bin: 10000000000000011000011110010011
+        Addr: 0x0001117c        hex: 00f707b3        bin: 00000000111101110000011110110011
+        Addr: 0x00011180        hex: 00d7a023        bin: 00000000110101111010000000100011
+        Addr: 0x00011184        hex: fe842783        bin: 11111110100001000010011110000011
+        Addr: 0x00011188        hex: 00178793        bin: 00000000000101111000011110010011
+        Addr: 0x0001118c        hex: fef42423        bin: 11111110111101000010010000100011
+        Addr: 0x00011190        hex: fe842703        bin: 11111110100001000010011100000011
+        Addr: 0x00011194        hex: 00200793        bin: 00000000001000000000011110010011
+        Addr: 0x00011198        hex: f6e7d8e3        bin: 11110110111001111101100011100011
+        Addr: 0x0001119c        hex: fec42783        bin: 11111110110001000010011110000011
+        Addr: 0x000111a0        hex: 00178793        bin: 00000000000101111000011110010011
+        Addr: 0x000111a4        hex: fef42623        bin: 11111110111101000010011000100011
+        Addr: 0x000111a8        hex: fec42703        bin: 11111110110001000010011100000011
+        Addr: 0x000111ac        hex: 00100793        bin: 00000000000100000000011110010011
+        Addr: 0x000111b0        hex: f4e7d8e3        bin: 11110100111001111101100011100011
+        Addr: 0x000111b4        hex: 00000793        bin: 00000000000000000000011110010011
+        Addr: 0x000111b8        hex: 00078513        bin: 00000000000001111000010100010011
+        Addr: 0x000111bc        hex: 04c12403        bin: 00000100110000010010010000000011
+        Addr: 0x000111c0        hex: 05010113        bin: 00000101000000010000000100010011
+        Addr: 0x000111c4        hex: 00008067        bin: 00000000000000001000000001100111
 ****************** ELF load complete ******************
 
-entryPoint: 0x11078
++++++++++++++++++++++++Key Value+++++++++++++++++++++++
+entryPoint: 0x1108c
 .bssBegin:  0x10074
-.bssSize:   4 bytes
+.bssSize:   24 bytes
+sp[R2]:     0x00010000
+gp[R3]:     0x00010874
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 -----------simulate the instruction excution---------
-Fetch the instruction
-pc:	11078		instruction:	fe010113
-opcode:	0x13
-funct3:	0x0
+*************Fetch the instruction***************
+pc:	1108c		instruction:	fb010113
 Decode the instruction
-decode output
+***************decode output**************
 Instruction type:	0x12
 Instruction rs1:	0x2	reg[rs1]	10000
-Instruction rs2:	0x0	reg[rs2]	0
+Instruction rs2:	0x10	reg[rs2]	0
 Instruction rd:	0x2	reg[rd]	10000
-Instruction imm:	0xfe0
-Excute the instruction
-0x10074:	0
-0x10075:	0
-0x10076:	0
-0x10077:	0
-0x10078:	0
-0x10079:	0
-0x1007a:	0
-0x1007b:	0
-0xfffff800:	0
-Instruction type:	12
-Instruction rs1:	0x2	reg[rs1]:	ffe0
-Instruction rs2:	0x0	reg[rs2]:	0
-Instruction rd:	0x2	reg[rd]:	ffe0
-Instruction imm:	0xfe0
-Fetch the instruction
-pc:	1107c		instruction:	812e23
-opcode:	0x23
-funct3:	0x2
-Decode the instruction
-decode output
-Instruction type:	0x11
-Instruction rs1:	0x2	reg[rs1]	ffe0
-Instruction rs2:	0x8	reg[rs2]	0
-Instruction rd:	0x1c	reg[rd]	0
-Instruction imm:	0x1c
-Excute the instruction
-1c
-11111111:	0
-addr:	fffc
-WVal:	0
-0 0 0 0
-Instruction type:	11
-Instruction rs1:	0x2	reg[rs1]:	ffe0
-Instruction rs2:	0x8	reg[rs2]:	0
-Instruction rd:	0x1c	reg[rd]:	0
-Instruction imm:	0x1c
-Fetch the instruction
-pc:	11080		instruction:	2010413
-opcode:	0x13
-funct3:	0x0
-Decode the instruction
-decode output
+Instruction imm:	0xfb0
+***************Excute Result**************
 Instruction type:	0x12
-Instruction rs1:	0x2	reg[rs1]	ffe0
-Instruction rs2:	0x0	reg[rs2]	0
-Instruction rd:	0x8	reg[rd]	0
-Instruction imm:	0x20
-Excute the instruction
-0x10074:	0
-0x10075:	0
-0x10076:	0
-0x10077:	0
-0x10078:	0
-0x10079:	0
-0x1007a:	0
-0x1007b:	0
-0xfffff800:	0
-Instruction type:	12
-Instruction rs1:	0x2	reg[rs1]:	ffe0
-Instruction rs2:	0x0	reg[rs2]:	0
-Instruction rd:	0x8	reg[rd]:	10000
-Instruction imm:	0x20
-Fetch the instruction
-pc:	11084		instruction:	a00793
-opcode:	0x13
-funct3:	0x0
+Instruction rs1:	0x2	reg[rs1]:	ffb0
+Instruction rs2:	0x10	reg[rs2]:	0
+Instruction rd:	0x2	reg[rd]:	ffb0
+Instruction imm:	0xfb0
+*************Fetch the instruction***************
+pc:	11090		instruction:	4812623
 Decode the instruction
-decode output
+***************decode output**************
+Instruction type:	0x11
+Instruction rs1:	0x2	reg[rs1]	ffb0
+Instruction rs2:	0x8	reg[rs2]	0
+Instruction rd:	0xc	reg[rd]	0
+Instruction imm:	0x4c
+***************Excute Result**************
+4c
+Instruction type:	0x11
+Instruction rs1:	0x2	reg[rs1]:	ffb0
+Instruction rs2:	0x8	reg[rs2]:	0
+Instruction rd:	0xc	reg[rd]:	0
+Instruction imm:	0x4c
+*************Fetch the instruction***************
+pc:	11094		instruction:	5010413
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x2	reg[rs1]	ffb0
+Instruction rs2:	0x10	reg[rs2]	0
+Instruction rd:	0x8	reg[rd]	0
+Instruction imm:	0x50
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x2	reg[rs1]:	ffb0
+Instruction rs2:	0x10	reg[rs2]:	0
+Instruction rd:	0x8	reg[rd]:	10000
+Instruction imm:	0x50
+*************Fetch the instruction***************
+pc:	11098		instruction:	100793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]	0
+Instruction rs2:	0x1	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]:	0
+Instruction rs2:	0x1	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	1
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	1109c		instruction:	fcf42823
+Decode the instruction
+***************decode output**************
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xf	reg[rs2]	1
+Instruction rd:	0x10	reg[rd]	0
+Instruction imm:	0xfd0
+***************Excute Result**************
+ffffffd0
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xf	reg[rs2]:	1
+Instruction rd:	0x10	reg[rd]:	0
+Instruction imm:	0xfd0
+*************Fetch the instruction***************
+pc:	110a0		instruction:	200793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]	0
+Instruction rs2:	0x2	reg[rs2]	ffb0
+Instruction rd:	0xf	reg[rd]	1
+Instruction imm:	0x2
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]:	0
+Instruction rs2:	0x2	reg[rs2]:	ffb0
+Instruction rd:	0xf	reg[rd]:	2
+Instruction imm:	0x2
+*************Fetch the instruction***************
+pc:	110a4		instruction:	fcf42a23
+Decode the instruction
+***************decode output**************
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xf	reg[rs2]	2
+Instruction rd:	0x14	reg[rd]	0
+Instruction imm:	0xfd4
+***************Excute Result**************
+ffffffd4
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xf	reg[rs2]:	2
+Instruction rd:	0x14	reg[rd]:	0
+Instruction imm:	0xfd4
+*************Fetch the instruction***************
+pc:	110a8		instruction:	300793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]	0
+Instruction rs2:	0x3	reg[rs2]	10874
+Instruction rd:	0xf	reg[rd]	2
+Instruction imm:	0x3
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]:	0
+Instruction rs2:	0x3	reg[rs2]:	10874
+Instruction rd:	0xf	reg[rd]:	3
+Instruction imm:	0x3
+*************Fetch the instruction***************
+pc:	110ac		instruction:	fcf42c23
+Decode the instruction
+***************decode output**************
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xf	reg[rs2]	3
+Instruction rd:	0x18	reg[rd]	0
+Instruction imm:	0xfd8
+***************Excute Result**************
+ffffffd8
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xf	reg[rs2]:	3
+Instruction rd:	0x18	reg[rd]:	0
+Instruction imm:	0xfd8
+*************Fetch the instruction***************
+pc:	110b0		instruction:	400793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]	0
+Instruction rs2:	0x4	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	3
+Instruction imm:	0x4
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]:	0
+Instruction rs2:	0x4	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	4
+Instruction imm:	0x4
+*************Fetch the instruction***************
+pc:	110b4		instruction:	fcf42e23
+Decode the instruction
+***************decode output**************
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xf	reg[rs2]	4
+Instruction rd:	0x1c	reg[rd]	0
+Instruction imm:	0xfdc
+***************Excute Result**************
+ffffffdc
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xf	reg[rs2]:	4
+Instruction rd:	0x1c	reg[rd]:	0
+Instruction imm:	0xfdc
+*************Fetch the instruction***************
+pc:	110b8		instruction:	500793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]	0
+Instruction rs2:	0x5	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	4
+Instruction imm:	0x5
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]:	0
+Instruction rs2:	0x5	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	5
+Instruction imm:	0x5
+*************Fetch the instruction***************
+pc:	110bc		instruction:	fef42023
+Decode the instruction
+***************decode output**************
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xf	reg[rs2]	5
+Instruction rd:	0x0	reg[rd]	0
+Instruction imm:	0xfe0
+***************Excute Result**************
+ffffffe0
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xf	reg[rs2]:	5
+Instruction rd:	0x0	reg[rd]:	0
+Instruction imm:	0xfe0
+*************Fetch the instruction***************
+pc:	110c0		instruction:	600793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]	0
+Instruction rs2:	0x6	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	5
+Instruction imm:	0x6
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]:	0
+Instruction rs2:	0x6	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	6
+Instruction imm:	0x6
+*************Fetch the instruction***************
+pc:	110c4		instruction:	fef42223
+Decode the instruction
+***************decode output**************
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xf	reg[rs2]	6
+Instruction rd:	0x4	reg[rd]	0
+Instruction imm:	0xfe4
+***************Excute Result**************
+ffffffe4
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xf	reg[rs2]:	6
+Instruction rd:	0x4	reg[rd]:	0
+Instruction imm:	0xfe4
+*************Fetch the instruction***************
+pc:	110c8		instruction:	700793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]	0
+Instruction rs2:	0x7	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	6
+Instruction imm:	0x7
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]:	0
+Instruction rs2:	0x7	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	7
+Instruction imm:	0x7
+*************Fetch the instruction***************
+pc:	110cc		instruction:	faf42c23
+Decode the instruction
+***************decode output**************
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xf	reg[rs2]	7
+Instruction rd:	0x18	reg[rd]	0
+Instruction imm:	0xfb8
+***************Excute Result**************
+ffffffb8
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xf	reg[rs2]:	7
+Instruction rd:	0x18	reg[rd]:	0
+Instruction imm:	0xfb8
+*************Fetch the instruction***************
+pc:	110d0		instruction:	800793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]	0
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xf	reg[rd]	7
+Instruction imm:	0x8
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]:	0
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xf	reg[rd]:	8
+Instruction imm:	0x8
+*************Fetch the instruction***************
+pc:	110d4		instruction:	faf42e23
+Decode the instruction
+***************decode output**************
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xf	reg[rs2]	8
+Instruction rd:	0x1c	reg[rd]	0
+Instruction imm:	0xfbc
+***************Excute Result**************
+ffffffbc
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xf	reg[rs2]:	8
+Instruction rd:	0x1c	reg[rd]:	0
+Instruction imm:	0xfbc
+*************Fetch the instruction***************
+pc:	110d8		instruction:	900793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]	0
+Instruction rs2:	0x9	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	8
+Instruction imm:	0x9
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]:	0
+Instruction rs2:	0x9	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	9
+Instruction imm:	0x9
+*************Fetch the instruction***************
+pc:	110dc		instruction:	fcf42023
+Decode the instruction
+***************decode output**************
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xf	reg[rs2]	9
+Instruction rd:	0x0	reg[rd]	0
+Instruction imm:	0xfc0
+***************Excute Result**************
+ffffffc0
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xf	reg[rs2]:	9
+Instruction rd:	0x0	reg[rd]:	0
+Instruction imm:	0xfc0
+*************Fetch the instruction***************
+pc:	110e0		instruction:	a00793
+Decode the instruction
+***************decode output**************
 Instruction type:	0x12
 Instruction rs1:	0x0	reg[rs1]	0
 Instruction rs2:	0xa	reg[rs2]	0
-Instruction rd:	0xf	reg[rd]	0
+Instruction rd:	0xf	reg[rd]	9
 Instruction imm:	0xa
-Excute the instruction
-0x10074:	0
-0x10075:	0
-0x10076:	0
-0x10077:	0
-0x10078:	0
-0x10079:	0
-0x1007a:	0
-0x1007b:	0
-0xfffff800:	0
-Instruction type:	12
+***************Excute Result**************
+Instruction type:	0x12
 Instruction rs1:	0x0	reg[rs1]:	0
 Instruction rs2:	0xa	reg[rs2]:	0
 Instruction rd:	0xf	reg[rd]:	a
 Instruction imm:	0xa
-Fetch the instruction
-pc:	11088		instruction:	fef42623
-opcode:	0x23
-funct3:	0x2
+*************Fetch the instruction***************
+pc:	110e4		instruction:	fcf42223
 Decode the instruction
-decode output
+***************decode output**************
 Instruction type:	0x11
 Instruction rs1:	0x8	reg[rs1]	10000
 Instruction rs2:	0xf	reg[rs2]	a
-Instruction rd:	0xc	reg[rd]	0
-Instruction imm:	0xfec
-Excute the instruction
-ffffffec
-11111111:	a
-addr:	ffec
-WVal:	a
-a 0 0 0
-Instruction type:	11
+Instruction rd:	0x4	reg[rd]	0
+Instruction imm:	0xfc4
+***************Excute Result**************
+ffffffc4
+Instruction type:	0x11
 Instruction rs1:	0x8	reg[rs1]:	10000
 Instruction rs2:	0xf	reg[rs2]:	a
-Instruction rd:	0xc	reg[rd]:	0
-Instruction imm:	0xfec
-Fetch the instruction
-pc:	1108c		instruction:	fec42783
-opcode:	0x3
-funct3:	0x2
+Instruction rd:	0x4	reg[rd]:	0
+Instruction imm:	0xfc4
+*************Fetch the instruction***************
+pc:	110e8		instruction:	b00793
 Decode the instruction
-decode output
-Instruction type:	0xc
-Instruction rs1:	0x8	reg[rs1]	10000
-Instruction rs2:	0xc	reg[rs2]	0
-Instruction rd:	0xf	reg[rd]	a
-Instruction imm:	0xfec
-Excute the instruction
-22222222222:	ffec
-22222222222:	a
-0x10074:	0
-0x10075:	0
-0x10076:	0
-0x10077:	0
-0x10078:	0
-0x10079:	0
-0x1007a:	0
-0x1007b:	0
-0xfffff800:	0
-Instruction type:	c
-Instruction rs1:	0x8	reg[rs1]:	10000
-Instruction rs2:	0xc	reg[rs2]:	0
-Instruction rd:	0xf	reg[rd]:	a
-Instruction imm:	0xfec
-Fetch the instruction
-pc:	11090		instruction:	1978793
-opcode:	0x13
-funct3:	0x0
-Decode the instruction
-decode output
+***************decode output**************
 Instruction type:	0x12
-Instruction rs1:	0xf	reg[rs1]	a
-Instruction rs2:	0x19	reg[rs2]	0
+Instruction rs1:	0x0	reg[rs1]	0
+Instruction rs2:	0xb	reg[rs2]	0
 Instruction rd:	0xf	reg[rd]	a
-Instruction imm:	0x19
-Excute the instruction
-0x10074:	0
-0x10075:	0
-0x10076:	0
-0x10077:	0
-0x10078:	0
-0x10079:	0
-0x1007a:	0
-0x1007b:	0
-0xfffff800:	0
-Instruction type:	12
-Instruction rs1:	0xf	reg[rs1]:	23
-Instruction rs2:	0x19	reg[rs2]:	0
-Instruction rd:	0xf	reg[rd]:	23
-Instruction imm:	0x19
-Fetch the instruction
-pc:	11094		instruction:	fef42623
-opcode:	0x23
-funct3:	0x2
+Instruction imm:	0xb
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]:	0
+Instruction rs2:	0xb	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	b
+Instruction imm:	0xb
+*************Fetch the instruction***************
+pc:	110ec		instruction:	fcf42423
 Decode the instruction
-decode output
+***************decode output**************
 Instruction type:	0x11
 Instruction rs1:	0x8	reg[rs1]	10000
-Instruction rs2:	0xf	reg[rs2]	23
+Instruction rs2:	0xf	reg[rs2]	b
+Instruction rd:	0x8	reg[rd]	10000
+Instruction imm:	0xfc8
+***************Excute Result**************
+ffffffc8
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xf	reg[rs2]:	b
+Instruction rd:	0x8	reg[rd]:	10000
+Instruction imm:	0xfc8
+*************Fetch the instruction***************
+pc:	110f0		instruction:	c00793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]	0
+Instruction rs2:	0xc	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	b
+Instruction imm:	0xc
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]:	0
+Instruction rs2:	0xc	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	c
+Instruction imm:	0xc
+*************Fetch the instruction***************
+pc:	110f4		instruction:	fcf42623
+Decode the instruction
+***************decode output**************
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xf	reg[rs2]	c
+Instruction rd:	0xc	reg[rd]	0
+Instruction imm:	0xfcc
+***************Excute Result**************
+ffffffcc
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xf	reg[rs2]:	c
+Instruction rd:	0xc	reg[rd]:	0
+Instruction imm:	0xfcc
+*************Fetch the instruction***************
+pc:	110f8		instruction:	fe042623
+Decode the instruction
+***************decode output**************
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x0	reg[rs2]	0
 Instruction rd:	0xc	reg[rd]	0
 Instruction imm:	0xfec
-Excute the instruction
+***************Excute Result**************
 ffffffec
-11111111:	23
-addr:	ffec
-WVal:	23
-23 0 0 0
-Instruction type:	11
+Instruction type:	0x11
 Instruction rs1:	0x8	reg[rs1]:	10000
-Instruction rs2:	0xf	reg[rs2]:	23
+Instruction rs2:	0x0	reg[rs2]:	0
 Instruction rd:	0xc	reg[rd]:	0
 Instruction imm:	0xfec
-Fetch the instruction
-pc:	11098		instruction:	fec42703
-opcode:	0x3
-funct3:	0x2
+*************Fetch the instruction***************
+pc:	110fc		instruction:	ac0006f
 Decode the instruction
-decode output
+***************decode output**************
+Instruction type:	0x2
+Instruction rs1:	0x0	reg[rs1]	0
+Instruction rs2:	0xc	reg[rs2]	0
+Instruction rd:	0x0	reg[rd]	0
+Instruction imm:	0xac
+***************Excute Result**************
+Instruction type:	0x2
+Instruction rs1:	0x0	reg[rs1]:	0
+Instruction rs2:	0xc	reg[rs2]:	0
+Instruction rd:	0x0	reg[rd]:	0
+Instruction imm:	0xac
+*************Fetch the instruction***************
+pc:	111a8		instruction:	fec42703
+Decode the instruction
+***************decode output**************
 Instruction type:	0xc
 Instruction rs1:	0x8	reg[rs1]	10000
 Instruction rs2:	0xc	reg[rs2]	0
 Instruction rd:	0xe	reg[rd]	0
 Instruction imm:	0xfec
-Excute the instruction
-22222222222:	ffec
-22222222222:	23
-0x10074:	0
-0x10075:	0
-0x10076:	0
-0x10077:	0
-0x10078:	0
-0x10079:	0
-0x1007a:	0
-0x1007b:	0
-0xfffff800:	0
-Instruction type:	c
+***************Excute Result**************
+Instruction type:	0xc
 Instruction rs1:	0x8	reg[rs1]:	10000
 Instruction rs2:	0xc	reg[rs2]:	0
-Instruction rd:	0xe	reg[rd]:	23
+Instruction rd:	0xe	reg[rd]:	0
 Instruction imm:	0xfec
-Fetch the instruction
-pc:	1109c		instruction:	80e1a023
-opcode:	0x23
-funct3:	0x2
+*************Fetch the instruction***************
+pc:	111ac		instruction:	100793
 Decode the instruction
-decode output
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]	0
+Instruction rs2:	0x1	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	c
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]:	0
+Instruction rs2:	0x1	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	1
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	111b0		instruction:	f4e7d8e3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x7
+Instruction rs1:	0xf	reg[rs1]	1
+Instruction rs2:	0xe	reg[rs2]	0
+Instruction rd:	0x11	reg[rd]	0
+Instruction imm:	0x1f50
+***************Excute Result**************
+Instruction type:	0x7
+Instruction rs1:	0xf	reg[rs1]:	1
+Instruction rs2:	0xe	reg[rs2]:	0
+Instruction rd:	0x11	reg[rd]:	0
+Instruction imm:	0x1f50
+*************Fetch the instruction***************
+pc:	11100		instruction:	fe042423
+Decode the instruction
+***************decode output**************
 Instruction type:	0x11
-Instruction rs1:	0x3	reg[rs1]	10874
-Instruction rs2:	0xe	reg[rs2]	23
-Instruction rd:	0x0	reg[rd]	0
-Instruction imm:	0x800
-Excute the instruction
-fffff800
-11111111:	23
-addr:	10074
-WVal:	23
-23 0 0 0
-Instruction type:	11
-Instruction rs1:	0x3	reg[rs1]:	10874
-Instruction rs2:	0xe	reg[rs2]:	23
-Instruction rd:	0x0	reg[rd]:	0
-Instruction imm:	0x800
-Fetch the instruction
-pc:	110a0		instruction:	793
-opcode:	0x13
-funct3:	0x0
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0x8	reg[rd]	10000
+Instruction imm:	0xfe8
+***************Excute Result**************
+ffffffe8
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0x8	reg[rd]:	10000
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11104		instruction:	8c0006f
 Decode the instruction
-decode output
+***************decode output**************
+Instruction type:	0x2
+Instruction rs1:	0x0	reg[rs1]	0
+Instruction rs2:	0xc	reg[rs2]	0
+Instruction rd:	0x0	reg[rd]	0
+Instruction imm:	0x8c
+***************Excute Result**************
+Instruction type:	0x2
+Instruction rs1:	0x0	reg[rs1]:	0
+Instruction rs2:	0xc	reg[rs2]:	0
+Instruction rd:	0x0	reg[rd]:	0
+Instruction imm:	0x8c
+*************Fetch the instruction***************
+pc:	11190		instruction:	fe842703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xe	reg[rd]	0
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xe	reg[rd]:	0
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11194		instruction:	200793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]	0
+Instruction rs2:	0x2	reg[rs2]	ffb0
+Instruction rd:	0xf	reg[rd]	1
+Instruction imm:	0x2
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]:	0
+Instruction rs2:	0x2	reg[rs2]:	ffb0
+Instruction rd:	0xf	reg[rd]:	2
+Instruction imm:	0x2
+*************Fetch the instruction***************
+pc:	11198		instruction:	f6e7d8e3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x7
+Instruction rs1:	0xf	reg[rs1]	2
+Instruction rs2:	0xe	reg[rs2]	0
+Instruction rd:	0x11	reg[rd]	0
+Instruction imm:	0x1f70
+***************Excute Result**************
+Instruction type:	0x7
+Instruction rs1:	0xf	reg[rs1]:	2
+Instruction rs2:	0xe	reg[rs2]:	0
+Instruction rd:	0x11	reg[rd]:	0
+Instruction imm:	0x1f70
+*************Fetch the instruction***************
+pc:	11108		instruction:	fec42703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xc	reg[rs2]	0
+Instruction rd:	0xe	reg[rd]	0
+Instruction imm:	0xfec
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xc	reg[rs2]:	0
+Instruction rd:	0xe	reg[rd]:	0
+Instruction imm:	0xfec
+*************Fetch the instruction***************
+pc:	1110c		instruction:	70793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]	0
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	2
+Instruction imm:	0x0
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]:	0
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x0
+*************Fetch the instruction***************
+pc:	11110		instruction:	179793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0x1	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	0
+Instruction rs2:	0x1	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	11114		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0xe	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	0
+Instruction rs2:	0xe	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	11118		instruction:	fe842703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xe	reg[rd]	0
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xe	reg[rd]:	0
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	1111c		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0xe	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	0
+Instruction rs2:	0xe	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11120		instruction:	279793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0x2	reg[rs2]	ffb0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0x2
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	0
+Instruction rs2:	0x2	reg[rs2]:	ffb0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x2
+*************Fetch the instruction***************
+pc:	11124		instruction:	ff040713
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x10	reg[rs2]	0
+Instruction rd:	0xe	reg[rd]	0
+Instruction imm:	0xff0
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x10	reg[rs2]:	0
+Instruction rd:	0xe	reg[rd]:	fff0
+Instruction imm:	0xff0
+*************Fetch the instruction***************
+pc:	11128		instruction:	f707b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]	fff0
+Instruction rs2:	0xf	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0xff0
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]:	fff0
+Instruction rs2:	0xf	reg[rs2]:	fff0
+Instruction rd:	0xf	reg[rd]:	fff0
+Instruction imm:	0xff0
+*************Fetch the instruction***************
+pc:	1112c		instruction:	fe07a683
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0xf	reg[rs1]	fff0
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0xd	reg[rd]	0
+Instruction imm:	0xfe0
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0xf	reg[rs1]:	fff0
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0xd	reg[rd]:	1
+Instruction imm:	0xfe0
+*************Fetch the instruction***************
+pc:	11130		instruction:	fec42703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xc	reg[rs2]	0
+Instruction rd:	0xe	reg[rd]	fff0
+Instruction imm:	0xfec
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xc	reg[rs2]:	0
+Instruction rd:	0xe	reg[rd]:	0
+Instruction imm:	0xfec
+*************Fetch the instruction***************
+pc:	11134		instruction:	70793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]	0
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	fff0
+Instruction imm:	0x0
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]:	0
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x0
+*************Fetch the instruction***************
+pc:	11138		instruction:	179793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0x1	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	0
+Instruction rs2:	0x1	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	1113c		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0xe	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	0
+Instruction rs2:	0xe	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	11140		instruction:	fe842703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xe	reg[rd]	0
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xe	reg[rd]:	0
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11144		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0xe	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	0
+Instruction rs2:	0xe	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11148		instruction:	279793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0x2	reg[rs2]	ffb0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0x2
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	0
+Instruction rs2:	0x2	reg[rs2]:	ffb0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x2
+*************Fetch the instruction***************
+pc:	1114c		instruction:	ff040713
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x10	reg[rs2]	0
+Instruction rd:	0xe	reg[rd]	0
+Instruction imm:	0xff0
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x10	reg[rs2]:	0
+Instruction rd:	0xe	reg[rd]:	fff0
+Instruction imm:	0xff0
+*************Fetch the instruction***************
+pc:	11150		instruction:	f707b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]	fff0
+Instruction rs2:	0xf	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0xff0
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]:	fff0
+Instruction rs2:	0xf	reg[rs2]:	fff0
+Instruction rd:	0xf	reg[rd]:	fff0
+Instruction imm:	0xff0
+*************Fetch the instruction***************
+pc:	11154		instruction:	fc87a783
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0xf	reg[rs1]	fff0
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xf	reg[rd]	fff0
+Instruction imm:	0xfc8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0xf	reg[rs1]:	7
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xf	reg[rd]:	7
+Instruction imm:	0xfc8
+*************Fetch the instruction***************
+pc:	11158		instruction:	f686b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xd	reg[rs1]	1
+Instruction rs2:	0xf	reg[rs2]	7
+Instruction rd:	0xd	reg[rd]	1
+Instruction imm:	0xfc8
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xd	reg[rs1]:	8
+Instruction rs2:	0xf	reg[rs2]:	7
+Instruction rd:	0xd	reg[rd]:	8
+Instruction imm:	0xfc8
+*************Fetch the instruction***************
+pc:	1115c		instruction:	fec42703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xc	reg[rs2]	0
+Instruction rd:	0xe	reg[rd]	fff0
+Instruction imm:	0xfec
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xc	reg[rs2]:	0
+Instruction rd:	0xe	reg[rd]:	0
+Instruction imm:	0xfec
+*************Fetch the instruction***************
+pc:	11160		instruction:	70793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]	0
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	7
+Instruction imm:	0x0
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]:	0
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x0
+*************Fetch the instruction***************
+pc:	11164		instruction:	179793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0x1	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	0
+Instruction rs2:	0x1	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	11168		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0xe	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	0
+Instruction rs2:	0xe	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	1116c		instruction:	fe842703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xe	reg[rd]	0
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xe	reg[rd]:	0
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11170		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0xe	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	0
+Instruction rs2:	0xe	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11174		instruction:	279713
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0x2	reg[rs2]	ffb0
+Instruction rd:	0xe	reg[rd]	0
+Instruction imm:	0x2
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	0
+Instruction rs2:	0x2	reg[rs2]:	ffb0
+Instruction rd:	0xe	reg[rd]:	0
+Instruction imm:	0x2
+*************Fetch the instruction***************
+pc:	11178		instruction:	80018793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x3	reg[rs1]	10874
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0x800
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x3	reg[rs1]:	10874
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	10074
+Instruction imm:	0x800
+*************Fetch the instruction***************
+pc:	1117c		instruction:	f707b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]	0
+Instruction rs2:	0xf	reg[rs2]	10074
+Instruction rd:	0xf	reg[rd]	10074
+Instruction imm:	0x800
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]:	0
+Instruction rs2:	0xf	reg[rs2]:	10074
+Instruction rd:	0xf	reg[rd]:	10074
+Instruction imm:	0x800
+*************Fetch the instruction***************
+pc:	11180		instruction:	d7a023
+Decode the instruction
+***************decode output**************
+Instruction type:	0x11
+Instruction rs1:	0xf	reg[rs1]	10074
+Instruction rs2:	0xd	reg[rs2]	8
+Instruction rd:	0x0	reg[rd]	0
+Instruction imm:	0x0
+***************Excute Result**************
+0
+Instruction type:	0x11
+Instruction rs1:	0xf	reg[rs1]:	10074
+Instruction rs2:	0xd	reg[rs2]:	8
+Instruction rd:	0x0	reg[rd]:	0
+Instruction imm:	0x0
+*************Fetch the instruction***************
+pc:	11184		instruction:	fe842783
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xf	reg[rd]	10074
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11188		instruction:	178793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0x1	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0xf	reg[rs1]:	1
+Instruction rs2:	0x1	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	1
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	1118c		instruction:	fef42423
+Decode the instruction
+***************decode output**************
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xf	reg[rs2]	1
+Instruction rd:	0x8	reg[rd]	10000
+Instruction imm:	0xfe8
+***************Excute Result**************
+ffffffe8
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xf	reg[rs2]:	1
+Instruction rd:	0x8	reg[rd]:	10000
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11190		instruction:	fe842703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xe	reg[rd]	0
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xe	reg[rd]:	1
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11194		instruction:	200793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]	0
+Instruction rs2:	0x2	reg[rs2]	ffb0
+Instruction rd:	0xf	reg[rd]	1
+Instruction imm:	0x2
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]:	0
+Instruction rs2:	0x2	reg[rs2]:	ffb0
+Instruction rd:	0xf	reg[rd]:	2
+Instruction imm:	0x2
+*************Fetch the instruction***************
+pc:	11198		instruction:	f6e7d8e3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x7
+Instruction rs1:	0xf	reg[rs1]	2
+Instruction rs2:	0xe	reg[rs2]	1
+Instruction rd:	0x11	reg[rd]	0
+Instruction imm:	0x1f70
+***************Excute Result**************
+Instruction type:	0x7
+Instruction rs1:	0xf	reg[rs1]:	2
+Instruction rs2:	0xe	reg[rs2]:	1
+Instruction rd:	0x11	reg[rd]:	0
+Instruction imm:	0x1f70
+*************Fetch the instruction***************
+pc:	11108		instruction:	fec42703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xc	reg[rs2]	0
+Instruction rd:	0xe	reg[rd]	1
+Instruction imm:	0xfec
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xc	reg[rs2]:	0
+Instruction rd:	0xe	reg[rd]:	0
+Instruction imm:	0xfec
+*************Fetch the instruction***************
+pc:	1110c		instruction:	70793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]	0
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	2
+Instruction imm:	0x0
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]:	0
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x0
+*************Fetch the instruction***************
+pc:	11110		instruction:	179793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0x1	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	0
+Instruction rs2:	0x1	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	11114		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0xe	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	0
+Instruction rs2:	0xe	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	11118		instruction:	fe842703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xe	reg[rd]	0
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xe	reg[rd]:	1
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	1111c		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0xe	reg[rs2]	1
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	1
+Instruction rs2:	0xe	reg[rs2]:	1
+Instruction rd:	0xf	reg[rd]:	1
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11120		instruction:	279793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	1
+Instruction rs2:	0x2	reg[rs2]	ffb0
+Instruction rd:	0xf	reg[rd]	1
+Instruction imm:	0x2
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	80000000
+Instruction rs2:	0x2	reg[rs2]:	ffb0
+Instruction rd:	0xf	reg[rd]:	80000000
+Instruction imm:	0x2
+*************Fetch the instruction***************
+pc:	11124		instruction:	ff040713
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x10	reg[rs2]	0
+Instruction rd:	0xe	reg[rd]	1
+Instruction imm:	0xff0
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x10	reg[rs2]:	0
+Instruction rd:	0xe	reg[rd]:	fff0
+Instruction imm:	0xff0
+*************Fetch the instruction***************
+pc:	11128		instruction:	f707b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]	fff0
+Instruction rs2:	0xf	reg[rs2]	80000000
+Instruction rd:	0xf	reg[rd]	80000000
+Instruction imm:	0xff0
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]:	fff0
+Instruction rs2:	0xf	reg[rs2]:	8000fff0
+Instruction rd:	0xf	reg[rd]:	8000fff0
+Instruction imm:	0xff0
+*************Fetch the instruction***************
+pc:	1112c		instruction:	fe07a683
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0xf	reg[rs1]	8000fff0
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0xd	reg[rd]	8
+Instruction imm:	0xfe0
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0xf	reg[rs1]:	8000fff0
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0xd	reg[rd]:	0
+Instruction imm:	0xfe0
+*************Fetch the instruction***************
+pc:	11130		instruction:	fec42703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xc	reg[rs2]	0
+Instruction rd:	0xe	reg[rd]	fff0
+Instruction imm:	0xfec
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xc	reg[rs2]:	0
+Instruction rd:	0xe	reg[rd]:	0
+Instruction imm:	0xfec
+*************Fetch the instruction***************
+pc:	11134		instruction:	70793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]	0
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	8000fff0
+Instruction imm:	0x0
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]:	0
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x0
+*************Fetch the instruction***************
+pc:	11138		instruction:	179793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0x1	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	0
+Instruction rs2:	0x1	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	1113c		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0xe	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	0
+Instruction rs2:	0xe	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	11140		instruction:	fe842703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xe	reg[rd]	0
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xe	reg[rd]:	1
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11144		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0xe	reg[rs2]	1
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	1
+Instruction rs2:	0xe	reg[rs2]:	1
+Instruction rd:	0xf	reg[rd]:	1
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11148		instruction:	279793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	1
+Instruction rs2:	0x2	reg[rs2]	ffb0
+Instruction rd:	0xf	reg[rd]	1
+Instruction imm:	0x2
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	80000000
+Instruction rs2:	0x2	reg[rs2]:	ffb0
+Instruction rd:	0xf	reg[rd]:	80000000
+Instruction imm:	0x2
+*************Fetch the instruction***************
+pc:	1114c		instruction:	ff040713
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x10	reg[rs2]	0
+Instruction rd:	0xe	reg[rd]	1
+Instruction imm:	0xff0
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x10	reg[rs2]:	0
+Instruction rd:	0xe	reg[rd]:	fff0
+Instruction imm:	0xff0
+*************Fetch the instruction***************
+pc:	11150		instruction:	f707b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]	fff0
+Instruction rs2:	0xf	reg[rs2]	80000000
+Instruction rd:	0xf	reg[rd]	80000000
+Instruction imm:	0xff0
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]:	fff0
+Instruction rs2:	0xf	reg[rs2]:	8000fff0
+Instruction rd:	0xf	reg[rd]:	8000fff0
+Instruction imm:	0xff0
+*************Fetch the instruction***************
+pc:	11154		instruction:	fc87a783
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0xf	reg[rs1]	8000fff0
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xf	reg[rd]	8000fff0
+Instruction imm:	0xfc8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0xf	reg[rs1]:	0
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0xfc8
+*************Fetch the instruction***************
+pc:	11158		instruction:	f686b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xd	reg[rs1]	0
+Instruction rs2:	0xf	reg[rs2]	0
+Instruction rd:	0xd	reg[rd]	0
+Instruction imm:	0xfc8
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xd	reg[rs1]:	0
+Instruction rs2:	0xf	reg[rs2]:	0
+Instruction rd:	0xd	reg[rd]:	0
+Instruction imm:	0xfc8
+*************Fetch the instruction***************
+pc:	1115c		instruction:	fec42703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xc	reg[rs2]	0
+Instruction rd:	0xe	reg[rd]	fff0
+Instruction imm:	0xfec
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xc	reg[rs2]:	0
+Instruction rd:	0xe	reg[rd]:	0
+Instruction imm:	0xfec
+*************Fetch the instruction***************
+pc:	11160		instruction:	70793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]	0
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0x0
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]:	0
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x0
+*************Fetch the instruction***************
+pc:	11164		instruction:	179793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0x1	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	0
+Instruction rs2:	0x1	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	11168		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0xe	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	0
+Instruction rs2:	0xe	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	1116c		instruction:	fe842703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xe	reg[rd]	0
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xe	reg[rd]:	1
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11170		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0xe	reg[rs2]	1
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	1
+Instruction rs2:	0xe	reg[rs2]:	1
+Instruction rd:	0xf	reg[rd]:	1
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11174		instruction:	279713
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	1
+Instruction rs2:	0x2	reg[rs2]	ffb0
+Instruction rd:	0xe	reg[rd]	1
+Instruction imm:	0x2
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	1
+Instruction rs2:	0x2	reg[rs2]:	ffb0
+Instruction rd:	0xe	reg[rd]:	80000000
+Instruction imm:	0x2
+*************Fetch the instruction***************
+pc:	11178		instruction:	80018793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x3	reg[rs1]	10874
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	1
+Instruction imm:	0x800
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x3	reg[rs1]:	10874
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	10074
+Instruction imm:	0x800
+*************Fetch the instruction***************
+pc:	1117c		instruction:	f707b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]	80000000
+Instruction rs2:	0xf	reg[rs2]	10074
+Instruction rd:	0xf	reg[rd]	10074
+Instruction imm:	0x800
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]:	80000000
+Instruction rs2:	0xf	reg[rs2]:	80010074
+Instruction rd:	0xf	reg[rd]:	80010074
+Instruction imm:	0x800
+*************Fetch the instruction***************
+pc:	11180		instruction:	d7a023
+Decode the instruction
+***************decode output**************
+Instruction type:	0x11
+Instruction rs1:	0xf	reg[rs1]	80010074
+Instruction rs2:	0xd	reg[rs2]	0
+Instruction rd:	0x0	reg[rd]	0
+Instruction imm:	0x0
+***************Excute Result**************
+0
+Instruction type:	0x11
+Instruction rs1:	0xf	reg[rs1]:	80010074
+Instruction rs2:	0xd	reg[rs2]:	0
+Instruction rd:	0x0	reg[rd]:	0
+Instruction imm:	0x0
+*************Fetch the instruction***************
+pc:	11184		instruction:	fe842783
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xf	reg[rd]	80010074
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xf	reg[rd]:	1
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11188		instruction:	178793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0xf	reg[rs1]	1
+Instruction rs2:	0x1	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	1
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0xf	reg[rs1]:	2
+Instruction rs2:	0x1	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	2
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	1118c		instruction:	fef42423
+Decode the instruction
+***************decode output**************
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xf	reg[rs2]	2
+Instruction rd:	0x8	reg[rd]	10000
+Instruction imm:	0xfe8
+***************Excute Result**************
+ffffffe8
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xf	reg[rs2]:	2
+Instruction rd:	0x8	reg[rd]:	10000
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11190		instruction:	fe842703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xe	reg[rd]	80000000
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xe	reg[rd]:	2
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11194		instruction:	200793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]	0
+Instruction rs2:	0x2	reg[rs2]	ffb0
+Instruction rd:	0xf	reg[rd]	2
+Instruction imm:	0x2
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]:	0
+Instruction rs2:	0x2	reg[rs2]:	ffb0
+Instruction rd:	0xf	reg[rd]:	2
+Instruction imm:	0x2
+*************Fetch the instruction***************
+pc:	11198		instruction:	f6e7d8e3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x7
+Instruction rs1:	0xf	reg[rs1]	2
+Instruction rs2:	0xe	reg[rs2]	2
+Instruction rd:	0x11	reg[rd]	0
+Instruction imm:	0x1f70
+***************Excute Result**************
+Instruction type:	0x7
+Instruction rs1:	0xf	reg[rs1]:	2
+Instruction rs2:	0xe	reg[rs2]:	2
+Instruction rd:	0x11	reg[rd]:	0
+Instruction imm:	0x1f70
+*************Fetch the instruction***************
+pc:	11108		instruction:	fec42703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xc	reg[rs2]	0
+Instruction rd:	0xe	reg[rd]	2
+Instruction imm:	0xfec
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xc	reg[rs2]:	0
+Instruction rd:	0xe	reg[rd]:	0
+Instruction imm:	0xfec
+*************Fetch the instruction***************
+pc:	1110c		instruction:	70793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]	0
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	2
+Instruction imm:	0x0
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]:	0
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x0
+*************Fetch the instruction***************
+pc:	11110		instruction:	179793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0x1	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	0
+Instruction rs2:	0x1	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	11114		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0xe	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	0
+Instruction rs2:	0xe	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	11118		instruction:	fe842703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xe	reg[rd]	0
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xe	reg[rd]:	2
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	1111c		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0xe	reg[rs2]	2
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	2
+Instruction rs2:	0xe	reg[rs2]:	2
+Instruction rd:	0xf	reg[rd]:	2
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11120		instruction:	279793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	2
+Instruction rs2:	0x2	reg[rs2]	ffb0
+Instruction rd:	0xf	reg[rd]	2
+Instruction imm:	0x2
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	0
+Instruction rs2:	0x2	reg[rs2]:	ffb0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x2
+*************Fetch the instruction***************
+pc:	11124		instruction:	ff040713
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x10	reg[rs2]	0
+Instruction rd:	0xe	reg[rd]	2
+Instruction imm:	0xff0
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x10	reg[rs2]:	0
+Instruction rd:	0xe	reg[rd]:	fff0
+Instruction imm:	0xff0
+*************Fetch the instruction***************
+pc:	11128		instruction:	f707b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]	fff0
+Instruction rs2:	0xf	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0xff0
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]:	fff0
+Instruction rs2:	0xf	reg[rs2]:	fff0
+Instruction rd:	0xf	reg[rd]:	fff0
+Instruction imm:	0xff0
+*************Fetch the instruction***************
+pc:	1112c		instruction:	fe07a683
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0xf	reg[rs1]	fff0
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0xd	reg[rd]	0
+Instruction imm:	0xfe0
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0xf	reg[rs1]:	fff0
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0xd	reg[rd]:	1
+Instruction imm:	0xfe0
+*************Fetch the instruction***************
+pc:	11130		instruction:	fec42703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xc	reg[rs2]	0
+Instruction rd:	0xe	reg[rd]	fff0
+Instruction imm:	0xfec
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xc	reg[rs2]:	0
+Instruction rd:	0xe	reg[rd]:	0
+Instruction imm:	0xfec
+*************Fetch the instruction***************
+pc:	11134		instruction:	70793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]	0
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	fff0
+Instruction imm:	0x0
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]:	0
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x0
+*************Fetch the instruction***************
+pc:	11138		instruction:	179793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0x1	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	0
+Instruction rs2:	0x1	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	1113c		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0xe	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	0
+Instruction rs2:	0xe	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	11140		instruction:	fe842703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xe	reg[rd]	0
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xe	reg[rd]:	2
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11144		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0xe	reg[rs2]	2
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	2
+Instruction rs2:	0xe	reg[rs2]:	2
+Instruction rd:	0xf	reg[rd]:	2
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11148		instruction:	279793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	2
+Instruction rs2:	0x2	reg[rs2]	ffb0
+Instruction rd:	0xf	reg[rd]	2
+Instruction imm:	0x2
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	0
+Instruction rs2:	0x2	reg[rs2]:	ffb0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x2
+*************Fetch the instruction***************
+pc:	1114c		instruction:	ff040713
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x10	reg[rs2]	0
+Instruction rd:	0xe	reg[rd]	2
+Instruction imm:	0xff0
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x10	reg[rs2]:	0
+Instruction rd:	0xe	reg[rd]:	fff0
+Instruction imm:	0xff0
+*************Fetch the instruction***************
+pc:	11150		instruction:	f707b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]	fff0
+Instruction rs2:	0xf	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0xff0
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]:	fff0
+Instruction rs2:	0xf	reg[rs2]:	fff0
+Instruction rd:	0xf	reg[rd]:	fff0
+Instruction imm:	0xff0
+*************Fetch the instruction***************
+pc:	11154		instruction:	fc87a783
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0xf	reg[rs1]	fff0
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xf	reg[rd]	fff0
+Instruction imm:	0xfc8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0xf	reg[rs1]:	7
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xf	reg[rd]:	7
+Instruction imm:	0xfc8
+*************Fetch the instruction***************
+pc:	11158		instruction:	f686b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xd	reg[rs1]	1
+Instruction rs2:	0xf	reg[rs2]	7
+Instruction rd:	0xd	reg[rd]	1
+Instruction imm:	0xfc8
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xd	reg[rs1]:	8
+Instruction rs2:	0xf	reg[rs2]:	7
+Instruction rd:	0xd	reg[rd]:	8
+Instruction imm:	0xfc8
+*************Fetch the instruction***************
+pc:	1115c		instruction:	fec42703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xc	reg[rs2]	0
+Instruction rd:	0xe	reg[rd]	fff0
+Instruction imm:	0xfec
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xc	reg[rs2]:	0
+Instruction rd:	0xe	reg[rd]:	0
+Instruction imm:	0xfec
+*************Fetch the instruction***************
+pc:	11160		instruction:	70793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]	0
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	7
+Instruction imm:	0x0
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]:	0
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x0
+*************Fetch the instruction***************
+pc:	11164		instruction:	179793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0x1	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	0
+Instruction rs2:	0x1	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	11168		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0xe	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	0
+Instruction rs2:	0xe	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	1116c		instruction:	fe842703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xe	reg[rd]	0
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xe	reg[rd]:	2
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11170		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0xe	reg[rs2]	2
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	2
+Instruction rs2:	0xe	reg[rs2]:	2
+Instruction rd:	0xf	reg[rd]:	2
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11174		instruction:	279713
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	2
+Instruction rs2:	0x2	reg[rs2]	ffb0
+Instruction rd:	0xe	reg[rd]	2
+Instruction imm:	0x2
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	2
+Instruction rs2:	0x2	reg[rs2]:	ffb0
+Instruction rd:	0xe	reg[rd]:	0
+Instruction imm:	0x2
+*************Fetch the instruction***************
+pc:	11178		instruction:	80018793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x3	reg[rs1]	10874
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	2
+Instruction imm:	0x800
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x3	reg[rs1]:	10874
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	10074
+Instruction imm:	0x800
+*************Fetch the instruction***************
+pc:	1117c		instruction:	f707b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]	0
+Instruction rs2:	0xf	reg[rs2]	10074
+Instruction rd:	0xf	reg[rd]	10074
+Instruction imm:	0x800
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]:	0
+Instruction rs2:	0xf	reg[rs2]:	10074
+Instruction rd:	0xf	reg[rd]:	10074
+Instruction imm:	0x800
+*************Fetch the instruction***************
+pc:	11180		instruction:	d7a023
+Decode the instruction
+***************decode output**************
+Instruction type:	0x11
+Instruction rs1:	0xf	reg[rs1]	10074
+Instruction rs2:	0xd	reg[rs2]	8
+Instruction rd:	0x0	reg[rd]	0
+Instruction imm:	0x0
+***************Excute Result**************
+0
+Instruction type:	0x11
+Instruction rs1:	0xf	reg[rs1]:	10074
+Instruction rs2:	0xd	reg[rs2]:	8
+Instruction rd:	0x0	reg[rd]:	0
+Instruction imm:	0x0
+*************Fetch the instruction***************
+pc:	11184		instruction:	fe842783
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xf	reg[rd]	10074
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xf	reg[rd]:	2
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11188		instruction:	178793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0xf	reg[rs1]	2
+Instruction rs2:	0x1	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	2
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0xf	reg[rs1]:	3
+Instruction rs2:	0x1	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	3
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	1118c		instruction:	fef42423
+Decode the instruction
+***************decode output**************
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xf	reg[rs2]	3
+Instruction rd:	0x8	reg[rd]	10000
+Instruction imm:	0xfe8
+***************Excute Result**************
+ffffffe8
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xf	reg[rs2]:	3
+Instruction rd:	0x8	reg[rd]:	10000
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11190		instruction:	fe842703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xe	reg[rd]	0
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xe	reg[rd]:	3
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11194		instruction:	200793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]	0
+Instruction rs2:	0x2	reg[rs2]	ffb0
+Instruction rd:	0xf	reg[rd]	3
+Instruction imm:	0x2
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]:	0
+Instruction rs2:	0x2	reg[rs2]:	ffb0
+Instruction rd:	0xf	reg[rd]:	2
+Instruction imm:	0x2
+*************Fetch the instruction***************
+pc:	11198		instruction:	f6e7d8e3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x7
+Instruction rs1:	0xf	reg[rs1]	2
+Instruction rs2:	0xe	reg[rs2]	3
+Instruction rd:	0x11	reg[rd]	0
+Instruction imm:	0x1f70
+***************Excute Result**************
+Instruction type:	0x7
+Instruction rs1:	0xf	reg[rs1]:	2
+Instruction rs2:	0xe	reg[rs2]:	3
+Instruction rd:	0x11	reg[rd]:	0
+Instruction imm:	0x1f70
+*************Fetch the instruction***************
+pc:	1119c		instruction:	fec42783
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xc	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	2
+Instruction imm:	0xfec
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xc	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0xfec
+*************Fetch the instruction***************
+pc:	111a0		instruction:	178793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0x1	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0xf	reg[rs1]:	1
+Instruction rs2:	0x1	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	1
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	111a4		instruction:	fef42623
+Decode the instruction
+***************decode output**************
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xf	reg[rs2]	1
+Instruction rd:	0xc	reg[rd]	0
+Instruction imm:	0xfec
+***************Excute Result**************
+ffffffec
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xf	reg[rs2]:	1
+Instruction rd:	0xc	reg[rd]:	0
+Instruction imm:	0xfec
+*************Fetch the instruction***************
+pc:	111a8		instruction:	fec42703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xc	reg[rs2]	0
+Instruction rd:	0xe	reg[rd]	3
+Instruction imm:	0xfec
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xc	reg[rs2]:	0
+Instruction rd:	0xe	reg[rd]:	1
+Instruction imm:	0xfec
+*************Fetch the instruction***************
+pc:	111ac		instruction:	100793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]	0
+Instruction rs2:	0x1	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	1
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]:	0
+Instruction rs2:	0x1	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	1
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	111b0		instruction:	f4e7d8e3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x7
+Instruction rs1:	0xf	reg[rs1]	1
+Instruction rs2:	0xe	reg[rs2]	1
+Instruction rd:	0x11	reg[rd]	0
+Instruction imm:	0x1f50
+***************Excute Result**************
+Instruction type:	0x7
+Instruction rs1:	0xf	reg[rs1]:	1
+Instruction rs2:	0xe	reg[rs2]:	1
+Instruction rd:	0x11	reg[rd]:	0
+Instruction imm:	0x1f50
+*************Fetch the instruction***************
+pc:	11100		instruction:	fe042423
+Decode the instruction
+***************decode output**************
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0x8	reg[rd]	10000
+Instruction imm:	0xfe8
+***************Excute Result**************
+ffffffe8
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0x8	reg[rd]:	10000
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11104		instruction:	8c0006f
+Decode the instruction
+***************decode output**************
+Instruction type:	0x2
+Instruction rs1:	0x0	reg[rs1]	0
+Instruction rs2:	0xc	reg[rs2]	0
+Instruction rd:	0x0	reg[rd]	0
+Instruction imm:	0x8c
+***************Excute Result**************
+Instruction type:	0x2
+Instruction rs1:	0x0	reg[rs1]:	0
+Instruction rs2:	0xc	reg[rs2]:	0
+Instruction rd:	0x0	reg[rd]:	0
+Instruction imm:	0x8c
+*************Fetch the instruction***************
+pc:	11190		instruction:	fe842703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xe	reg[rd]	1
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xe	reg[rd]:	0
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11194		instruction:	200793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]	0
+Instruction rs2:	0x2	reg[rs2]	ffb0
+Instruction rd:	0xf	reg[rd]	1
+Instruction imm:	0x2
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]:	0
+Instruction rs2:	0x2	reg[rs2]:	ffb0
+Instruction rd:	0xf	reg[rd]:	2
+Instruction imm:	0x2
+*************Fetch the instruction***************
+pc:	11198		instruction:	f6e7d8e3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x7
+Instruction rs1:	0xf	reg[rs1]	2
+Instruction rs2:	0xe	reg[rs2]	0
+Instruction rd:	0x11	reg[rd]	0
+Instruction imm:	0x1f70
+***************Excute Result**************
+Instruction type:	0x7
+Instruction rs1:	0xf	reg[rs1]:	2
+Instruction rs2:	0xe	reg[rs2]:	0
+Instruction rd:	0x11	reg[rd]:	0
+Instruction imm:	0x1f70
+*************Fetch the instruction***************
+pc:	11108		instruction:	fec42703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xc	reg[rs2]	0
+Instruction rd:	0xe	reg[rd]	0
+Instruction imm:	0xfec
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xc	reg[rs2]:	0
+Instruction rd:	0xe	reg[rd]:	1
+Instruction imm:	0xfec
+*************Fetch the instruction***************
+pc:	1110c		instruction:	70793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]	1
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	2
+Instruction imm:	0x0
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]:	1
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	1
+Instruction imm:	0x0
+*************Fetch the instruction***************
+pc:	11110		instruction:	179793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	1
+Instruction rs2:	0x1	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	1
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	80000000
+Instruction rs2:	0x1	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	80000000
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	11114		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	80000000
+Instruction rs2:	0xe	reg[rs2]	1
+Instruction rd:	0xf	reg[rd]	80000000
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	80000001
+Instruction rs2:	0xe	reg[rs2]:	1
+Instruction rd:	0xf	reg[rd]:	80000001
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	11118		instruction:	fe842703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xe	reg[rd]	1
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xe	reg[rd]:	0
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	1111c		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	80000001
+Instruction rs2:	0xe	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	80000001
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	80000001
+Instruction rs2:	0xe	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	80000001
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11120		instruction:	279793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	80000001
+Instruction rs2:	0x2	reg[rs2]	ffb0
+Instruction rd:	0xf	reg[rd]	80000001
+Instruction imm:	0x2
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	80000000
+Instruction rs2:	0x2	reg[rs2]:	ffb0
+Instruction rd:	0xf	reg[rd]:	80000000
+Instruction imm:	0x2
+*************Fetch the instruction***************
+pc:	11124		instruction:	ff040713
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x10	reg[rs2]	0
+Instruction rd:	0xe	reg[rd]	0
+Instruction imm:	0xff0
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x10	reg[rs2]:	0
+Instruction rd:	0xe	reg[rd]:	fff0
+Instruction imm:	0xff0
+*************Fetch the instruction***************
+pc:	11128		instruction:	f707b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]	fff0
+Instruction rs2:	0xf	reg[rs2]	80000000
+Instruction rd:	0xf	reg[rd]	80000000
+Instruction imm:	0xff0
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]:	fff0
+Instruction rs2:	0xf	reg[rs2]:	8000fff0
+Instruction rd:	0xf	reg[rd]:	8000fff0
+Instruction imm:	0xff0
+*************Fetch the instruction***************
+pc:	1112c		instruction:	fe07a683
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0xf	reg[rs1]	8000fff0
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0xd	reg[rd]	8
+Instruction imm:	0xfe0
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0xf	reg[rs1]:	8000fff0
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0xd	reg[rd]:	0
+Instruction imm:	0xfe0
+*************Fetch the instruction***************
+pc:	11130		instruction:	fec42703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xc	reg[rs2]	0
+Instruction rd:	0xe	reg[rd]	fff0
+Instruction imm:	0xfec
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xc	reg[rs2]:	0
+Instruction rd:	0xe	reg[rd]:	1
+Instruction imm:	0xfec
+*************Fetch the instruction***************
+pc:	11134		instruction:	70793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]	1
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	8000fff0
+Instruction imm:	0x0
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]:	1
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	1
+Instruction imm:	0x0
+*************Fetch the instruction***************
+pc:	11138		instruction:	179793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	1
+Instruction rs2:	0x1	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	1
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	80000000
+Instruction rs2:	0x1	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	80000000
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	1113c		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	80000000
+Instruction rs2:	0xe	reg[rs2]	1
+Instruction rd:	0xf	reg[rd]	80000000
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	80000001
+Instruction rs2:	0xe	reg[rs2]:	1
+Instruction rd:	0xf	reg[rd]:	80000001
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	11140		instruction:	fe842703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xe	reg[rd]	1
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xe	reg[rd]:	0
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11144		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	80000001
+Instruction rs2:	0xe	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	80000001
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	80000001
+Instruction rs2:	0xe	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	80000001
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11148		instruction:	279793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	80000001
+Instruction rs2:	0x2	reg[rs2]	ffb0
+Instruction rd:	0xf	reg[rd]	80000001
+Instruction imm:	0x2
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	80000000
+Instruction rs2:	0x2	reg[rs2]:	ffb0
+Instruction rd:	0xf	reg[rd]:	80000000
+Instruction imm:	0x2
+*************Fetch the instruction***************
+pc:	1114c		instruction:	ff040713
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x10	reg[rs2]	0
+Instruction rd:	0xe	reg[rd]	0
+Instruction imm:	0xff0
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x10	reg[rs2]:	0
+Instruction rd:	0xe	reg[rd]:	fff0
+Instruction imm:	0xff0
+*************Fetch the instruction***************
+pc:	11150		instruction:	f707b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]	fff0
+Instruction rs2:	0xf	reg[rs2]	80000000
+Instruction rd:	0xf	reg[rd]	80000000
+Instruction imm:	0xff0
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]:	fff0
+Instruction rs2:	0xf	reg[rs2]:	8000fff0
+Instruction rd:	0xf	reg[rd]:	8000fff0
+Instruction imm:	0xff0
+*************Fetch the instruction***************
+pc:	11154		instruction:	fc87a783
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0xf	reg[rs1]	8000fff0
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xf	reg[rd]	8000fff0
+Instruction imm:	0xfc8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0xf	reg[rs1]:	0
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0xfc8
+*************Fetch the instruction***************
+pc:	11158		instruction:	f686b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xd	reg[rs1]	0
+Instruction rs2:	0xf	reg[rs2]	0
+Instruction rd:	0xd	reg[rd]	0
+Instruction imm:	0xfc8
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xd	reg[rs1]:	0
+Instruction rs2:	0xf	reg[rs2]:	0
+Instruction rd:	0xd	reg[rd]:	0
+Instruction imm:	0xfc8
+*************Fetch the instruction***************
+pc:	1115c		instruction:	fec42703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xc	reg[rs2]	0
+Instruction rd:	0xe	reg[rd]	fff0
+Instruction imm:	0xfec
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xc	reg[rs2]:	0
+Instruction rd:	0xe	reg[rd]:	1
+Instruction imm:	0xfec
+*************Fetch the instruction***************
+pc:	11160		instruction:	70793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]	1
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0x0
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]:	1
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	1
+Instruction imm:	0x0
+*************Fetch the instruction***************
+pc:	11164		instruction:	179793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	1
+Instruction rs2:	0x1	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	1
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	80000000
+Instruction rs2:	0x1	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	80000000
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	11168		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	80000000
+Instruction rs2:	0xe	reg[rs2]	1
+Instruction rd:	0xf	reg[rd]	80000000
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	80000001
+Instruction rs2:	0xe	reg[rs2]:	1
+Instruction rd:	0xf	reg[rd]:	80000001
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	1116c		instruction:	fe842703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xe	reg[rd]	1
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xe	reg[rd]:	0
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11170		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	80000001
+Instruction rs2:	0xe	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	80000001
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	80000001
+Instruction rs2:	0xe	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	80000001
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11174		instruction:	279713
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	80000001
+Instruction rs2:	0x2	reg[rs2]	ffb0
+Instruction rd:	0xe	reg[rd]	0
+Instruction imm:	0x2
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	80000001
+Instruction rs2:	0x2	reg[rs2]:	ffb0
+Instruction rd:	0xe	reg[rd]:	80000000
+Instruction imm:	0x2
+*************Fetch the instruction***************
+pc:	11178		instruction:	80018793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x3	reg[rs1]	10874
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	80000001
+Instruction imm:	0x800
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x3	reg[rs1]:	10874
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	10074
+Instruction imm:	0x800
+*************Fetch the instruction***************
+pc:	1117c		instruction:	f707b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]	80000000
+Instruction rs2:	0xf	reg[rs2]	10074
+Instruction rd:	0xf	reg[rd]	10074
+Instruction imm:	0x800
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]:	80000000
+Instruction rs2:	0xf	reg[rs2]:	80010074
+Instruction rd:	0xf	reg[rd]:	80010074
+Instruction imm:	0x800
+*************Fetch the instruction***************
+pc:	11180		instruction:	d7a023
+Decode the instruction
+***************decode output**************
+Instruction type:	0x11
+Instruction rs1:	0xf	reg[rs1]	80010074
+Instruction rs2:	0xd	reg[rs2]	0
+Instruction rd:	0x0	reg[rd]	0
+Instruction imm:	0x0
+***************Excute Result**************
+0
+Instruction type:	0x11
+Instruction rs1:	0xf	reg[rs1]:	80010074
+Instruction rs2:	0xd	reg[rs2]:	0
+Instruction rd:	0x0	reg[rd]:	0
+Instruction imm:	0x0
+*************Fetch the instruction***************
+pc:	11184		instruction:	fe842783
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xf	reg[rd]	80010074
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11188		instruction:	178793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0xf	reg[rs1]	0
+Instruction rs2:	0x1	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0xf	reg[rs1]:	1
+Instruction rs2:	0x1	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	1
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	1118c		instruction:	fef42423
+Decode the instruction
+***************decode output**************
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xf	reg[rs2]	1
+Instruction rd:	0x8	reg[rd]	10000
+Instruction imm:	0xfe8
+***************Excute Result**************
+ffffffe8
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xf	reg[rs2]:	1
+Instruction rd:	0x8	reg[rd]:	10000
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11190		instruction:	fe842703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xe	reg[rd]	80000000
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xe	reg[rd]:	1
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11194		instruction:	200793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]	0
+Instruction rs2:	0x2	reg[rs2]	ffb0
+Instruction rd:	0xf	reg[rd]	1
+Instruction imm:	0x2
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]:	0
+Instruction rs2:	0x2	reg[rs2]:	ffb0
+Instruction rd:	0xf	reg[rd]:	2
+Instruction imm:	0x2
+*************Fetch the instruction***************
+pc:	11198		instruction:	f6e7d8e3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x7
+Instruction rs1:	0xf	reg[rs1]	2
+Instruction rs2:	0xe	reg[rs2]	1
+Instruction rd:	0x11	reg[rd]	0
+Instruction imm:	0x1f70
+***************Excute Result**************
+Instruction type:	0x7
+Instruction rs1:	0xf	reg[rs1]:	2
+Instruction rs2:	0xe	reg[rs2]:	1
+Instruction rd:	0x11	reg[rd]:	0
+Instruction imm:	0x1f70
+*************Fetch the instruction***************
+pc:	11108		instruction:	fec42703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xc	reg[rs2]	0
+Instruction rd:	0xe	reg[rd]	1
+Instruction imm:	0xfec
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xc	reg[rs2]:	0
+Instruction rd:	0xe	reg[rd]:	1
+Instruction imm:	0xfec
+*************Fetch the instruction***************
+pc:	1110c		instruction:	70793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]	1
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	2
+Instruction imm:	0x0
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]:	1
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	1
+Instruction imm:	0x0
+*************Fetch the instruction***************
+pc:	11110		instruction:	179793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	1
+Instruction rs2:	0x1	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	1
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	80000000
+Instruction rs2:	0x1	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	80000000
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	11114		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	80000000
+Instruction rs2:	0xe	reg[rs2]	1
+Instruction rd:	0xf	reg[rd]	80000000
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	80000001
+Instruction rs2:	0xe	reg[rs2]:	1
+Instruction rd:	0xf	reg[rd]:	80000001
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	11118		instruction:	fe842703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xe	reg[rd]	1
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xe	reg[rd]:	1
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	1111c		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	80000001
+Instruction rs2:	0xe	reg[rs2]	1
+Instruction rd:	0xf	reg[rd]	80000001
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	80000002
+Instruction rs2:	0xe	reg[rs2]:	1
+Instruction rd:	0xf	reg[rd]:	80000002
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11120		instruction:	279793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	80000002
+Instruction rs2:	0x2	reg[rs2]	ffb0
+Instruction rd:	0xf	reg[rd]	80000002
+Instruction imm:	0x2
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	0
+Instruction rs2:	0x2	reg[rs2]:	ffb0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x2
+*************Fetch the instruction***************
+pc:	11124		instruction:	ff040713
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x10	reg[rs2]	0
+Instruction rd:	0xe	reg[rd]	1
+Instruction imm:	0xff0
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x10	reg[rs2]:	0
+Instruction rd:	0xe	reg[rd]:	fff0
+Instruction imm:	0xff0
+*************Fetch the instruction***************
+pc:	11128		instruction:	f707b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]	fff0
+Instruction rs2:	0xf	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0xff0
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]:	fff0
+Instruction rs2:	0xf	reg[rs2]:	fff0
+Instruction rd:	0xf	reg[rd]:	fff0
+Instruction imm:	0xff0
+*************Fetch the instruction***************
+pc:	1112c		instruction:	fe07a683
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0xf	reg[rs1]	fff0
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0xd	reg[rd]	0
+Instruction imm:	0xfe0
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0xf	reg[rs1]:	fff0
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0xd	reg[rd]:	1
+Instruction imm:	0xfe0
+*************Fetch the instruction***************
+pc:	11130		instruction:	fec42703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xc	reg[rs2]	0
+Instruction rd:	0xe	reg[rd]	fff0
+Instruction imm:	0xfec
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xc	reg[rs2]:	0
+Instruction rd:	0xe	reg[rd]:	1
+Instruction imm:	0xfec
+*************Fetch the instruction***************
+pc:	11134		instruction:	70793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]	1
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	fff0
+Instruction imm:	0x0
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]:	1
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	1
+Instruction imm:	0x0
+*************Fetch the instruction***************
+pc:	11138		instruction:	179793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	1
+Instruction rs2:	0x1	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	1
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	80000000
+Instruction rs2:	0x1	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	80000000
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	1113c		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	80000000
+Instruction rs2:	0xe	reg[rs2]	1
+Instruction rd:	0xf	reg[rd]	80000000
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	80000001
+Instruction rs2:	0xe	reg[rs2]:	1
+Instruction rd:	0xf	reg[rd]:	80000001
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	11140		instruction:	fe842703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xe	reg[rd]	1
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xe	reg[rd]:	1
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11144		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	80000001
+Instruction rs2:	0xe	reg[rs2]	1
+Instruction rd:	0xf	reg[rd]	80000001
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	80000002
+Instruction rs2:	0xe	reg[rs2]:	1
+Instruction rd:	0xf	reg[rd]:	80000002
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11148		instruction:	279793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	80000002
+Instruction rs2:	0x2	reg[rs2]	ffb0
+Instruction rd:	0xf	reg[rd]	80000002
+Instruction imm:	0x2
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	0
+Instruction rs2:	0x2	reg[rs2]:	ffb0
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0x2
+*************Fetch the instruction***************
+pc:	1114c		instruction:	ff040713
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x10	reg[rs2]	0
+Instruction rd:	0xe	reg[rd]	1
+Instruction imm:	0xff0
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x10	reg[rs2]:	0
+Instruction rd:	0xe	reg[rd]:	fff0
+Instruction imm:	0xff0
+*************Fetch the instruction***************
+pc:	11150		instruction:	f707b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]	fff0
+Instruction rs2:	0xf	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0xff0
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]:	fff0
+Instruction rs2:	0xf	reg[rs2]:	fff0
+Instruction rd:	0xf	reg[rd]:	fff0
+Instruction imm:	0xff0
+*************Fetch the instruction***************
+pc:	11154		instruction:	fc87a783
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0xf	reg[rs1]	fff0
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xf	reg[rd]	fff0
+Instruction imm:	0xfc8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0xf	reg[rs1]:	7
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xf	reg[rd]:	7
+Instruction imm:	0xfc8
+*************Fetch the instruction***************
+pc:	11158		instruction:	f686b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xd	reg[rs1]	1
+Instruction rs2:	0xf	reg[rs2]	7
+Instruction rd:	0xd	reg[rd]	1
+Instruction imm:	0xfc8
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xd	reg[rs1]:	8
+Instruction rs2:	0xf	reg[rs2]:	7
+Instruction rd:	0xd	reg[rd]:	8
+Instruction imm:	0xfc8
+*************Fetch the instruction***************
+pc:	1115c		instruction:	fec42703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xc	reg[rs2]	0
+Instruction rd:	0xe	reg[rd]	fff0
+Instruction imm:	0xfec
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xc	reg[rs2]:	0
+Instruction rd:	0xe	reg[rd]:	1
+Instruction imm:	0xfec
+*************Fetch the instruction***************
+pc:	11160		instruction:	70793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]	1
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	7
+Instruction imm:	0x0
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]:	1
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	1
+Instruction imm:	0x0
+*************Fetch the instruction***************
+pc:	11164		instruction:	179793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	1
+Instruction rs2:	0x1	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	1
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	80000000
+Instruction rs2:	0x1	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	80000000
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	11168		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	80000000
+Instruction rs2:	0xe	reg[rs2]	1
+Instruction rd:	0xf	reg[rd]	80000000
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	80000001
+Instruction rs2:	0xe	reg[rs2]:	1
+Instruction rd:	0xf	reg[rd]:	80000001
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	1116c		instruction:	fe842703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xe	reg[rd]	1
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xe	reg[rd]:	1
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11170		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	80000001
+Instruction rs2:	0xe	reg[rs2]	1
+Instruction rd:	0xf	reg[rd]	80000001
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	80000002
+Instruction rs2:	0xe	reg[rs2]:	1
+Instruction rd:	0xf	reg[rd]:	80000002
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11174		instruction:	279713
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	80000002
+Instruction rs2:	0x2	reg[rs2]	ffb0
+Instruction rd:	0xe	reg[rd]	1
+Instruction imm:	0x2
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	80000002
+Instruction rs2:	0x2	reg[rs2]:	ffb0
+Instruction rd:	0xe	reg[rd]:	0
+Instruction imm:	0x2
+*************Fetch the instruction***************
+pc:	11178		instruction:	80018793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x3	reg[rs1]	10874
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	80000002
+Instruction imm:	0x800
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x3	reg[rs1]:	10874
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	10074
+Instruction imm:	0x800
+*************Fetch the instruction***************
+pc:	1117c		instruction:	f707b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]	0
+Instruction rs2:	0xf	reg[rs2]	10074
+Instruction rd:	0xf	reg[rd]	10074
+Instruction imm:	0x800
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]:	0
+Instruction rs2:	0xf	reg[rs2]:	10074
+Instruction rd:	0xf	reg[rd]:	10074
+Instruction imm:	0x800
+*************Fetch the instruction***************
+pc:	11180		instruction:	d7a023
+Decode the instruction
+***************decode output**************
+Instruction type:	0x11
+Instruction rs1:	0xf	reg[rs1]	10074
+Instruction rs2:	0xd	reg[rs2]	8
+Instruction rd:	0x0	reg[rd]	0
+Instruction imm:	0x0
+***************Excute Result**************
+0
+Instruction type:	0x11
+Instruction rs1:	0xf	reg[rs1]:	10074
+Instruction rs2:	0xd	reg[rs2]:	8
+Instruction rd:	0x0	reg[rd]:	0
+Instruction imm:	0x0
+*************Fetch the instruction***************
+pc:	11184		instruction:	fe842783
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xf	reg[rd]	10074
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xf	reg[rd]:	1
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11188		instruction:	178793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0xf	reg[rs1]	1
+Instruction rs2:	0x1	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	1
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0xf	reg[rs1]:	2
+Instruction rs2:	0x1	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	2
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	1118c		instruction:	fef42423
+Decode the instruction
+***************decode output**************
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xf	reg[rs2]	2
+Instruction rd:	0x8	reg[rd]	10000
+Instruction imm:	0xfe8
+***************Excute Result**************
+ffffffe8
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xf	reg[rs2]:	2
+Instruction rd:	0x8	reg[rd]:	10000
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11190		instruction:	fe842703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xe	reg[rd]	0
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xe	reg[rd]:	2
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11194		instruction:	200793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]	0
+Instruction rs2:	0x2	reg[rs2]	ffb0
+Instruction rd:	0xf	reg[rd]	2
+Instruction imm:	0x2
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]:	0
+Instruction rs2:	0x2	reg[rs2]:	ffb0
+Instruction rd:	0xf	reg[rd]:	2
+Instruction imm:	0x2
+*************Fetch the instruction***************
+pc:	11198		instruction:	f6e7d8e3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x7
+Instruction rs1:	0xf	reg[rs1]	2
+Instruction rs2:	0xe	reg[rs2]	2
+Instruction rd:	0x11	reg[rd]	0
+Instruction imm:	0x1f70
+***************Excute Result**************
+Instruction type:	0x7
+Instruction rs1:	0xf	reg[rs1]:	2
+Instruction rs2:	0xe	reg[rs2]:	2
+Instruction rd:	0x11	reg[rd]:	0
+Instruction imm:	0x1f70
+*************Fetch the instruction***************
+pc:	11108		instruction:	fec42703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xc	reg[rs2]	0
+Instruction rd:	0xe	reg[rd]	2
+Instruction imm:	0xfec
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xc	reg[rs2]:	0
+Instruction rd:	0xe	reg[rd]:	1
+Instruction imm:	0xfec
+*************Fetch the instruction***************
+pc:	1110c		instruction:	70793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]	1
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	2
+Instruction imm:	0x0
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]:	1
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	1
+Instruction imm:	0x0
+*************Fetch the instruction***************
+pc:	11110		instruction:	179793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	1
+Instruction rs2:	0x1	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	1
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	80000000
+Instruction rs2:	0x1	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	80000000
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	11114		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	80000000
+Instruction rs2:	0xe	reg[rs2]	1
+Instruction rd:	0xf	reg[rd]	80000000
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	80000001
+Instruction rs2:	0xe	reg[rs2]:	1
+Instruction rd:	0xf	reg[rd]:	80000001
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	11118		instruction:	fe842703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xe	reg[rd]	1
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xe	reg[rd]:	2
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	1111c		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	80000001
+Instruction rs2:	0xe	reg[rs2]	2
+Instruction rd:	0xf	reg[rd]	80000001
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	80000003
+Instruction rs2:	0xe	reg[rs2]:	2
+Instruction rd:	0xf	reg[rd]:	80000003
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11120		instruction:	279793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	80000003
+Instruction rs2:	0x2	reg[rs2]	ffb0
+Instruction rd:	0xf	reg[rd]	80000003
+Instruction imm:	0x2
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	80000000
+Instruction rs2:	0x2	reg[rs2]:	ffb0
+Instruction rd:	0xf	reg[rd]:	80000000
+Instruction imm:	0x2
+*************Fetch the instruction***************
+pc:	11124		instruction:	ff040713
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x10	reg[rs2]	0
+Instruction rd:	0xe	reg[rd]	2
+Instruction imm:	0xff0
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x10	reg[rs2]:	0
+Instruction rd:	0xe	reg[rd]:	fff0
+Instruction imm:	0xff0
+*************Fetch the instruction***************
+pc:	11128		instruction:	f707b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]	fff0
+Instruction rs2:	0xf	reg[rs2]	80000000
+Instruction rd:	0xf	reg[rd]	80000000
+Instruction imm:	0xff0
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]:	fff0
+Instruction rs2:	0xf	reg[rs2]:	8000fff0
+Instruction rd:	0xf	reg[rd]:	8000fff0
+Instruction imm:	0xff0
+*************Fetch the instruction***************
+pc:	1112c		instruction:	fe07a683
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0xf	reg[rs1]	8000fff0
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0xd	reg[rd]	8
+Instruction imm:	0xfe0
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0xf	reg[rs1]:	8000fff0
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0xd	reg[rd]:	0
+Instruction imm:	0xfe0
+*************Fetch the instruction***************
+pc:	11130		instruction:	fec42703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xc	reg[rs2]	0
+Instruction rd:	0xe	reg[rd]	fff0
+Instruction imm:	0xfec
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xc	reg[rs2]:	0
+Instruction rd:	0xe	reg[rd]:	1
+Instruction imm:	0xfec
+*************Fetch the instruction***************
+pc:	11134		instruction:	70793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]	1
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	8000fff0
+Instruction imm:	0x0
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]:	1
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	1
+Instruction imm:	0x0
+*************Fetch the instruction***************
+pc:	11138		instruction:	179793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	1
+Instruction rs2:	0x1	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	1
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	80000000
+Instruction rs2:	0x1	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	80000000
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	1113c		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	80000000
+Instruction rs2:	0xe	reg[rs2]	1
+Instruction rd:	0xf	reg[rd]	80000000
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	80000001
+Instruction rs2:	0xe	reg[rs2]:	1
+Instruction rd:	0xf	reg[rd]:	80000001
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	11140		instruction:	fe842703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xe	reg[rd]	1
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xe	reg[rd]:	2
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11144		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	80000001
+Instruction rs2:	0xe	reg[rs2]	2
+Instruction rd:	0xf	reg[rd]	80000001
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	80000003
+Instruction rs2:	0xe	reg[rs2]:	2
+Instruction rd:	0xf	reg[rd]:	80000003
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11148		instruction:	279793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	80000003
+Instruction rs2:	0x2	reg[rs2]	ffb0
+Instruction rd:	0xf	reg[rd]	80000003
+Instruction imm:	0x2
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	80000000
+Instruction rs2:	0x2	reg[rs2]:	ffb0
+Instruction rd:	0xf	reg[rd]:	80000000
+Instruction imm:	0x2
+*************Fetch the instruction***************
+pc:	1114c		instruction:	ff040713
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x10	reg[rs2]	0
+Instruction rd:	0xe	reg[rd]	2
+Instruction imm:	0xff0
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x10	reg[rs2]:	0
+Instruction rd:	0xe	reg[rd]:	fff0
+Instruction imm:	0xff0
+*************Fetch the instruction***************
+pc:	11150		instruction:	f707b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]	fff0
+Instruction rs2:	0xf	reg[rs2]	80000000
+Instruction rd:	0xf	reg[rd]	80000000
+Instruction imm:	0xff0
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]:	fff0
+Instruction rs2:	0xf	reg[rs2]:	8000fff0
+Instruction rd:	0xf	reg[rd]:	8000fff0
+Instruction imm:	0xff0
+*************Fetch the instruction***************
+pc:	11154		instruction:	fc87a783
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0xf	reg[rs1]	8000fff0
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xf	reg[rd]	8000fff0
+Instruction imm:	0xfc8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0xf	reg[rs1]:	0
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xf	reg[rd]:	0
+Instruction imm:	0xfc8
+*************Fetch the instruction***************
+pc:	11158		instruction:	f686b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xd	reg[rs1]	0
+Instruction rs2:	0xf	reg[rs2]	0
+Instruction rd:	0xd	reg[rd]	0
+Instruction imm:	0xfc8
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xd	reg[rs1]:	0
+Instruction rs2:	0xf	reg[rs2]:	0
+Instruction rd:	0xd	reg[rd]:	0
+Instruction imm:	0xfc8
+*************Fetch the instruction***************
+pc:	1115c		instruction:	fec42703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xc	reg[rs2]	0
+Instruction rd:	0xe	reg[rd]	fff0
+Instruction imm:	0xfec
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xc	reg[rs2]:	0
+Instruction rd:	0xe	reg[rd]:	1
+Instruction imm:	0xfec
+*************Fetch the instruction***************
+pc:	11160		instruction:	70793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]	1
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	0
+Instruction imm:	0x0
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0xe	reg[rs1]:	1
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	1
+Instruction imm:	0x0
+*************Fetch the instruction***************
+pc:	11164		instruction:	179793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	1
+Instruction rs2:	0x1	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	1
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	80000000
+Instruction rs2:	0x1	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	80000000
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	11168		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	80000000
+Instruction rs2:	0xe	reg[rs2]	1
+Instruction rd:	0xf	reg[rd]	80000000
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	80000001
+Instruction rs2:	0xe	reg[rs2]:	1
+Instruction rd:	0xf	reg[rd]:	80000001
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	1116c		instruction:	fe842703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xe	reg[rd]	1
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xe	reg[rd]:	2
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11170		instruction:	e787b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]	80000001
+Instruction rs2:	0xe	reg[rs2]	2
+Instruction rd:	0xf	reg[rd]	80000001
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xf	reg[rs1]:	80000003
+Instruction rs2:	0xe	reg[rs2]:	2
+Instruction rd:	0xf	reg[rd]:	80000003
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11174		instruction:	279713
+Decode the instruction
+***************decode output**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]	80000003
+Instruction rs2:	0x2	reg[rs2]	ffb0
+Instruction rd:	0xe	reg[rd]	2
+Instruction imm:	0x2
+***************Excute Result**************
+Instruction type:	0x18
+Instruction rs1:	0xf	reg[rs1]:	80000003
+Instruction rs2:	0x2	reg[rs2]:	ffb0
+Instruction rd:	0xe	reg[rd]:	80000000
+Instruction imm:	0x2
+*************Fetch the instruction***************
+pc:	11178		instruction:	80018793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x3	reg[rs1]	10874
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	80000003
+Instruction imm:	0x800
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x3	reg[rs1]:	10874
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	10074
+Instruction imm:	0x800
+*************Fetch the instruction***************
+pc:	1117c		instruction:	f707b3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]	80000000
+Instruction rs2:	0xf	reg[rs2]	10074
+Instruction rd:	0xf	reg[rd]	10074
+Instruction imm:	0x800
+***************Excute Result**************
+Instruction type:	0x1b
+Instruction rs1:	0xe	reg[rs1]:	80000000
+Instruction rs2:	0xf	reg[rs2]:	80010074
+Instruction rd:	0xf	reg[rd]:	80010074
+Instruction imm:	0x800
+*************Fetch the instruction***************
+pc:	11180		instruction:	d7a023
+Decode the instruction
+***************decode output**************
+Instruction type:	0x11
+Instruction rs1:	0xf	reg[rs1]	80010074
+Instruction rs2:	0xd	reg[rs2]	0
+Instruction rd:	0x0	reg[rd]	0
+Instruction imm:	0x0
+***************Excute Result**************
+0
+Instruction type:	0x11
+Instruction rs1:	0xf	reg[rs1]:	80010074
+Instruction rs2:	0xd	reg[rs2]:	0
+Instruction rd:	0x0	reg[rd]:	0
+Instruction imm:	0x0
+*************Fetch the instruction***************
+pc:	11184		instruction:	fe842783
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xf	reg[rd]	80010074
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xf	reg[rd]:	2
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11188		instruction:	178793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0xf	reg[rs1]	2
+Instruction rs2:	0x1	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	2
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0xf	reg[rs1]:	3
+Instruction rs2:	0x1	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	3
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	1118c		instruction:	fef42423
+Decode the instruction
+***************decode output**************
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xf	reg[rs2]	3
+Instruction rd:	0x8	reg[rd]	10000
+Instruction imm:	0xfe8
+***************Excute Result**************
+ffffffe8
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xf	reg[rs2]:	3
+Instruction rd:	0x8	reg[rd]:	10000
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11190		instruction:	fe842703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0x8	reg[rs2]	10000
+Instruction rd:	0xe	reg[rd]	80000000
+Instruction imm:	0xfe8
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0x8	reg[rs2]:	10000
+Instruction rd:	0xe	reg[rd]:	3
+Instruction imm:	0xfe8
+*************Fetch the instruction***************
+pc:	11194		instruction:	200793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]	0
+Instruction rs2:	0x2	reg[rs2]	ffb0
+Instruction rd:	0xf	reg[rd]	3
+Instruction imm:	0x2
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]:	0
+Instruction rs2:	0x2	reg[rs2]:	ffb0
+Instruction rd:	0xf	reg[rd]:	2
+Instruction imm:	0x2
+*************Fetch the instruction***************
+pc:	11198		instruction:	f6e7d8e3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x7
+Instruction rs1:	0xf	reg[rs1]	2
+Instruction rs2:	0xe	reg[rs2]	3
+Instruction rd:	0x11	reg[rd]	0
+Instruction imm:	0x1f70
+***************Excute Result**************
+Instruction type:	0x7
+Instruction rs1:	0xf	reg[rs1]:	2
+Instruction rs2:	0xe	reg[rs2]:	3
+Instruction rd:	0x11	reg[rd]:	0
+Instruction imm:	0x1f70
+*************Fetch the instruction***************
+pc:	1119c		instruction:	fec42783
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xc	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	2
+Instruction imm:	0xfec
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xc	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	1
+Instruction imm:	0xfec
+*************Fetch the instruction***************
+pc:	111a0		instruction:	178793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0xf	reg[rs1]	1
+Instruction rs2:	0x1	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	1
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0xf	reg[rs1]:	2
+Instruction rs2:	0x1	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	2
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	111a4		instruction:	fef42623
+Decode the instruction
+***************decode output**************
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xf	reg[rs2]	2
+Instruction rd:	0xc	reg[rd]	0
+Instruction imm:	0xfec
+***************Excute Result**************
+ffffffec
+Instruction type:	0x11
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xf	reg[rs2]:	2
+Instruction rd:	0xc	reg[rd]:	0
+Instruction imm:	0xfec
+*************Fetch the instruction***************
+pc:	111a8		instruction:	fec42703
+Decode the instruction
+***************decode output**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]	10000
+Instruction rs2:	0xc	reg[rs2]	0
+Instruction rd:	0xe	reg[rd]	3
+Instruction imm:	0xfec
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x8	reg[rs1]:	10000
+Instruction rs2:	0xc	reg[rs2]:	0
+Instruction rd:	0xe	reg[rd]:	2
+Instruction imm:	0xfec
+*************Fetch the instruction***************
+pc:	111ac		instruction:	100793
+Decode the instruction
+***************decode output**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]	0
+Instruction rs2:	0x1	reg[rs2]	0
+Instruction rd:	0xf	reg[rd]	2
+Instruction imm:	0x1
+***************Excute Result**************
+Instruction type:	0x12
+Instruction rs1:	0x0	reg[rs1]:	0
+Instruction rs2:	0x1	reg[rs2]:	0
+Instruction rd:	0xf	reg[rd]:	1
+Instruction imm:	0x1
+*************Fetch the instruction***************
+pc:	111b0		instruction:	f4e7d8e3
+Decode the instruction
+***************decode output**************
+Instruction type:	0x7
+Instruction rs1:	0xf	reg[rs1]	1
+Instruction rs2:	0xe	reg[rs2]	2
+Instruction rd:	0x11	reg[rd]	0
+Instruction imm:	0x1f50
+***************Excute Result**************
+Instruction type:	0x7
+Instruction rs1:	0xf	reg[rs1]:	1
+Instruction rs2:	0xe	reg[rs2]:	2
+Instruction rd:	0x11	reg[rd]:	0
+Instruction imm:	0x1f50
+*************Fetch the instruction***************
+pc:	111b4		instruction:	793
+Decode the instruction
+***************decode output**************
 Instruction type:	0x12
 Instruction rs1:	0x0	reg[rs1]	0
 Instruction rs2:	0x0	reg[rs2]	0
-Instruction rd:	0xf	reg[rd]	23
+Instruction rd:	0xf	reg[rd]	1
 Instruction imm:	0x0
-Excute the instruction
-0x10074:	23
-0x10075:	0
-0x10076:	0
-0x10077:	0
-0x10078:	0
-0x10079:	0
-0x1007a:	0
-0x1007b:	0
-0xfffff800:	0
-Instruction type:	12
+***************Excute Result**************
+Instruction type:	0x12
 Instruction rs1:	0x0	reg[rs1]:	0
 Instruction rs2:	0x0	reg[rs2]:	0
 Instruction rd:	0xf	reg[rd]:	0
 Instruction imm:	0x0
-Fetch the instruction
-pc:	110a4		instruction:	78513
-opcode:	0x13
-funct3:	0x0
+*************Fetch the instruction***************
+pc:	111b8		instruction:	78513
 Decode the instruction
-decode output
+***************decode output**************
 Instruction type:	0x12
 Instruction rs1:	0xf	reg[rs1]	0
 Instruction rs2:	0x0	reg[rs2]	0
 Instruction rd:	0xa	reg[rd]	0
 Instruction imm:	0x0
-Excute the instruction
-0x10074:	23
-0x10075:	0
-0x10076:	0
-0x10077:	0
-0x10078:	0
-0x10079:	0
-0x1007a:	0
-0x1007b:	0
-0xfffff800:	0
-Instruction type:	12
+***************Excute Result**************
+Instruction type:	0x12
 Instruction rs1:	0xf	reg[rs1]:	0
 Instruction rs2:	0x0	reg[rs2]:	0
 Instruction rd:	0xa	reg[rd]:	0
 Instruction imm:	0x0
-Fetch the instruction
-pc:	110a8		instruction:	1c12403
-opcode:	0x3
-funct3:	0x2
+*************Fetch the instruction***************
+pc:	111bc		instruction:	4c12403
 Decode the instruction
-decode output
+***************decode output**************
 Instruction type:	0xc
-Instruction rs1:	0x2	reg[rs1]	ffe0
-Instruction rs2:	0x1c	reg[rs2]	0
+Instruction rs1:	0x2	reg[rs1]	ffb0
+Instruction rs2:	0xc	reg[rs2]	0
 Instruction rd:	0x8	reg[rd]	10000
-Instruction imm:	0x1c
-Excute the instruction
-22222222222:	fffc
-22222222222:	0
-0x10074:	23
-0x10075:	0
-0x10076:	0
-0x10077:	0
-0x10078:	0
-0x10079:	0
-0x1007a:	0
-0x1007b:	0
-0xfffff800:	0
-Instruction type:	c
-Instruction rs1:	0x2	reg[rs1]:	ffe0
-Instruction rs2:	0x1c	reg[rs2]:	0
+Instruction imm:	0x4c
+***************Excute Result**************
+Instruction type:	0xc
+Instruction rs1:	0x2	reg[rs1]:	ffb0
+Instruction rs2:	0xc	reg[rs2]:	0
 Instruction rd:	0x8	reg[rd]:	0
-Instruction imm:	0x1c
-Fetch the instruction
-pc:	110ac		instruction:	2010113
-opcode:	0x13
-funct3:	0x0
+Instruction imm:	0x4c
+*************Fetch the instruction***************
+pc:	111c0		instruction:	5010113
 Decode the instruction
-decode output
+***************decode output**************
 Instruction type:	0x12
-Instruction rs1:	0x2	reg[rs1]	ffe0
-Instruction rs2:	0x0	reg[rs2]	0
-Instruction rd:	0x2	reg[rd]	ffe0
-Instruction imm:	0x20
-Excute the instruction
-0x10074:	23
-0x10075:	0
-0x10076:	0
-0x10077:	0
-0x10078:	0
-0x10079:	0
-0x1007a:	0
-0x1007b:	0
-0xfffff800:	0
-Instruction type:	12
+Instruction rs1:	0x2	reg[rs1]	ffb0
+Instruction rs2:	0x10	reg[rs2]	0
+Instruction rd:	0x2	reg[rd]	ffb0
+Instruction imm:	0x50
+***************Excute Result**************
+Instruction type:	0x12
 Instruction rs1:	0x2	reg[rs1]:	10000
-Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rs2:	0x10	reg[rs2]:	0
 Instruction rd:	0x2	reg[rd]:	10000
-Instruction imm:	0x20
-Fetch the instruction
-pc:	110b0		instruction:	8067
-opcode:	0x67
-funct3:	0x0
+Instruction imm:	0x50
+*************Fetch the instruction***************
+pc:	111c4		instruction:	8067
 Decode the instruction
-decode output
+***************decode output**************
 Instruction type:	0x3
 Instruction rs1:	0x1	reg[rs1]	0
 Instruction rs2:	0x0	reg[rs2]	0
 Instruction rd:	0x0	reg[rd]	0
 Instruction imm:	0x0
-Excute the instruction
-Instruction type:	3
+***************Excute Result**************
+Instruction type:	0x3
 Instruction rs1:	0x1	reg[rs1]:	0
 Instruction rs2:	0x0	reg[rs2]:	0
 Instruction rd:	0x0	reg[rd]:	0
 Instruction imm:	0x0
-ZGW: bssBegin: 0x10074
+*************Fetch the instruction***************
+pc:	0		instruction:	0
+Decode the instruction
+***************decode output**************
+Instruction type:	0x3
+Instruction rs1:	0x0	reg[rs1]	0
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0x0	reg[rd]	0
+Instruction imm:	0x0
+***************Excute Result**************
+Instruction type:	0x3
+Instruction rs1:	0x0	reg[rs1]:	0
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0x0	reg[rd]:	0
+Instruction imm:	0x0
+*************Fetch the instruction***************
+pc:	0		instruction:	0
+Decode the instruction
+***************decode output**************
+Instruction type:	0x3
+Instruction rs1:	0x0	reg[rs1]	0
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0x0	reg[rd]	0
+Instruction imm:	0x0
+***************Excute Result**************
+Instruction type:	0x3
+Instruction rs1:	0x0	reg[rs1]:	0
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0x0	reg[rd]:	0
+Instruction imm:	0x0
+*************Fetch the instruction***************
+pc:	0		instruction:	0
+Decode the instruction
+***************decode output**************
+Instruction type:	0x3
+Instruction rs1:	0x0	reg[rs1]	0
+Instruction rs2:	0x0	reg[rs2]	0
+Instruction rd:	0x0	reg[rd]	0
+Instruction imm:	0x0
+***************Excute Result**************
+Instruction type:	0x3
+Instruction rs1:	0x0	reg[rs1]:	0
+Instruction rs2:	0x0	reg[rs2]:	0
+Instruction rd:	0x0	reg[rd]:	0
+Instruction imm:	0x0
 -----------Output the result------------
-0x10074:	23
-0x10075:	0
-0x10076:	0
-0x10077:	0
-0x10078:	0
-0x10079:	0
-0x1007a:	0
-0x1007b:	0
-0xfffff800:	0
-23
-0
-0
-0
+SUM		8		0		0		0		0		0		
+bss:	0
+bss:	16
+bss:	0
+bss:	0
+bss:	8
+bss:	0
+bss:	0
+bss:	0
+bss:	0
+bss:	0
+bss:	0
+bss:	0

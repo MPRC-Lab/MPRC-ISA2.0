@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <bitset>
 #include "elf.h"
+#include <unordered_map>
 #include "Memory.h"
 
 #define PT_LOAD 1
@@ -16,7 +17,7 @@ using namespace std;
  * @param bssBegin : function will return the .bss begin address
  * @param bssSize  : function will return the .bss area size (bytes)
  */
-void parseELF(char* filename, unsigned int &bssBegin, unsigned int &bssSize){
+void parseELF(char* filename, unsigned int &bssBegin, unsigned int &bssSize, unsigned int &gp, unsigned int &sp, unordered_map<string, pair<unsigned int, unsigned int> > &gVar){
     ifstream fin(filename, ios::binary);
     cout << "=====================parse ELF begin=====================" << endl;
 
@@ -99,12 +100,24 @@ void parseELF(char* filename, unsigned int &bssBegin, unsigned int &bssSize){
         cout << "        p_flags:       0x" << hex << (unsigned int)elf_phdr.p_flags  << endl;
         cout << "        p_align:       0x" << hex << (unsigned int)elf_phdr.p_align  << endl;
         cout << endl;   
+
+        // set sp[R2] value
+        if(elf_phdr.p_type == PT_LOAD){
+            if(i == 0)
+                sp = elf_phdr.p_vaddr;
+            else 
+                sp = sp < elf_phdr.p_vaddr ? sp : elf_phdr.p_vaddr;
+        }
+        
     }
 
     cout << "---------------------------------------------------------" << endl;
     cout << "ELF Section Headers: (" << dec << (unsigned int)elf_ehdr.e_shnum << " headers)" << endl;
     Elf32_Shdr elf_shdr;
     Elf32_Shdr elf_shdr_shstrtab;
+    Elf32_Shdr elf_shdr_sym;
+    Elf32_Shdr elf_shdr_strtab; 
+
     string sectionName = "";
 
     fin.seekg(elf_ehdr.e_shoff + elf_ehdr.e_shstrndx * elf_ehdr.e_shentsize, ios::beg);
@@ -145,8 +158,52 @@ void parseELF(char* filename, unsigned int &bssBegin, unsigned int &bssSize){
             bssSize  = (unsigned int)elf_shdr.sh_size;
             //cout << "bssBegin: 0x" << hex << bssBegin << "    bssSize: " << dec << bssSize << endl;
         }
+
+        if(sectionName == ".symtab"){
+            elf_shdr_sym = elf_shdr;
+        }
+        if(sectionName == ".strtab"){
+            elf_shdr_strtab = elf_shdr;
+        }
     }
 
+    cout << "---------------------------------------------------------" << endl;
+    cout << "ELF Symbol Table:" << endl;
+    Elf32_Sym elf_sym;
+    string tagName = "";
+    for (int i = 0; i < elf_shdr_sym.sh_size / elf_shdr_sym.sh_entsize; i++){
+        fin.seekg(elf_shdr_sym.sh_offset + i * elf_shdr_sym.sh_entsize, ios::beg);
+        fin.read((char*)&elf_sym, elf_shdr_sym.sh_entsize);
+
+        // get name
+        char nameChar;
+        tagName = "";
+        fin.seekg(elf_shdr_strtab.sh_offset + elf_sym.st_name, ios::beg);
+        fin.read((char*)&nameChar, sizeof(char));
+        int j = 0;
+        while(nameChar != '\0'){
+            j++;
+            tagName += nameChar;
+            fin.seekg(elf_shdr_strtab.sh_offset + elf_sym.st_name + j, ios::beg);
+            fin.read((char*)&nameChar, sizeof(char));
+        }
+        cout << "    Entry " << dec << i << ": " << endl;
+        cout << "        Name:          "   << tagName << endl;
+        cout << "        value:         0x" << hex << setw(8) << setfill('0') << elf_sym.st_value << endl;
+        cout << "        Size:          "   << dec << elf_sym.st_size << endl;
+        unsigned int index = (elf_sym.st_info & 0x0000000f);
+        cout << "        Info(Type):    "   << syb_type[index] << endl;
+        index =              (elf_sym.st_info & 0xfffffff0);
+        cout << "        Info(bind):    "   << syb_bind[index] << endl;
+
+        if(tagName == "_gp"){
+            gp = elf_sym.st_value;
+        }
+
+        if (elf_sym.st_value >= bssBegin && elf_sym.st_value < bssBegin + bssSize && tagName != ""){
+            gVar[tagName] = make_pair(elf_sym.st_value, elf_sym.st_size);
+        }
+    }
     cout << "======================parse ELF end======================" << endl << endl;
     fin.close();
 }
