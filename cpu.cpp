@@ -248,14 +248,18 @@ unsigned int Cpu::excute(Memory& memory, const DecodeRes& decodeRes, int& sstack
 				reg[decodeRes.i_rd] = pc + 4;
 			}
 			pc = ((decodeRes.i_imm << 11) >> 11) + pc;
-			++sstack;
+			++sstack;		
+			cout << "sstack:	" << sstack << endl;
+			cout << "pc:	" << pc << endl;
 			break;
 		case JALR:
 			if (decodeRes.i_rd != 0){
 				reg[decodeRes.i_rd] = pc + 4;
 			}
-			pc = ((decodeRes.i_imm << 20) >> 20) + pc;
+			pc = ((decodeRes.i_imm << 20) >> 20) + reg[decodeRes.i_rs1];
 			--sstack;
+			cout << "sstack:	" << sstack << endl;
+			cout << "pc:	" << pc << endl;
 			break;
 		case BEQ:
 			offset = (decodeRes.i_imm << 19) >> 19;

@@ -34,6 +34,7 @@ int main(){
 		inst = cpu.fetch(pc, memory);
 		cpu.decode(pc, inst, decodeRes);
 		pc = cpu.excute(memory, decodeRes, sstack);
+		cout << "sstack:	" << sstack << endl;
 	}
 
 	//output the bss segment
