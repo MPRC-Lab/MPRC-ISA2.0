@@ -11,22 +11,26 @@ int main(){
 
 	unsigned int bssBegin;						// the address of .bss area
 	unsigned int bssSize;						// the size of .bss area
+	unsigned int gp;
+	unsigned int sp;
 	parseELF(filename, bssBegin, bssSize);
 
 	Memory memory;
 	unsigned int entryPoint; 					// the entry point of program 
 	entryPoint = loadELF(filename, memory);
 
-///* Print entry Point, .bssBegin, .bssEnd
+	cout << "+++++++++++++++++++++++Key Value+++++++++++++++++++++++" << endl;
 	cout << "entryPoint: 0x" << hex << entryPoint << endl;
-	cout << ".bssBegin:  0x" << hex << bssBegin << endl;
-	cout << ".bssSize:   "   << dec << bssSize << " bytes" << endl;
-//*/
+	cout << ".bssBegin:  0x" << hex << bssBegin   << endl;
+	cout << ".bssSize:   "   << dec << bssSize    << " bytes"         << endl;
+	cout << "sp[R2]:     0x" << hex << setw(8)    << setfill('0')     << sp   << endl;
+	cout << "gp[R3]:     0x" << hex << setw(8)    << setfill('0')     << gp   << endl;
+	cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++" << endl << endl;
 	//simulate the instruction excution
 	unsigned int pc = entryPoint;
 	int sstack = 1;
 	DecodeRes decodeRes;
-	Cpu cpu;
+	Cpu cpu(gp, sp);
 	unsigned int inst;
 
 	cout << "-----------simulate the instruction excution---------" << endl; 

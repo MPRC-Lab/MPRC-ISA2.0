@@ -17,10 +17,10 @@ public:
 class Cpu {
 public:
 	std::vector<unsigned int> reg;
-	Cpu(){
+	Cpu(unsigned int gp, unsigned int sp){
 		reg.resize(32, 0);
-		reg[2]=0x10000;
-		reg[3] = 0x10874;
+		reg[2] = sp;
+		reg[3] = gp;
 	};
 	unsigned int fetch(unsigned int, Memory&);
 	void decode(unsigned int, unsigned int, DecodeRes&);
