@@ -1,0 +1,51 @@
+
+/root/simulator/Tmp/test7:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00011054 <func>:
+   11054:	fd010113          	addi	sp,sp,-48
+   11058:	02812623          	sw	s0,44(sp)
+   1105c:	03010413          	addi	s0,sp,48
+   11060:	fca42e23          	sw	a0,-36(s0)
+   11064:	fe0407a3          	sb	zero,-17(s0)
+   11068:	fdc42783          	lw	a5,-36(s0)
+   1106c:	0007c783          	lbu	a5,0(a5)
+   11070:	fef407a3          	sb	a5,-17(s0)
+   11074:	fdc42783          	lw	a5,-36(s0)
+   11078:	0017c783          	lbu	a5,1(a5)
+   1107c:	fef407a3          	sb	a5,-17(s0)
+   11080:	fdc42783          	lw	a5,-36(s0)
+   11084:	0027c783          	lbu	a5,2(a5)
+   11088:	fef407a3          	sb	a5,-17(s0)
+   1108c:	fdc42783          	lw	a5,-36(s0)
+   11090:	0037c783          	lbu	a5,3(a5)
+   11094:	fef407a3          	sb	a5,-17(s0)
+   11098:	fdc42783          	lw	a5,-36(s0)
+   1109c:	0047c783          	lbu	a5,4(a5)
+   110a0:	fef407a3          	sb	a5,-17(s0)
+   110a4:	00000013          	nop
+   110a8:	02c12403          	lw	s0,44(sp)
+   110ac:	03010113          	addi	sp,sp,48
+   110b0:	00008067          	ret
+
+000110b4 <main>:
+   110b4:	fe010113          	addi	sp,sp,-32
+   110b8:	00112e23          	sw	ra,28(sp)
+   110bc:	00812c23          	sw	s0,24(sp)
+   110c0:	02010413          	addi	s0,sp,32
+   110c4:	6c6c67b7          	lui	a5,0x6c6c6
+   110c8:	54878793          	addi	a5,a5,1352 # 6c6c6548 <__bss_start+0x6c6b444c>
+   110cc:	fef42423          	sw	a5,-24(s0)
+   110d0:	06f00793          	li	a5,111
+   110d4:	fef41623          	sh	a5,-20(s0)
+   110d8:	fe840793          	addi	a5,s0,-24
+   110dc:	00078513          	mv	a0,a5
+   110e0:	f75ff0ef          	jal	11054 <func>
+   110e4:	00000793          	li	a5,0
+   110e8:	00078513          	mv	a0,a5
+   110ec:	01c12083          	lw	ra,28(sp)
+   110f0:	01812403          	lw	s0,24(sp)
+   110f4:	02010113          	addi	sp,sp,32
+   110f8:	00008067          	ret

@@ -3,7 +3,9 @@
 #include <fstream>
 #include <iomanip>
 #include <bitset>
+#include <vector>
 #include "elf.h"
+#include "parseELF.h"
 #include <unordered_map>
 #include "Memory.h"
 
@@ -17,7 +19,7 @@ using namespace std;
  * @param bssBegin : function will return the .bss begin address
  * @param bssSize  : function will return the .bss area size (bytes)
  */
-void parseELF(char* filename, unsigned int &bssBegin, unsigned int &bssSize, unsigned int &gp, unsigned int &sp, unordered_map<string, pair<unsigned int, unsigned int> > &gVar){
+void parseELF(char* filename, unsigned int &bssBegin, unsigned int &bssSize, unsigned int &gp, unsigned int &sp, unordered_map<string, pair<unsigned int, unsigned int> > &gVar, unordered_map<unsigned int, string> &symbolFunc, vector<string> &rodata, string &originRodata){
     ifstream fin(filename, ios::binary);
     cout << "=====================parse ELF begin=====================" << endl;
 
@@ -108,7 +110,6 @@ void parseELF(char* filename, unsigned int &bssBegin, unsigned int &bssSize, uns
             else 
                 sp = sp < elf_phdr.p_vaddr ? sp : elf_phdr.p_vaddr;
         }
-        
     }
 
     cout << "---------------------------------------------------------" << endl;
@@ -117,8 +118,11 @@ void parseELF(char* filename, unsigned int &bssBegin, unsigned int &bssSize, uns
     Elf32_Shdr elf_shdr_shstrtab;
     Elf32_Shdr elf_shdr_sym;
     Elf32_Shdr elf_shdr_strtab; 
+    Elf32_Shdr elf_shdr_rodata;
+    Elf32_Shdr elf_shdr_sdata;
 
     string sectionName = "";
+    string sectionType = "";
 
     fin.seekg(elf_ehdr.e_shoff + elf_ehdr.e_shstrndx * elf_ehdr.e_shentsize, ios::beg);
     fin.read((char*)&elf_shdr_shstrtab, elf_ehdr.e_shentsize);
@@ -130,6 +134,7 @@ void parseELF(char* filename, unsigned int &bssBegin, unsigned int &bssSize, uns
         // get name
         char nameChar;
         sectionName = "";
+        sectionType = "";
         fin.seekg(elf_shdr_shstrtab.sh_offset + elf_shdr.sh_name, ios::beg);
         fin.read((char*)&nameChar, sizeof(char));
         int j = 0;
@@ -139,10 +144,12 @@ void parseELF(char* filename, unsigned int &bssBegin, unsigned int &bssSize, uns
             fin.seekg(elf_shdr_shstrtab.sh_offset + elf_shdr.sh_name + j, ios::beg);
             fin.read((char*)&nameChar, sizeof(char));
         }
+        //bcq
 
         cout << "    Entry " << dec << i << ": " << endl;
-        cout << "        Name:          "   << sectionName << endl; 
-        cout << "        Type:          "   << sz_desc_sh_type[(unsigned int)elf_shdr.sh_type]   << endl;
+        cout << "        Name:          "   << sectionName << endl;
+        sectionType = elf_shdr.sh_type < 12 ? sz_desc_sh_type[(unsigned int)elf_shdr.sh_type] : "Unknown";
+        cout << "        Type:          "   << sectionType   << endl;
         cout << "        Addr:          0x" << hex << setw(8) << setfill('0') << (unsigned int)elf_shdr.sh_addr   << endl;
         cout << "        Off:           0x" << hex << setw(8) << setfill('0') << (unsigned int)elf_shdr.sh_offset << endl;
         cout << "        Size:          "   << dec << (unsigned int)elf_shdr.sh_size      << endl;
@@ -164,6 +171,12 @@ void parseELF(char* filename, unsigned int &bssBegin, unsigned int &bssSize, uns
         }
         if(sectionName == ".strtab"){
             elf_shdr_strtab = elf_shdr;
+        }
+        if(sectionName == ".rodata"){
+            elf_shdr_rodata = elf_shdr;
+        }
+        if(sectionName == ".sdata"){
+            elf_shdr_sdata = elf_shdr;
         }
     }
 
@@ -196,6 +209,9 @@ void parseELF(char* filename, unsigned int &bssBegin, unsigned int &bssSize, uns
         index =              (elf_sym.st_info & 0xfffffff0);
         cout << "        Info(bind):    "   << syb_bind[index] << endl;
 
+        // Store name & address to symbolFunc
+        symbolFunc[elf_sym.st_value] = tagName;
+
         if(tagName == "_gp"){
             gp = elf_sym.st_value;
         }
@@ -205,6 +221,74 @@ void parseELF(char* filename, unsigned int &bssBegin, unsigned int &bssSize, uns
         }
     }
     cout << "======================parse ELF end======================" << endl << endl;
+
+    cout << "==================== print symbolFunc ===================" << endl;
+    for(unordered_map<unsigned int, string>:: iterator it = symbolFunc.begin(); it != symbolFunc.end(); ++it){
+        cout << "    0x" << hex << setw(8) << setfill('0') << it->first << ":  ";
+        cout << it->second << endl; 
+    }
+    cout << "======================== end print ======================" << endl << endl;
+
+    cout << "====================== print rodata =====================" << endl;
+    // get rodata
+    
+    char rodataChar;
+    string rodataName = "";
+
+    fin.seekg(elf_shdr_rodata.sh_offset, ios::beg);
+    fin.read((char*)&rodataChar, sizeof(char));
+    int j = 0;
+    while(j < elf_shdr_rodata.sh_size){//rodataChar != '\0' && 
+        j++;
+        rodataName += rodataChar;
+        fin.seekg(elf_shdr_rodata.sh_offset + j, ios::beg);
+        fin.read((char*)&rodataChar, sizeof(char));
+    }
+    cout << "rodata:  " << rodataName << endl;
+    originRodata = rodataName;
+
+    // store %s
+    char flagChar;
+    string flagName = "";
+    fin.seekg(elf_shdr_rodata.sh_offset, ios::beg);
+    fin.read((char*)&flagChar, sizeof(char));
+    j = 0;
+    while(j < elf_shdr_rodata.sh_size){
+        j++;
+        fin.seekg(elf_shdr_rodata.sh_offset + j, ios::beg);
+        if(flagChar == '%'){
+            flagName = "";
+            fin.read((char*)&flagChar, sizeof(char));
+            flagName += flagChar;
+            rodata.push_back(flagName);
+        } else {
+            fin.read((char*)&flagChar, sizeof(char));
+        }
+    }
+    cout << "vector<string> rodata: ";
+    for(int i = 0; i < rodata.size(); i++){
+        cout << rodata[i] << " ";
+    }
+    cout << endl;
+    cout << "======================== end print ======================" << endl << endl;
+
+    cout << "======================= print sdata =====================" << endl;
+    // get rodata
+    char sdataChar;
+    string sdataName = "";
+
+    fin.seekg(elf_shdr_sdata.sh_offset, ios::beg);
+    fin.read((char*)&sdataChar, sizeof(char));
+    j = 0;
+    while(j < elf_shdr_sdata.sh_size){//rodataChar != '\0' && 
+        j++;
+        sdataName += sdataChar;
+        fin.seekg(elf_shdr_sdata.sh_offset + j, ios::beg);
+        fin.read((char*)&sdataChar, sizeof(char));
+    }
+    cout << "sdata:  " << sdataName << endl;
+    cout << "======================== end print ======================" << endl << endl;
+
     fin.close();
 }
 
@@ -229,13 +313,16 @@ unsigned int loadELF(char* filename, Memory &memory){
     cout << "    Sections loading..."          << endl;
 
     Elf32_Phdr elf_phdr;
+    string typeName = "";
     for(int i = 0; i < elf_ehdr.e_phnum; i++){
         fin.seekg(elf_ehdr.e_phoff + i * elf_ehdr.e_phentsize, ios::beg);
         fin.read((char*)&elf_phdr, elf_ehdr.e_phentsize);
 
+        typeName = "";
         cout << "    -----------------------------------------------"      << endl;
         cout << "    Sections " << dec << i << endl;
-        cout << "        p_type:         "   << sz_desc_p_type[(unsigned int)elf_phdr.p_type] << endl;
+        typeName = elf_phdr.p_type < 7 ? sz_desc_p_type[(unsigned int)elf_phdr.p_type] : "Unknown";
+        cout << "        p_type:         "   << typeName << endl;
         cout << "        p_offset:       0x" << hex << elf_phdr.p_offset << endl;
         cout << "        p_vaddr:        0x" << hex << elf_phdr.p_vaddr  << endl;
         cout << "        p_paddr:        0x" << hex << elf_phdr.p_paddr  << endl;

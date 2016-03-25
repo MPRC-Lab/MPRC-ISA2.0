@@ -2,6 +2,8 @@
 #define __CPU_H__
 #include "Memory.h"
 #include <vector>
+#include <string>
+#include <unordered_map>
 
 
 
@@ -26,7 +28,10 @@ public:
 	};
 	unsigned int fetch(unsigned int, Memory&);
 	void decode(unsigned int, unsigned int, DecodeRes&);
-	unsigned int excute(Memory&, const DecodeRes&, int&);
+	unsigned int excute(Memory&, const DecodeRes&, int&, unordered_map<unsigned int, string>&, vector<string>&, string&);
+	void printReg();
+	bool detect(unsigned int, Memory&, unordered_map<unsigned int, string>&, vector<string>&, string&);
+	void callPrint(const vector<string>&, unsigned int, Memory&, string&);
 	//simulate the registers,下面这个为什么错误？
 	//vector<int> reg(32, 0);
 };

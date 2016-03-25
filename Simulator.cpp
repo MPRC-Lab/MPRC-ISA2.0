@@ -1,3 +1,13 @@
+/**
+ ***********************************************
+ * Author     : Bao Chuquan, Zhang Guowei
+ * Date       : 2016-03-16
+ * Descrption :
+ *   A Simulator of RISC-V Instruction Level.
+ *   With RISC-V 32 Base Integer Instruction Complemented.
+ ***********************************************
+ */
+
 #include "parseELF.h"
 #include "Memory.h"
 #include "cpu.h"
@@ -17,11 +27,15 @@ int main(int argc, char** argv){
 	unsigned int bssSize;						// the size of .bss area
 	unsigned int gp;
 	unsigned int sp;
+	unordered_map<unsigned int, string> symbolFunc;
+	vector<string> rodata;
+	string originRodata;
+
 	unordered_map<string, pair<unsigned int, unsigned int> > gVar;
-	parseELF(filename, bssBegin, bssSize, gp, sp, gVar);
+	parseELF(filename, bssBegin, bssSize, gp, sp, gVar, symbolFunc, rodata, originRodata);
 
 	Memory memory;
-	unsigned int entryPoint; 					// the entry point of program 
+	unsigned int entryPoint; 					// the entry point of program
 	entryPoint = loadELF(filename, memory);
 
 	cout << "+++++++++++++++++++++++Key Value+++++++++++++++++++++++" << endl;
@@ -38,14 +52,17 @@ int main(int argc, char** argv){
 	Cpu cpu(gp, sp);
 	unsigned int inst;
 
-	cout << "-----------simulate the instruction excution---------" << endl; 
+	cout << "-----------simulate the instruction excution---------" << endl;
+	int count = 1;
 	while (sstack > 0){
+		cout << "+++++++++++++++++++++++ No." << dec << count << " +++++++++++++++++++++++" << endl;
 		inst = cpu.fetch(pc, memory);
 		cpu.decode(pc, inst, decodeRes);
-		pc = cpu.excute(memory, decodeRes, sstack);
+		pc = cpu.excute(memory, decodeRes, sstack, symbolFunc, rodata, originRodata);
+		count++;
 	}
-
-	cout << "-----------Output the result------------" << endl;
+	cout << endl;
+	cout << "----------- Output the result ------------" << endl;
 	int res;
 	for (unordered_map<string, pair<unsigned int, unsigned int> >::iterator it = gVar.begin(); it != gVar.end(); ++it){
 		cout << it->first << "		";
@@ -55,6 +72,16 @@ int main(int argc, char** argv){
 		}
 		cout << endl;
 	}
+//debug
+/*
+	cout << endl;
+	cout << "----------- Print Memory -----------" << endl;
+	for (unordered_map<unsigned int, unsigned char>::iterator it = memory.memory.begin(); it != memory.memory.end(); ++it){
+		unsigned char data;
+		memory.memoryRead(it->first, (unsigned char*)&data, 1);
+		cout << "  addr: 0x" << hex << setw(0) << setfill('0') << it->first << "    0x" << hex << setw(2) << setfill('0') << (unsigned int)data << endl;
+	}
+*/
 	memory.memoryClear();
 	/*
 	cout << "bss:	" << (unsigned int)memory.memory[0x10074] << endl;
@@ -69,7 +96,12 @@ int main(int argc, char** argv){
 	/*
 	for (int i = 0; i < bssSize; i = i + 4){
 		memory.memoryRead(bssBegin + i, (unsigned char*)&res, 4);
-		cout << dec << res << endl; 
-	}*/	
+		cout << dec << res << endl;
+	}*/
+
+	//debug
+	cout << "+++++++++++++++++++++++" << endl;
+	cout << "    a0: 0x" << hex << setw(0) << setfill('0') << cpu.reg[10] << endl;
+	cout << "    a1: 0x" << hex << setw(0) << setfill('0') << cpu.reg[11] << endl;
  	return 0;
 }

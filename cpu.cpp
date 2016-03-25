@@ -2,6 +2,11 @@
 #include <unordered_map>
 #include <iostream>
 #include <vector>
+#include <iomanip>
+#include "KMP.h"
+#include <iostream>
+#include <string>
+#include "parseELF.h"
 
 #define DEBUG
 
@@ -12,12 +17,67 @@ unsigned int Cpu::fetch(unsigned int pc, Memory& memory){
 	delete target;
 
 #ifdef DEBUG
-	cout << "*************Fetch the instruction***************" << endl;
-	cout << "pc:	" << hex << pc << "		instruction:	" << inst << endl;
+//	cout << "*************Fetch the instruction***************" << endl;
+	cout << "+++ Fetch  +++" << endl;
+//	cout << "pc:	" << hex << pc << "		instruction:	" << inst << endl;
+//	cout << "pc:    0x" << setw(8) << setfill('0') << hex << decodeRes.i_pc << "    instruction:    0x" << setw(8) << setfill('0')<< inst << endl;
 #endif
 	return inst;
 }
 
+void Cpu::callPrint(const vector<string>& rodata, unsigned int addr, Memory& memory, string &originRodata){
+	cout << endl << endl << endl;
+	cout << hex << "SP + 8 : 0x" << setw(8) << setfill('0') << addr << endl; 
+	//cout << "    a0: 0x" << hex << setw(0) << setfill('0') << reg[10] << endl;
+	//cout << "    a1: 0x" << hex << setw(0) << setfill('0') << reg[11] << endl;
+	cout << "************ Call Local Printf: ************" << endl;
+
+	for(int x = 0; x < originRodata.length(); x++){
+
+		if(originRodata[x] == '%'){
+			if(x+1 < originRodata.length() && originRodata[x+1] == 's'){
+
+				string soutput = "";
+				char singleChar = '?';
+				while (singleChar != '\0'){
+					memory.memoryRead(addr, (unsigned char*)&singleChar, 1);
+					++addr;
+					soutput += singleChar;
+				}
+				cout << soutput;
+				x++;
+				continue;
+			}
+			if(x+1 < originRodata.length() && originRodata[x+1] == 'd'){
+				while (addr % 4 != 0){
+					++addr;
+				}
+				int doutput;
+				memory.memoryRead(addr, (unsigned char*)&doutput, 4);
+				cout << doutput << endl;
+				x++;
+				continue;
+			}
+		}
+		cout << originRodata[x];
+	}
+	cout << endl;
+	cout << "********************************************" << endl;
+	cout << endl << endl << endl;
+}
+
+bool Cpu::detect(unsigned int pc, Memory& memory, unordered_map<unsigned int, string>& symbolFunc, vector<string>& rodata, string &originRodata){
+	if (symbolFunc.find(pc) == symbolFunc.end()){
+		return false;
+	}
+	string name = symbolFunc[pc];
+	string pattern("printf");
+	if (KMP(pattern, name) > 0){
+		callPrint(rodata, reg[2] + 8, memory, originRodata);
+		return true;
+	}
+	return false;
+}
 
 void Cpu::decode(unsigned int pc, unsigned int inst, DecodeRes& decodeRes){
 	decodeRes.i_pc = pc;
@@ -25,9 +85,6 @@ void Cpu::decode(unsigned int pc, unsigned int inst, DecodeRes& decodeRes){
 	unsigned int imm_12, imm_10_5, imm_4_1, imm_4_0;
 	int opcode = inst & 0x7f;
 	int funct3 = (inst >> 12) & 0x7;
-#ifdef DEBUG
-	cout << "Decode the instruction" << endl;
-#endif
 
 	decodeRes.i_rd = (inst >> 7) & 0x1f;
 	decodeRes.i_rs1 = (inst >> 15) & 0x1f;
@@ -35,7 +92,7 @@ void Cpu::decode(unsigned int pc, unsigned int inst, DecodeRes& decodeRes){
 	switch (opcode) {
 		case 0x37:
 			decodeRes.i_type = 0;
-			decodeRes.i_imm = inst & 0xfff;
+			decodeRes.i_imm = inst & 0xfffff000;
 			break;
 
 		case 0x17:
@@ -198,16 +255,18 @@ void Cpu::decode(unsigned int pc, unsigned int inst, DecodeRes& decodeRes){
 			}
 			break;
  	}
- 	cout << "***************decode output**************" << endl;
- 	cout << "Instruction type:	0x" << hex << decodeRes.i_type << endl;
- 	cout << "Instruction rs1:	0x" << hex << decodeRes.i_rs1 << "	reg[rs1]	" << reg[decodeRes.i_rs1] << endl;
-	cout << "Instruction rs2:	0x" << hex << decodeRes.i_rs2 << "	reg[rs2]	" << reg[decodeRes.i_rs2] << endl;
-	cout << "Instruction rd:	0x" << hex << decodeRes.i_rd << "	reg[rd]	" << reg[decodeRes.i_rd] << endl;
-	cout << "Instruction imm:	0x" << hex << decodeRes.i_imm << endl;
+// 	cout << "***************Deocode Instruction**************" << endl;
+ 	cout << "        pc:    0x" << setw(8) << setfill('0') << hex << pc              << "    instruction: 0x" << setw(8) << setfill('0')<< inst << endl;
+ 	cout << "+++ Decode +++" << endl;
+ 	cout << "        type:  0x" << setw(8) << setfill('0') << hex << decodeRes.i_type << endl;
+ 	cout << "        rs1:   0x" << setw(8) << setfill('0') << hex << decodeRes.i_rs1 << "    reg[rs1]:    0x" << setw(8) << setfill('0') << reg[decodeRes.i_rs1] << endl;
+	cout << "        rs2:   0x" << setw(8) << setfill('0') << hex << decodeRes.i_rs2 << "    reg[rs2]:    0x" << setw(8) << setfill('0') << reg[decodeRes.i_rs2] << endl;
+	cout << "        rd :   0x" << setw(8) << setfill('0') << hex << decodeRes.i_rd  << "    reg[rd]:     0x" << setw(8) << setfill('0') << reg[decodeRes.i_rd] << endl;
+	cout << "        imm:   0x" << setw(8) << setfill('0') << hex << decodeRes.i_imm << endl;
  	return;
 }
 
-unsigned int Cpu::excute(Memory& memory, const DecodeRes& decodeRes, int& sstack){
+unsigned int Cpu::excute(Memory& memory, const DecodeRes& decodeRes, int& sstack, unordered_map<unsigned int, string>& symbolFunc, vector<string>& rodata, string &originRodata){
 	//pc等于当前指令地址
 	unsigned int pc = decodeRes.i_pc;
 	int type = decodeRes.i_type;
@@ -223,12 +282,20 @@ unsigned int Cpu::excute(Memory& memory, const DecodeRes& decodeRes, int& sstack
 	int amount = 0;
 	int offset = 0;
 #ifdef DEBUG
-	cout << "***************Excute Result**************" << endl;
+	cout << "+++ Excute +++" << endl;
+//	cout << "***************Excute Instruction**************" << endl;
 #endif
 
+	unsigned int oldPc;
+	bool syscall;
 	switch (type){
 		case LUI:
-			reg[decodeRes.i_rd] = (decodeRes.i_imm << 12); 
+			cout << decodeRes.i_imm << endl;
+			reg[decodeRes.i_rd] = decodeRes.i_imm; 
+			/*
+			cout << ":::::::::::::::::::::::" << endl;
+			cout << decodeRes.i_rd << " " << reg[decodeRes.i_rd] << endl;
+			*/
 			pc += 4;
 			break;
 		case AUIPC:
@@ -240,8 +307,15 @@ unsigned int Cpu::excute(Memory& memory, const DecodeRes& decodeRes, int& sstack
 			if (decodeRes.i_rd != 0){
 				reg[decodeRes.i_rd] = pc + 4;
 			}
+			oldPc = pc;
 			pc = ((decodeRes.i_imm << 11) >> 11) + pc;
-			++sstack;		
+			syscall = detect(pc, memory, symbolFunc, rodata, originRodata);
+			if (syscall){
+				pc = oldPc + 4;
+			}
+			else {
+				++sstack;
+			}		
 			break;
 		case JALR:
 			if (decodeRes.i_rd != 0){
@@ -342,19 +416,23 @@ unsigned int Cpu::excute(Memory& memory, const DecodeRes& decodeRes, int& sstack
 			break;
 		case SW:
 			offset = (decodeRes.i_imm << 20) >> 20;
-			cout << offset << endl;
-			addr = offset + reg[decodeRes.i_rs1];			
+			addr = offset + reg[decodeRes.i_rs1];		
 			WVal = reg[decodeRes.i_rs2];
-			/*
-			cout << "11111111:	" << reg[decodeRes.i_rs2] << endl;
-			cout << "addr:	" << addr << endl;
-			cout << "WVal:	" << WVal << endl;
-			cout << (unsigned int)memory.memory[addr] << " ";
-			cout << (unsigned int)memory.memory[addr + 1] << " ";
-			cout << (unsigned int)memory.memory[addr + 2] << " ";
-			cout << (unsigned int)memory.memory[addr + 3] << endl;
-			*/
+			
 			memory.memoryWrite(addr, (unsigned char *)&WVal, 4);
+			/*
+			cout << decodeRes.i_rs1 << " " << decodeRes.i_rs2 << endl;
+			cout << reg[decodeRes.i_rs1] << " " << reg[decodeRes.i_rs2] << endl;
+			cout << addr << endl;
+			cout << "======================================" << endl;
+			cout << WVal << endl;
+			cout << addr << endl;
+			cout << memory.memory[addr] << endl;
+			cout << memory.memory[addr+1] << endl;
+			cout << memory.memory[addr+2] << endl;
+			cout << memory.memory[addr+3] << endl;
+			cout << "======================================" << endl;
+			*/
 			pc += 4;
 			break;
 		case ADDI:
@@ -413,7 +491,7 @@ unsigned int Cpu::excute(Memory& memory, const DecodeRes& decodeRes, int& sstack
 			pc += 4;
 			break;
 		case SRLI:
-		//逻辑右移，要补0，怎么确认高位补0,直接除以2咋样！
+		//逻辑右移，要补0，怎么确认高位补0,直接除以2可行吗！
 		//因为我测试过了，我的电脑是默认算术右移的
 			right = 0x1f;
 			right &= decodeRes.i_imm;
@@ -476,12 +554,16 @@ unsigned int Cpu::excute(Memory& memory, const DecodeRes& decodeRes, int& sstack
 	}
 	int temp = 0;
 	memory.memoryRead(addr, (unsigned char*)&temp, 4);
-	cout << "Instruction type:	0x" << decodeRes.i_type << endl;
-	cout << "Instruction rs1:	0x" << decodeRes.i_rs1 << "	reg[rs1]:	" << reg[decodeRes.i_rs1] << endl;
-	cout << "Instruction rs2:	0x" << decodeRes.i_rs2 << "	reg[rs2]:	" << reg[decodeRes.i_rs2] << endl;
-	cout << "Instruction rd:	0x" << decodeRes.i_rd << "	reg[rd]:	" << reg[decodeRes.i_rd] << endl;
-	cout << "Instruction imm:	0x" << decodeRes.i_imm << endl;
-	cout << "Address:			0x" << addr << endl;
-	cout << "Memory state:		0x" << temp << endl;
+	cout << "        type:  0x" << setw(8) << setfill('0') << decodeRes.i_type << endl;
+	cout << "        rs1:   0x" << setw(8) << setfill('0') << decodeRes.i_rs1 << "    reg[rs1]:    0x" << setw(8) << setfill('0') << reg[decodeRes.i_rs1] << endl;
+	cout << "        rs2:   0x" << setw(8) << setfill('0') << decodeRes.i_rs2 << "    reg[rs2]:    0x" << setw(8) << setfill('0') << reg[decodeRes.i_rs2] << endl;
+	cout << "        rd :   0x" << setw(8) << setfill('0') << decodeRes.i_rd <<  "    reg[rd]:     0x" << setw(8) << setfill('0') << reg[decodeRes.i_rd] << endl;
+	cout << "        imm:   0x" << setw(8) << setfill('0') << decodeRes.i_imm << endl;
 	return pc;
+}
+
+void Cpu::printReg(){
+	for (int i = 0; i < 32; ++i){
+		cout << hex << "Reg" << i << ":    0x" << setw(8) << setfill('0') << reg[i] << endl;
+	}
 }

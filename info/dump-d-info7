@@ -1,0 +1,38 @@
+
+
+/root/simulator/Tmp/test7:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00011054 <func>:
+   11054:	fd010113          	addi	sp,sp,-48
+   11058:	02812623          	sw	s0,44(sp)
+   1105c:	03010413          	addi	s0,sp,48
+   11060:	fca42e23          	sw	a0,-36(s0)
+   11064:	00100793          	li	a5,1
+   11068:	fef42623          	sw	a5,-20(s0)
+   1106c:	00000013          	nop
+   11070:	02c12403          	lw	s0,44(sp)
+   11074:	03010113          	addi	sp,sp,48
+   11078:	00008067          	ret
+
+0001107c <main>:
+   1107c:	fe010113          	addi	sp,sp,-32
+   11080:	00112e23          	sw	ra,28(sp)
+   11084:	00812c23          	sw	s0,24(sp)
+   11088:	02010413          	addi	s0,sp,32
+   1108c:	6c6c67b7          	lui	a5,0x6c6c6
+   11090:	54878793          	addi	a5,a5,1352 # 6c6c6548 <__bss_start+0x6c6b4484>
+   11094:	fef42423          	sw	a5,-24(s0)
+   11098:	06f00793          	li	a5,111
+   1109c:	fef41623          	sh	a5,-20(s0)
+   110a0:	fe840793          	addi	a5,s0,-24
+   110a4:	00078513          	mv	a0,a5
+   110a8:	fadff0ef          	jal	11054 <func>
+   110ac:	00000793          	li	a5,0
+   110b0:	00078513          	mv	a0,a5
+   110b4:	01c12083          	lw	ra,28(sp)
+   110b8:	01812403          	lw	s0,24(sp)
+   110bc:	02010113          	addi	sp,sp,32
+   110c0:	00008067          	ret

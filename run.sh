@@ -1,3 +1,3 @@
 #!/bin/bash
 
-g++ cpu.cpp memory.cpp parseELF.cpp Simulator.cpp
+g++ cpu.cpp memory.cpp parseELF.cpp Simulator.cpp KMP.cpp

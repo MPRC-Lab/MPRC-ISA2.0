@@ -1,0 +1,54 @@
+
+/root/simulator/Tmp/test8:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+0001107c <func>:
+   1107c:	fe010113          	addi	sp,sp,-32
+   11080:	00812e23          	sw	s0,28(sp)
+   11084:	02010413          	addi	s0,sp,32
+   11088:	fea42623          	sw	a0,-20(s0)
+   1108c:	fec42783          	lw	a5,-20(s0)
+   11090:	0007c703          	lbu	a4,0(a5)
+   11094:	80e18023          	sb	a4,-2048(gp) # 10074 <ANS>
+   11098:	fec42783          	lw	a5,-20(s0)
+   1109c:	0017c703          	lbu	a4,1(a5)
+   110a0:	80018793          	addi	a5,gp,-2048 # 10074 <ANS>
+   110a4:	00e780a3          	sb	a4,1(a5)
+   110a8:	fec42783          	lw	a5,-20(s0)
+   110ac:	0027c703          	lbu	a4,2(a5)
+   110b0:	80018793          	addi	a5,gp,-2048 # 10074 <ANS>
+   110b4:	00e78123          	sb	a4,2(a5)
+   110b8:	fec42783          	lw	a5,-20(s0)
+   110bc:	0037c703          	lbu	a4,3(a5)
+   110c0:	80018793          	addi	a5,gp,-2048 # 10074 <ANS>
+   110c4:	00e781a3          	sb	a4,3(a5)
+   110c8:	fec42783          	lw	a5,-20(s0)
+   110cc:	0047c703          	lbu	a4,4(a5)
+   110d0:	80018793          	addi	a5,gp,-2048 # 10074 <ANS>
+   110d4:	00e78223          	sb	a4,4(a5)
+   110d8:	00000013          	nop
+   110dc:	01c12403          	lw	s0,28(sp)
+   110e0:	02010113          	addi	sp,sp,32
+   110e4:	00008067          	ret
+
+000110e8 <main>:
+   110e8:	fe010113          	addi	sp,sp,-32
+   110ec:	00112e23          	sw	ra,28(sp)
+   110f0:	00812c23          	sw	s0,24(sp)
+   110f4:	02010413          	addi	s0,sp,32
+   110f8:	6c6c67b7          	lui	a5,0x6c6c6
+   110fc:	54878793          	addi	a5,a5,1352 # 6c6c6548 <__bss_start+0x6c6b4418>
+   11100:	fef42423          	sw	a5,-24(s0)
+   11104:	06f00793          	li	a5,111
+   11108:	fef41623          	sh	a5,-20(s0)
+   1110c:	fe840793          	addi	a5,s0,-24
+   11110:	00078513          	mv	a0,a5
+   11114:	f69ff0ef          	jal	1107c <func>
+   11118:	00000793          	li	a5,0
+   1111c:	00078513          	mv	a0,a5
+   11120:	01c12083          	lw	ra,28(sp)
+   11124:	01812403          	lw	s0,24(sp)
+   11128:	02010113          	addi	sp,sp,32
+   1112c:	00008067          	ret
