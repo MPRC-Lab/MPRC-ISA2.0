@@ -27,16 +27,53 @@ unsigned int Cpu::fetch(unsigned int pc, Memory& memory){
 
 void Cpu::callPrint(const vector<string>& rodata, unsigned int addr, Memory& memory, string &originRodata){
 	cout << endl << endl << endl;
+	cout << "-------------- Print Memory ---------------" << endl;
+	for (unordered_map<unsigned int, unsigned char>::iterator it = memory.memory.begin(); it != memory.memory.end(); ++it){
+		unsigned char data;
+		memory.memoryRead(it->first, (unsigned char*)&data, 1);
+		cout << "  addr: 0x" << hex << setw(0) << setfill('0') << it->first << "    0x" << hex << setw(2) << setfill('0') << (unsigned int)data << endl;
+	}
+	cout << endl;
 	cout << hex << "SP + 8 : 0x" << setw(8) << setfill('0') << addr << endl; 
-	//cout << "    a0: 0x" << hex << setw(0) << setfill('0') << reg[10] << endl;
-	//cout << "    a1: 0x" << hex << setw(0) << setfill('0') << reg[11] << endl;
+
+	cout << "    [1]  ra:  0x" << hex << setw(0) << setfill('0') << reg[1] << endl;
+	cout << "    [2]  sp:  0x" << hex << setw(0) << setfill('0') << reg[2] << endl;
+	cout << "    [3]  gp:  0x" << hex << setw(0) << setfill('0') << reg[3] << endl;
+	cout << "    [4]    :  0x" << hex << setw(0) << setfill('0') << reg[4] << endl;
+	cout << "    [5]    :  0x" << hex << setw(0) << setfill('0') << reg[5] << endl;
+	cout << "    [6]    :  0x" << hex << setw(0) << setfill('0') << reg[6] << endl;
+	cout << "    [7]    :  0x" << hex << setw(0) << setfill('0') << reg[7] << endl;
+	cout << "    [8]  s0:  0x" << hex << setw(0) << setfill('0') << reg[8] << endl;
+	cout << "    [9]  s1:  0x" << hex << setw(0) << setfill('0') << reg[9] << endl;
+	cout << "    [10] a0:  0x" << hex << setw(0) << setfill('0') << reg[10] << endl;
+	cout << "    [11] a1:  0x" << hex << setw(0) << setfill('0') << reg[11] << endl;
+	cout << "    [12] a2:  0x" << hex << setw(0) << setfill('0') << reg[12] << endl;
+	cout << "    [13] a3:  0x" << hex << setw(0) << setfill('0') << reg[13] << endl;
+	cout << "    [14] a4:  0x" << hex << setw(0) << setfill('0') << reg[14] << endl;
+	cout << "    [15] a5:  0x" << hex << setw(0) << setfill('0') << reg[15] << endl;
+	cout << "    [16] a6:  0x" << hex << setw(0) << setfill('0') << reg[16] << endl;
+	cout << "    [17] a7:  0x" << hex << setw(0) << setfill('0') << reg[17] << endl;
+	cout << "    [18] a8:  0x" << hex << setw(0) << setfill('0') << reg[18] << endl;
+	cout << "    [19] a9:  0x" << hex << setw(0) << setfill('0') << reg[19] << endl;
+	cout << "    [20] a10: 0x" << hex << setw(0) << setfill('0') << reg[20] << endl;
+	cout << "    [21] a11: 0x" << hex << setw(0) << setfill('0') << reg[21] << endl;
+	cout << "    [22] a12: 0x" << hex << setw(0) << setfill('0') << reg[22] << endl;
+	cout << "    [23] a13: 0x" << hex << setw(0) << setfill('0') << reg[23] << endl;
+	cout << "    [24] a14: 0x" << hex << setw(0) << setfill('0') << reg[24] << endl;
+	cout << "    [25] a15: 0x" << hex << setw(0) << setfill('0') << reg[25] << endl;
+	cout << "    [26] a16: 0x" << hex << setw(0) << setfill('0') << reg[26] << endl;
+	cout << "    [27] a17: 0x" << hex << setw(0) << setfill('0') << reg[27] << endl;
+	cout << "    [28] a18: 0x" << hex << setw(0) << setfill('0') << reg[28] << endl;
+	cout << "    [29] a19: 0x" << hex << setw(0) << setfill('0') << reg[29] << endl;
+	cout << "    [30] a20: 0x" << hex << setw(0) << setfill('0') << reg[30] << endl;
+	cout << "    [31] a21: 0x" << hex << setw(0) << setfill('0') << reg[31] << endl;
+
 	cout << "************ Call Local Printf: ************" << endl;
 
 	for(int x = 0; x < originRodata.length(); x++){
 
 		if(originRodata[x] == '%'){
 			if(x+1 < originRodata.length() && originRodata[x+1] == 's'){
-
 				string soutput = "";
 				char singleChar = '?';
 				while (singleChar != '\0'){
@@ -54,7 +91,7 @@ void Cpu::callPrint(const vector<string>& rodata, unsigned int addr, Memory& mem
 				}
 				int doutput;
 				memory.memoryRead(addr, (unsigned char*)&doutput, 4);
-				cout << doutput << endl;
+				cout << dec << doutput << endl;
 				x++;
 				continue;
 			}
@@ -73,7 +110,7 @@ bool Cpu::detect(unsigned int pc, Memory& memory, unordered_map<unsigned int, st
 	string name = symbolFunc[pc];
 	string pattern("printf");
 	if (KMP(pattern, name) > 0){
-		callPrint(rodata, reg[2] + 8, memory, originRodata);
+		callPrint(rodata, reg[11], memory, originRodata);
 		return true;
 	}
 	return false;
