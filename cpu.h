@@ -7,6 +7,7 @@
 
 
 
+
 class DecodeRes {
 public:
 	DecodeRes():i_type(0), i_rs1(0), i_rs2(0), i_rd(0), i_imm(0), i_pc(0){};
@@ -75,5 +76,6 @@ public:
 #define SRA			34
 #define OR			35
 #define AND			36
+#define SCALL		37
 
 #endif

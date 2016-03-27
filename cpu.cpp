@@ -7,6 +7,7 @@
 #include <iostream>
 #include <string>
 #include "parseELF.h"
+#include "doSyscall.h"
 
 #define DEBUG
 
@@ -25,6 +26,8 @@ unsigned int Cpu::fetch(unsigned int pc, Memory& memory){
 	return inst;
 }
 
+
+/*
 void Cpu::callPrint(const vector<string>& rodata, unsigned int addr, Memory& memory, string &originRodata){
 	cout << endl << endl << endl;
 	cout << "-------------- Print Memory ---------------" << endl;
@@ -102,7 +105,8 @@ void Cpu::callPrint(const vector<string>& rodata, unsigned int addr, Memory& mem
 	cout << "********************************************" << endl;
 	cout << endl << endl << endl;
 }
-
+*/
+/*
 bool Cpu::detect(unsigned int pc, Memory& memory, unordered_map<unsigned int, string>& symbolFunc, vector<string>& rodata, string &originRodata){
 	if (symbolFunc.find(pc) == symbolFunc.end()){
 		return false;
@@ -115,6 +119,7 @@ bool Cpu::detect(unsigned int pc, Memory& memory, unordered_map<unsigned int, st
 	}
 	return false;
 }
+*/
 
 void Cpu::decode(unsigned int pc, unsigned int inst, DecodeRes& decodeRes){
 	decodeRes.i_pc = pc;
@@ -126,6 +131,7 @@ void Cpu::decode(unsigned int pc, unsigned int inst, DecodeRes& decodeRes){
 	decodeRes.i_rd = (inst >> 7) & 0x1f;
 	decodeRes.i_rs1 = (inst >> 15) & 0x1f;
 	decodeRes.i_rs2 = (inst >> 20) & 0x1f;
+
 	switch (opcode) {
 		case 0x37:
 			decodeRes.i_type = 0;
@@ -291,6 +297,10 @@ void Cpu::decode(unsigned int pc, unsigned int inst, DecodeRes& decodeRes){
 					break;
 			}
 			break;
+		case 0x73:
+			decodeRes.i_type = SCALL;
+			break;
+
  	}
 // 	cout << "***************Deocode Instruction**************" << endl;
  	cout << "        pc:    0x" << setw(8) << setfill('0') << hex << pc              << "    instruction: 0x" << setw(8) << setfill('0')<< inst << endl;
@@ -329,10 +339,6 @@ unsigned int Cpu::excute(Memory& memory, const DecodeRes& decodeRes, int& sstack
 		case LUI:
 			cout << decodeRes.i_imm << endl;
 			reg[decodeRes.i_rd] = decodeRes.i_imm; 
-			/*
-			cout << ":::::::::::::::::::::::" << endl;
-			cout << decodeRes.i_rd << " " << reg[decodeRes.i_rd] << endl;
-			*/
 			pc += 4;
 			break;
 		case AUIPC:
@@ -344,15 +350,8 @@ unsigned int Cpu::excute(Memory& memory, const DecodeRes& decodeRes, int& sstack
 			if (decodeRes.i_rd != 0){
 				reg[decodeRes.i_rd] = pc + 4;
 			}
-			oldPc = pc;
 			pc = ((decodeRes.i_imm << 11) >> 11) + pc;
-			syscall = detect(pc, memory, symbolFunc, rodata, originRodata);
-			if (syscall){
-				pc = oldPc + 4;
-			}
-			else {
-				++sstack;
-			}		
+			++sstack;		
 			break;
 		case JALR:
 			if (decodeRes.i_rd != 0){
@@ -588,6 +587,9 @@ unsigned int Cpu::excute(Memory& memory, const DecodeRes& decodeRes, int& sstack
 			reg[decodeRes.i_rd] = (int)reg[decodeRes.i_rs1] >> amount;
 			pc += 4;
 			break;
+		case SCALL:
+			doSyscall(reg, memory);
+			pc += 4;
 	}
 	int temp = 0;
 	memory.memoryRead(addr, (unsigned char*)&temp, 4);
