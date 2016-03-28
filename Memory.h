@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __MEMORY_H__
+#define __MEMORY_H__
 #include <unordered_map>
 
 using namespace std;
@@ -12,3 +13,5 @@ public:
 	void memoryRead( unsigned int addr, unsigned char* target, unsigned int bytes = 1);
 	void instructionRead(  unsigned int addr, unsigned int* target, unsigned int num = 1);
 };
+
+#endif
