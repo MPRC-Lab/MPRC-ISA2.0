@@ -9,7 +9,7 @@
 #include "parseELF.h"
 #include "doSyscall.h"
 
-#define DEBUG
+//#define DEBUG
 
 unsigned int Cpu::fetch(unsigned int pc, Memory& memory){
 	unsigned int* target = new unsigned int();
@@ -302,6 +302,7 @@ void Cpu::decode(unsigned int pc, unsigned int inst, DecodeRes& decodeRes){
 			break;
 
  	}
+#ifdef DEBUG
 // 	cout << "***************Deocode Instruction**************" << endl;
  	cout << "        pc:    0x" << setw(8) << setfill('0') << hex << pc              << "    instruction: 0x" << setw(8) << setfill('0')<< inst << endl;
  	cout << "+++ Decode +++" << endl;
@@ -310,6 +311,7 @@ void Cpu::decode(unsigned int pc, unsigned int inst, DecodeRes& decodeRes){
 	cout << "        rs2:   0x" << setw(8) << setfill('0') << hex << decodeRes.i_rs2 << "    reg[rs2]:    0x" << setw(8) << setfill('0') << reg[decodeRes.i_rs2] << endl;
 	cout << "        rd :   0x" << setw(8) << setfill('0') << hex << decodeRes.i_rd  << "    reg[rd]:     0x" << setw(8) << setfill('0') << reg[decodeRes.i_rd] << endl;
 	cout << "        imm:   0x" << setw(8) << setfill('0') << hex << decodeRes.i_imm << endl;
+ #endif
  	return;
 }
 
@@ -337,15 +339,16 @@ unsigned int Cpu::excute(Memory& memory, const DecodeRes& decodeRes, int& sstack
 	bool syscall;
 	switch (type){
 		case LUI:
-			cout << decodeRes.i_imm << endl;
 			reg[decodeRes.i_rd] = decodeRes.i_imm; 
 			pc += 4;
 			break;
 		case AUIPC:
 			reg[decodeRes.i_rd] = decodeRes.i_imm + pc;
+#ifdef DEBUG
 			cout << hex << pc << endl;
 			cout << hex << decodeRes.i_rd << endl;
 			cout << hex << reg[decodeRes.i_rd] << endl;
+#endif
 			pc += 4;
 			break;
 		//有疑问，这里我对这句指令的模拟可能不对
@@ -594,25 +597,30 @@ unsigned int Cpu::excute(Memory& memory, const DecodeRes& decodeRes, int& sstack
 			pc += 4;
 			break;
 		case SCALL:
+#ifdef DEBUG
 			cout << "sssssccccc" << endl;
 			cout << reg[17] << endl;
 			cout << reg[11] << endl;
 			cout << memory.memory[reg[11]] << endl;
+#endif
 			doSyscall(reg, memory);
 			pc += 4;
 	}
 	int temp = 0;
 	memory.memoryRead(addr, (unsigned char*)&temp, 4);
+#ifdef DEBUG
 	cout << "        type:  0x" << setw(8) << setfill('0') << decodeRes.i_type << endl;
 	cout << "        rs1:   0x" << setw(8) << setfill('0') << decodeRes.i_rs1 << "    reg[rs1]:    0x" << setw(8) << setfill('0') << reg[decodeRes.i_rs1] << endl;
 	cout << "        rs2:   0x" << setw(8) << setfill('0') << decodeRes.i_rs2 << "    reg[rs2]:    0x" << setw(8) << setfill('0') << reg[decodeRes.i_rs2] << endl;
 	cout << "        rd :   0x" << setw(8) << setfill('0') << decodeRes.i_rd <<  "    reg[rd]:     0x" << setw(8) << setfill('0') << reg[decodeRes.i_rd] << endl;
 	cout << "        imm:   0x" << setw(8) << setfill('0') << decodeRes.i_imm << endl;
+#endif
 	return pc;
 }
-
+#ifdef DEBUG
 void Cpu::printReg(){
 	for (int i = 0; i < 32; ++i){
 		cout << hex << "Reg" << i << ":    0x" << setw(8) << setfill('0') << reg[i] << endl;
 	}
 }
+#endif

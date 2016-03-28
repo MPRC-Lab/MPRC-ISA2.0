@@ -18,6 +18,7 @@
 
 using namespace std;
 
+//#define DEBUG
 int main(int argc, char** argv){
 	char filename[50];
 	cout << "Filename: ";
@@ -37,7 +38,7 @@ int main(int argc, char** argv){
 	Memory memory;
 	unsigned int entryPoint; 					// the entry point of program
 	entryPoint = loadELF(filename, memory);
-
+#ifdef DEBUG
 	cout << "+++++++++++++++++++++++Key Value+++++++++++++++++++++++" << endl;
 	cout << "entryPoint: 0x" << hex << entryPoint << endl;
 	cout << ".bssBegin:  0x" << hex << bssBegin   << endl;
@@ -45,24 +46,31 @@ int main(int argc, char** argv){
 	cout << "sp[R2]:     0x" << hex << setw(8)    << setfill('0')     << sp   << endl;
 	cout << "gp[R3]:     0x" << hex << setw(8)    << setfill('0')     << gp   << endl;
 	cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++" << endl << endl;
+#endif
 	//simulate the instruction excution
 	unsigned int pc = entryPoint;
 	int sstack = 1;
 	DecodeRes decodeRes;
 	Cpu cpu(gp, sp);
 	unsigned int inst;
-
+#ifdef DEBUG
 	cout << "-----------simulate the instruction excution---------" << endl;
+#endif
 	int count = 1;
 	while (sstack > 0){
+#ifdef DEBUG
 		cout << "+++++++++++++++++++++++ No." << dec << count << " +++++++++++++++++++++++" << endl;
+#endif
 		inst = cpu.fetch(pc, memory);
 		cpu.decode(pc, inst, decodeRes);
 		pc = cpu.excute(memory, decodeRes, sstack, symbolFunc, rodata, originRodata);
 		count++;
 	}
+#ifdef DEBUG
 	cout << endl;
 	cout << "----------- Output the result ------------" << endl;
+#endif
+#ifdef DEBUG
 	int res;
 	for (unordered_map<string, pair<unsigned int, unsigned int> >::iterator it = gVar.begin(); it != gVar.end(); ++it){
 		cout << it->first << "		";
@@ -72,6 +80,7 @@ int main(int argc, char** argv){
 		}
 		cout << endl;
 	}
+#endif
 //debug
 /*
 	cout << endl;
@@ -100,8 +109,10 @@ int main(int argc, char** argv){
 	}*/
 
 	//debug
+#ifdef DEBUG
 	cout << "+++++++++++++++++++++++" << endl;
 	cout << "    a0: 0x" << hex << setw(0) << setfill('0') << cpu.reg[10] << endl;
 	cout << "    a1: 0x" << hex << setw(0) << setfill('0') << cpu.reg[11] << endl;
+#endif
  	return 0;
 }
