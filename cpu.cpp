@@ -140,7 +140,7 @@ void Cpu::decode(unsigned int pc, unsigned int inst, DecodeRes& decodeRes){
 
 		case 0x17:
 			decodeRes.i_type = 1;
-			decodeRes.i_imm = inst & 0xfff;
+			decodeRes.i_imm = inst & 0xfffff000;
 			break;
 		//signed-extend? how? 到底要用有符号立即数还是无符号立即数不大确定
 		case 0x6f:
@@ -342,7 +342,10 @@ unsigned int Cpu::excute(Memory& memory, const DecodeRes& decodeRes, int& sstack
 			pc += 4;
 			break;
 		case AUIPC:
-			reg[decodeRes.i_rd] = (decodeRes.i_imm << 12) + pc;
+			reg[decodeRes.i_rd] = decodeRes.i_imm + pc;
+			cout << hex << pc << endl;
+			cout << hex << decodeRes.i_rd << endl;
+			cout << hex << reg[decodeRes.i_rd] << endl;
 			pc += 4;
 			break;
 		//有疑问，这里我对这句指令的模拟可能不对
@@ -351,7 +354,10 @@ unsigned int Cpu::excute(Memory& memory, const DecodeRes& decodeRes, int& sstack
 				reg[decodeRes.i_rd] = pc + 4;
 			}
 			pc = ((decodeRes.i_imm << 11) >> 11) + pc;
-			++sstack;		
+			++sstack;
+			if (sstack > 100){
+				sstack = 0;
+			}		
 			break;
 		case JALR:
 			if (decodeRes.i_rd != 0){
@@ -588,6 +594,10 @@ unsigned int Cpu::excute(Memory& memory, const DecodeRes& decodeRes, int& sstack
 			pc += 4;
 			break;
 		case SCALL:
+			cout << "sssssccccc" << endl;
+			cout << reg[17] << endl;
+			cout << reg[11] << endl;
+			cout << memory.memory[reg[11]] << endl;
 			doSyscall(reg, memory);
 			pc += 4;
 	}
