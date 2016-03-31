@@ -15,9 +15,10 @@
 #include <bitset>
 #include <unordered_map>
 #include <iostream>
+#include <time.h>
 
 using namespace std;
-
+time_t tTime = 0;
 //#define DEBUG
 int main(int argc, char** argv){
 	char filename[50];
@@ -57,7 +58,7 @@ int main(int argc, char** argv){
 	cout << "-----------simulate the instruction excution---------" << endl;
 #endif
 	int count = 1;
-	while (sstack > -100){
+	while (sstack > -100000){
 #ifdef DEBUG
 		cout << "+++++++++++++++++++++++ No." << dec << count << " +++++++++++++++++++++++" << endl;
 #endif
@@ -65,11 +66,14 @@ int main(int argc, char** argv){
 		cpu.decode(pc, inst, decodeRes);
 		pc = cpu.excute(memory, decodeRes, sstack, symbolFunc, rodata, originRodata);
 		count++;
+//		cout << "sstack: " << sstack << endl;
 	}
+/*
 #ifdef DEBUG
 	cout << endl;
 	cout << "----------- Output the result ------------" << endl;
 #endif
+
 #ifdef DEBUG
 	int res;
 	for (unordered_map<string, pair<unsigned int, unsigned int> >::iterator it = gVar.begin(); it != gVar.end(); ++it){
@@ -81,6 +85,7 @@ int main(int argc, char** argv){
 		cout << endl;
 	}
 #endif
+*/
 //debug
 /*
 	cout << endl;
@@ -109,10 +114,12 @@ int main(int argc, char** argv){
 	}*/
 
 	//debug
+/*
 #ifdef DEBUG
 	cout << "+++++++++++++++++++++++" << endl;
 	cout << "    a0: 0x" << hex << setw(0) << setfill('0') << cpu.reg[10] << endl;
 	cout << "    a1: 0x" << hex << setw(0) << setfill('0') << cpu.reg[11] << endl;
 #endif
+*/
  	return 0;
 }

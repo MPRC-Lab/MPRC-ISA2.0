@@ -10,6 +10,7 @@
 #include "doSyscall.h"
 
 //#define DEBUG
+//#define DEBUG_SYSCALL
 
 unsigned int Cpu::fetch(unsigned int pc, Memory& memory){
 	unsigned int* target = new unsigned int();
@@ -358,8 +359,8 @@ unsigned int Cpu::excute(Memory& memory, const DecodeRes& decodeRes, int& sstack
 			}
 			pc = ((decodeRes.i_imm << 11) >> 11) + pc;
 			++sstack;
-			if (sstack > 100){
-				sstack = -110;
+			if (sstack > 100000){
+				sstack = -110000;
 			}		
 			break;
 		case JALR:
@@ -597,7 +598,7 @@ unsigned int Cpu::excute(Memory& memory, const DecodeRes& decodeRes, int& sstack
 			pc += 4;
 			break;
 		case SCALL:
-#ifdef DEBUG
+#ifdef DEBUG_SYSCALL
 			cout << "sssssccccc" << endl;
 			cout << "reg17: " << reg[17] << endl;
 			cout << "reg11: " << reg[11] << endl;
@@ -607,7 +608,7 @@ unsigned int Cpu::excute(Memory& memory, const DecodeRes& decodeRes, int& sstack
 #endif
 //			cout << pc << endl;
 //			cout << "*******" << endl;
-			doSyscall(reg, memory);
+			doSyscall(reg, memory, sstack);
 			pc += 4;
 	}
 	int temp = 0;
