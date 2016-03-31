@@ -57,7 +57,7 @@ int main(int argc, char** argv){
 	cout << "-----------simulate the instruction excution---------" << endl;
 #endif
 	int count = 1;
-	while (sstack > 0){
+	while (sstack > -100){
 #ifdef DEBUG
 		cout << "+++++++++++++++++++++++ No." << dec << count << " +++++++++++++++++++++++" << endl;
 #endif

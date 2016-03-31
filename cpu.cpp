@@ -359,7 +359,7 @@ unsigned int Cpu::excute(Memory& memory, const DecodeRes& decodeRes, int& sstack
 			pc = ((decodeRes.i_imm << 11) >> 11) + pc;
 			++sstack;
 			if (sstack > 100){
-				sstack = 0;
+				sstack = -110;
 			}		
 			break;
 		case JALR:
@@ -599,10 +599,14 @@ unsigned int Cpu::excute(Memory& memory, const DecodeRes& decodeRes, int& sstack
 		case SCALL:
 #ifdef DEBUG
 			cout << "sssssccccc" << endl;
-			cout << reg[17] << endl;
-			cout << reg[11] << endl;
-			cout << memory.memory[reg[11]] << endl;
+			cout << "reg17: " << reg[17] << endl;
+			cout << "reg11: " << reg[11] << endl;
+			cout << "reg12: " << reg[12] << endl;
+			cout << "ccccccssss" << endl;
+			cout << "reg11 context: " << memory.memory[reg[11]] << endl;
 #endif
+//			cout << pc << endl;
+//			cout << "*******" << endl;
 			doSyscall(reg, memory);
 			pc += 4;
 	}
