@@ -7,7 +7,10 @@
 #include <sys/time.h>
 using namespace std;
 
-extern timeval tTime;
+timeval sTime;
+timeval eTime;
+int s = 0;
+long int timedif;
 //#define DEBUG
 void doSyscall(vector<unsigned int>& reg, Memory& memory, int& sstack){
 	char input;
@@ -48,13 +51,31 @@ void doSyscall(vector<unsigned int>& reg, Memory& memory, int& sstack){
 			*/
 			break;
 		case SYS_gettimeofday:
+			if (s == 0){
+				gettimeofday(&sTime, NULL);
+				/*
+				cout << "start" << endl;
+				cout << sTime.tv_sec << endl;
+				*/
+				s = 1;
+			}
+			else {
+				gettimeofday(&eTime, NULL);
+//				cout << eTime.tv_sec << endl;
+				timedif = eTime.tv_sec - sTime.tv_sec;
+//				cout << timedif << endl;
+			}
+			/*
 			gettimeofday(&tTime, NULL);
-			source = tTime.tv_usec;
+			source = tTime.tv_sec;
 			memory.memoryWrite(0x1df58, (unsigned char*)&source, 4);
+			*/
 			break;
 
 		case SYS_exit:
-		cout << "eeeeexxxxxxiiiiiitttttt" << endl;
+			printf("Microseconds for one run through Dhrystone: %f\n", timedif*1000000.0/50000);
+			printf("Dhrystones per Second:                      %f\n", 50000.0/(timedif));
+			cout << "exit" << endl;
 			sstack = 0;
 			break;
 	}

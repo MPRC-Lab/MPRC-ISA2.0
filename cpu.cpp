@@ -357,18 +357,13 @@ unsigned int Cpu::excute(Memory& memory, const DecodeRes& decodeRes, int& sstack
 			if (decodeRes.i_rd != 0){
 				reg[decodeRes.i_rd] = pc + 4;
 			}
-			pc = ((decodeRes.i_imm << 11) >> 11) + pc;
-			++sstack;
-			if (sstack > 100000){
-				sstack = -110000;
-			}		
+			pc = ((decodeRes.i_imm << 11) >> 11) + pc;		
 			break;
 		case JALR:
 			if (decodeRes.i_rd != 0){
 				reg[decodeRes.i_rd] = pc + 4;
 			}
 			pc = ((decodeRes.i_imm << 20) >> 20) + reg[decodeRes.i_rs1];
-			--sstack;
 			break;
 		case BEQ:
 			offset = (decodeRes.i_imm << 19) >> 19;

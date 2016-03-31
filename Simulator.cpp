@@ -18,7 +18,6 @@
 #include <time.h>
 
 using namespace std;
-time_t tTime = 0;
 //#define DEBUG
 int main(int argc, char** argv){
 	char filename[50];
@@ -58,7 +57,7 @@ int main(int argc, char** argv){
 	cout << "-----------simulate the instruction excution---------" << endl;
 #endif
 	int count = 1;
-	while (sstack > -100000){
+	while (sstack > 0){
 #ifdef DEBUG
 		cout << "+++++++++++++++++++++++ No." << dec << count << " +++++++++++++++++++++++" << endl;
 #endif
