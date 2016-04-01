@@ -67,6 +67,7 @@ int main(int argc, char** argv){
 		count++;
 //		cout << "sstack: " << sstack << endl;
 	}
+	cout << "Instruction Number: " << dec << count << endl;
 /*
 #ifdef DEBUG
 	cout << endl;
